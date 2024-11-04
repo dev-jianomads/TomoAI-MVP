@@ -508,7 +508,7 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 66.0, 0.0, 12.0),
                         child: Text(
-                          'Make friends with \n people like you',
+                          'Take work out\nof work!',
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
@@ -524,7 +524,7 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                         child: Text(
-                          'Interact with people with the \nsame interest as you',
+                          'All your important\ntasks in one place',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium

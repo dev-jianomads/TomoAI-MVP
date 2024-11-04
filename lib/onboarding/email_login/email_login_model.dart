@@ -10,6 +10,10 @@ class EmailLoginModel extends FlutterFlowModel<EmailLoginWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  // State field(s) for firstName widget.
+  FocusNode? firstNameFocusNode;
+  TextEditingController? firstNameTextController;
+  String? Function(BuildContext, String?)? firstNameTextControllerValidator;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode1;
   TextEditingController? emailAddressTextController1;
@@ -19,6 +23,12 @@ class EmailLoginModel extends FlutterFlowModel<EmailLoginWidget> {
   TextEditingController? passwordTextController1;
   late bool passwordVisibility1;
   String? Function(BuildContext, String?)? passwordTextController1Validator;
+  // State field(s) for confirmpassword widget.
+  FocusNode? confirmpasswordFocusNode;
+  TextEditingController? confirmpasswordTextController;
+  late bool confirmpasswordVisibility;
+  String? Function(BuildContext, String?)?
+      confirmpasswordTextControllerValidator;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode2;
   TextEditingController? emailAddressTextController2;
@@ -32,17 +42,24 @@ class EmailLoginModel extends FlutterFlowModel<EmailLoginWidget> {
   @override
   void initState(BuildContext context) {
     passwordVisibility1 = false;
+    confirmpasswordVisibility = false;
     passwordVisibility2 = false;
   }
 
   @override
   void dispose() {
     tabBarController?.dispose();
+    firstNameFocusNode?.dispose();
+    firstNameTextController?.dispose();
+
     emailAddressFocusNode1?.dispose();
     emailAddressTextController1?.dispose();
 
     passwordFocusNode1?.dispose();
     passwordTextController1?.dispose();
+
+    confirmpasswordFocusNode?.dispose();
+    confirmpasswordTextController?.dispose();
 
     emailAddressFocusNode2?.dispose();
     emailAddressTextController2?.dispose();
