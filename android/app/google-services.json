@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "144465513576",
+    "project_id": "cleaning-app-87923",
+    "storage_bucket": "cleaning-app-87923.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144465513576:android:01b82a8b47738d5ae0bfdd",
+        "android_client_info": {
+          "package_name": "com.mycompany.cleaningapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCikpUMvQJjYOZeKackhhXwLObchtkqJnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144465513576:android:97ac8126e96b0d22e0bfdd",
+        "android_client_info": {
+          "package_name": "com.mycompany.datingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCikpUMvQJjYOZeKackhhXwLObchtkqJnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144465513576:android:85ada9eb11111df7e0bfdd",
+        "android_client_info": {
+          "package_name": "com.mycompany.properrtymanagementapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCikpUMvQJjYOZeKackhhXwLObchtkqJnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144465513576:android:b3bf54d14d100b34e0bfdd",
+        "android_client_info": {
+          "package_name": "com.mycompany.sneakerstoregh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCikpUMvQJjYOZeKackhhXwLObchtkqJnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
