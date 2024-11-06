@@ -221,14 +221,28 @@ class _HomepageWidgetState extends State<HomepageWidget>
               title: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(
-                    'Discover',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          fontSize: 24.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        'Morning ',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 24.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                      Text(
+                        'Morning ',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 24.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ],
                   ),
                   Text(
                     'Greater Accra Region',
@@ -408,11 +422,13 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               15.0),
-                                                      child: Image.network(
-                                                        'https://images.unsplash.com/photo-1593878024377-b38927fc7689?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxibGFjayUyMGdpcmx8ZW58MHx8fHwxNzA4MDg5NTkyfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                                      child: Image.asset(
+                                                        'assets/images/nordwood-themes-kRNZiGKtz48-unsplash.jpg',
                                                         width: double.infinity,
                                                         height: double.infinity,
                                                         fit: BoxFit.cover,
+                                                        alignment:
+                                                            const Alignment(1.0, 0.0),
                                                       ),
                                                     ),
                                                   ),

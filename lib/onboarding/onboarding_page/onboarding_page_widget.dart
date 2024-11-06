@@ -308,8 +308,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1576363346069-e57aab1813bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMXx8YWZyaWNhbiUyMHxlbnwwfHx8fDE3MDc3NTgzMjl8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/vecteezy_zoom-logo-in-blue-colors-meetings-app-logotype-illustration_12871376.png',
                                     width: 124.0,
                                     height: 124.0,
                                     fit: BoxFit.cover,
@@ -334,8 +334,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1561406636-b80293969660?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyfHxibGFjayUyMGxhZHl8ZW58MHx8fHwxNzA3NzU4NzUzfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/mark-gradient-blue-jira.png',
                                     width: 124.0,
                                     height: 124.0,
                                     fit: BoxFit.cover,
@@ -360,8 +360,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1531384441138-2736e62e0919?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMnx8YWZyaWNhbiUyMHxlbnwwfHx8fDE3MDc3NTgzMjl8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/vecteezy_google-calendar-icon-logo-symbol_22613031.png',
                                     width: 124.0,
                                     height: 124.0,
                                     fit: BoxFit.cover,
@@ -387,8 +387,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1631168228401-c37875b22ee8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMXx8YmxhY2slMjBnaXJsfGVufDB8fHx8MTcwNzc1NzYyNHww&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/vecteezy_gmail-png-icon_16716465.png',
                                     width: 124.0,
                                     height: 124.0,
                                     fit: BoxFit.cover,
@@ -413,8 +413,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1612214070475-1e73f478188c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxMHx8YmxhY2slMjBtYW58ZW58MHx8fHwxNzA3NzU4NTAwfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/Asana-_avatar.png',
                                     width: 124.0,
                                     height: 124.0,
                                     fit: BoxFit.cover,
@@ -439,8 +439,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1596365481115-79cb80ea517b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8YWZyaWNhbiUyMHxlbnwwfHx8fDE3MDc3NTgzMjl8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/vecteezy_slack-transparent-icon_48759332.png',
                                     width: 124.0,
                                     height: 124.0,
                                     fit: BoxFit.cover,
@@ -449,58 +449,72 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                               ).animateOnPageLoad(animationsMap[
                                   'containerOnPageLoadAnimation6']!),
                             ),
-                            Align(
-                              alignment: const AlignmentDirectional(-0.8, 0.1),
-                              child: Container(
-                                width: 60.0,
-                                height: 60.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: const Color(0xFFE585FF),
-                                    width: 5.0,
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                              desktop: false,
+                            ))
+                              Align(
+                                alignment: const AlignmentDirectional(-0.8, 0.1),
+                                child: Container(
+                                  width: 60.0,
+                                  height: 60.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFFE585FF),
+                                      width: 5.0,
+                                    ),
                                   ),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1593878024377-b38927fc7689?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxibGFjayUyMGdpcmx8ZW58MHx8fHwxNzA3NzU3NjI0fDA&ixlib=rb-4.0.3&q=80&w=400',
-                                    width: 124.0,
-                                    height: 124.0,
-                                    fit: BoxFit.cover,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1593878024377-b38927fc7689?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxibGFjayUyMGdpcmx8ZW58MHx8fHwxNzA3NzU3NjI0fDA&ixlib=rb-4.0.3&q=80&w=400',
+                                      width: 124.0,
+                                      height: 124.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                              ).animateOnPageLoad(animationsMap[
-                                  'containerOnPageLoadAnimation7']!),
-                            ),
-                            Align(
-                              alignment: const AlignmentDirectional(0.1, -1.0),
-                              child: Container(
-                                width: 60.0,
-                                height: 60.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: const Color(0xFF85E0FF),
-                                    width: 5.0,
+                                ).animateOnPageLoad(animationsMap[
+                                    'containerOnPageLoadAnimation7']!),
+                              ),
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                              desktop: false,
+                            ))
+                              Align(
+                                alignment: const AlignmentDirectional(0.1, -1.0),
+                                child: Container(
+                                  width: 60.0,
+                                  height: 60.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFF85E0FF),
+                                      width: 5.0,
+                                    ),
                                   ),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1563132337-f159f484226c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxibGFjayUyMGxhZHl8ZW58MHx8fHwxNzA3NzU4NzUzfDA&ixlib=rb-4.0.3&q=80&w=1080',
-                                    width: 124.0,
-                                    height: 124.0,
-                                    fit: BoxFit.cover,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1563132337-f159f484226c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxibGFjayUyMGxhZHl8ZW58MHx8fHwxNzA3NzU4NzUzfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                      width: 124.0,
+                                      height: 124.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                              ).animateOnPageLoad(animationsMap[
-                                  'containerOnPageLoadAnimation8']!),
-                            ),
+                                ).animateOnPageLoad(animationsMap[
+                                    'containerOnPageLoadAnimation8']!),
+                              ),
                           ],
                         ),
                       ),
@@ -543,7 +557,7 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('AuthenticationPage');
+                            context.pushNamed('EmailLogin');
                           },
                           text: 'Continue',
                           options: FFButtonOptions(
@@ -571,39 +585,46 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                         ).animateOnPageLoad(
                             animationsMap['buttonOnPageLoadAnimation1']!),
                       ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('AuthenticationPage');
-                          },
-                          text: 'Sign In',
-                          options: FFButtonOptions(
-                            width: 295.0,
-                            height: 56.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).secondary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                      if (responsiveVisibility(
+                        context: context,
+                        phone: false,
+                        tablet: false,
+                        tabletLandscape: false,
+                        desktop: false,
+                      ))
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 16.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed('AuthenticationPage');
+                            },
+                            text: 'Sign In',
+                            options: FFButtonOptions(
+                              width: 295.0,
+                              height: 56.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).secondary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(32.0),
                             ),
-                            borderRadius: BorderRadius.circular(32.0),
-                          ),
-                        ).animateOnPageLoad(
-                            animationsMap['buttonOnPageLoadAnimation2']!),
-                      ),
+                          ).animateOnPageLoad(
+                              animationsMap['buttonOnPageLoadAnimation2']!),
+                        ),
                     ],
                   ),
                 ),

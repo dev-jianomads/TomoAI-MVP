@@ -456,125 +456,156 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                               ).animateOnPageLoad(animationsMap[
                                   'textFieldOnPageLoadAnimation2']!),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await showModalBottomSheet<bool>(
-                                      context: context,
-                                      builder: (context) {
-                                        final datePickedCupertinoTheme =
-                                            CupertinoTheme.of(context);
-                                        return ScrollConfiguration(
-                                          behavior:
-                                              const MaterialScrollBehavior()
-                                                  .copyWith(
-                                            dragDevices: {
-                                              PointerDeviceKind.mouse,
-                                              PointerDeviceKind.touch,
-                                              PointerDeviceKind.stylus,
-                                              PointerDeviceKind.unknown
-                                            },
-                                          ),
-                                          child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                3,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            child: CupertinoTheme(
-                                              data: datePickedCupertinoTheme
-                                                  .copyWith(
-                                                textTheme:
-                                                    datePickedCupertinoTheme
-                                                        .textTheme
-                                                        .copyWith(
-                                                  dateTimePickerTextStyle:
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                              desktop: false,
+                            ))
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await showModalBottomSheet<bool>(
+                                        context: context,
+                                        builder: (context) {
+                                          final datePickedCupertinoTheme =
+                                              CupertinoTheme.of(context);
+                                          return ScrollConfiguration(
+                                            behavior:
+                                                const MaterialScrollBehavior()
+                                                    .copyWith(
+                                              dragDevices: {
+                                                PointerDeviceKind.mouse,
+                                                PointerDeviceKind.touch,
+                                                PointerDeviceKind.stylus,
+                                                PointerDeviceKind.unknown
+                                              },
+                                            ),
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  3,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              child: CupertinoTheme(
+                                                data: datePickedCupertinoTheme
+                                                    .copyWith(
+                                                  textTheme:
+                                                      datePickedCupertinoTheme
+                                                          .textTheme
+                                                          .copyWith(
+                                                    dateTimePickerTextStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .headlineMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Inter',
+                                                              color:
+                                                                  Colors.black,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                            ),
+                                                  ),
+                                                ),
+                                                child: CupertinoDatePicker(
+                                                  mode: CupertinoDatePickerMode
+                                                      .date,
+                                                  minimumDate: DateTime(1900),
+                                                  initialDateTime:
+                                                      getCurrentTimestamp,
+                                                  maximumDate:
+                                                      getCurrentTimestamp,
+                                                  backgroundColor:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .headlineMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            color: Colors.black,
-                                                            letterSpacing: 0.0,
-                                                          ),
+                                                          .info,
+                                                  use24hFormat: false,
+                                                  onDateTimeChanged:
+                                                      (newDateTime) =>
+                                                          safeSetState(() {
+                                                    _model.datePicked =
+                                                        newDateTime;
+                                                  }),
                                                 ),
                                               ),
-                                              child: CupertinoDatePicker(
-                                                mode: CupertinoDatePickerMode
-                                                    .date,
-                                                minimumDate: DateTime(1900),
-                                                initialDateTime:
-                                                    getCurrentTimestamp,
-                                                maximumDate:
-                                                    getCurrentTimestamp,
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .info,
-                                                use24hFormat: false,
-                                                onDateTimeChanged:
-                                                    (newDateTime) =>
-                                                        safeSetState(() {
-                                                  _model.datePicked =
-                                                      newDateTime;
-                                                }),
-                                              ),
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  child: Container(
+                                    width: 295.0,
+                                    height: 58.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondary,
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Visibility(
+                                      visible: responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                        tablet: false,
+                                        tabletLandscape: false,
+                                        desktop: false,
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.calendar_month,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 24.0,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    19.5, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Choose birthday date',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                             ),
                                           ),
-                                        );
-                                      });
-                                },
-                                child: Container(
-                                  width: 295.0,
-                                  height: 58.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.calendar_month,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        size: 24.0,
+                                        ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            19.5, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          'Choose birthday date',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ).animateOnPageLoad(animationsMap[
-                                  'containerOnPageLoadAnimation']!),
-                            ),
-                            if (_model.datePicked != null)
+                                ).animateOnPageLoad(animationsMap[
+                                    'containerOnPageLoadAnimation']!),
+                              ),
+                            if ((_model.datePicked != null) &&
+                                responsiveVisibility(
+                                  context: context,
+                                  phone: false,
+                                  tablet: false,
+                                  tabletLandscape: false,
+                                  desktop: false,
+                                ))
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
@@ -599,7 +630,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   0.0, 88.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('chooseGender');
+                                  context.pushNamed('Homepage');
                                 },
                                 text: 'Continue',
                                 options: FFButtonOptions(
