@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'nav_bar_model.dart';
 export 'nav_bar_model.dart';
 
@@ -114,8 +113,8 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 11.0, 0.0, 11.0),
-                          child: FaIcon(
-                            FontAwesomeIcons.peopleArrows,
+                          child: Icon(
+                            Icons.home,
                             color: widget.homeIconColor,
                             size: 28.0,
                           ),
@@ -157,7 +156,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 11.0, 0.0, 11.0),
                           child: Icon(
-                            Icons.favorite_rounded,
+                            Icons.list_alt,
                             color: widget.favoriteIconColor,
                             size: 28.0,
                           ),
@@ -219,7 +218,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                           child: Align(
                             alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Icon(
-                              Icons.message_rounded,
+                              Icons.auto_awesome,
                               color: widget.chatsIconColour,
                               size: 28.0,
                             ),
@@ -231,48 +230,55 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 ),
               ),
             ),
-            InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () async {
-                await widget.navigateToProfile?.call();
-              },
-              child: Container(
-                width: 60.0,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 2.0,
-                      decoration: BoxDecoration(
-                        color: widget.profileActiveBarColour,
+            if (responsiveVisibility(
+              context: context,
+              phone: false,
+              tablet: false,
+              tabletLandscape: false,
+              desktop: false,
+            ))
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  await widget.navigateToProfile?.call();
+                },
+                child: Container(
+                  width: 60.0,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 2.0,
+                        decoration: BoxDecoration(
+                          color: widget.profileActiveBarColour,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 11.0, 0.0, 11.0),
-                          child: Icon(
-                            Icons.person,
-                            color: widget.profileIconColour,
-                            size: 28.0,
+                      Expanded(
+                        child: Align(
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 11.0, 0.0, 11.0),
+                            child: Icon(
+                              Icons.person,
+                              color: widget.profileIconColour,
+                              size: 28.0,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
           ]
               .divide(const SizedBox(width: 29.0))
               .addToStart(const SizedBox(width: 24.0))

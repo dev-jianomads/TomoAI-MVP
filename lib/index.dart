@@ -26,3 +26,6 @@ export '/pages/all_chats/all_chats_widget.dart' show AllChatsWidget;
 export '/pages/chat_details/chat_details_widget.dart' show ChatDetailsWidget;
 export '/pages/profile_details/profile_details_widget.dart'
     show ProfileDetailsWidget;
+export '/pages/favorites2/favorites2_widget.dart' show Favorites2Widget;
+export '/pages/integrations/integrations_widget.dart' show IntegrationsWidget;
+export '/pages/access/access_widget.dart' show AccessWidget;

@@ -1,4 +1,4 @@
-package com.mycompany.datingapp
+package com.mycompany.tomoaimvpapp
 
 import io.flutter.embedding.android.FlutterActivity
 

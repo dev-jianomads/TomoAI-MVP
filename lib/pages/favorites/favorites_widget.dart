@@ -1,8 +1,11 @@
+import '/components/match_component/match_component_widget.dart';
 import '/components/nav_bar/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -78,7 +81,26 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
           ),
         ],
       ),
-      'textOnPageLoadAnimation': AnimationInfo(
+      'textOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 41.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           MoveEffect(
@@ -203,7 +225,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                           alignment:
                                               const AlignmentDirectional(-1.0, 0.0),
                                           child: Text(
-                                            'Favorites',
+                                            'Priority for today',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -215,130 +237,283 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                           ),
                                         ),
                                       ),
-                                      Stack(
-                                        children: [
-                                          if (_model.sortAtoZ == true)
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                borderColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                borderRadius: 15.0,
-                                                borderWidth: 1.0,
-                                                buttonSize: 52.0,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                icon: FaIcon(
-                                                  FontAwesomeIcons
-                                                      .sortAlphaDown,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 24.0,
-                                                ),
-                                                onPressed: () async {
-                                                  if (animationsMap[
-                                                          'iconButtonOnActionTriggerAnimation2'] !=
-                                                      null) {
-                                                    safeSetState(() =>
-                                                        hasIconButtonTriggered2 =
-                                                            true);
-                                                    SchedulerBinding.instance
-                                                        .addPostFrameCallback((_) async =>
-                                                            await animationsMap[
-                                                                    'iconButtonOnActionTriggerAnimation2']!
-                                                                .controller
-                                                                .forward(
-                                                                    from: 0.0));
-                                                  }
-                                                  _model.sortAtoZ = false;
-                                                  safeSetState(() {});
-                                                },
-                                              ).animateOnActionTrigger(
-                                                  animationsMap[
-                                                      'iconButtonOnActionTriggerAnimation1']!,
-                                                  hasBeenTriggered:
-                                                      hasIconButtonTriggered1),
-                                            ),
-                                          if (_model.sortAtoZ == false)
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                borderColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                borderRadius: 15.0,
-                                                borderWidth: 1.0,
-                                                buttonSize: 52.0,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                icon: FaIcon(
-                                                  FontAwesomeIcons
-                                                      .sortAlphaDownAlt,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 24.0,
-                                                ),
-                                                onPressed: () async {
-                                                  if (animationsMap[
-                                                          'iconButtonOnActionTriggerAnimation1'] !=
-                                                      null) {
-                                                    safeSetState(() =>
-                                                        hasIconButtonTriggered1 =
-                                                            true);
-                                                    SchedulerBinding.instance
-                                                        .addPostFrameCallback((_) async =>
-                                                            await animationsMap[
-                                                                    'iconButtonOnActionTriggerAnimation1']!
-                                                                .controller
-                                                                .forward(
-                                                                    from: 0.0));
-                                                  }
-                                                  _model.sortAtoZ = true;
-                                                  safeSetState(() {});
-                                                },
-                                              ).animateOnActionTrigger(
-                                                  animationsMap[
-                                                      'iconButtonOnActionTriggerAnimation2']!,
-                                                  hasBeenTriggered:
-                                                      hasIconButtonTriggered2),
-                                            ),
-                                        ],
-                                      ),
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                        tablet: false,
+                                        tabletLandscape: false,
+                                        desktop: false,
+                                      ))
+                                        Stack(
+                                          children: [
+                                            if (_model.sortAtoZ == true)
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderRadius: 15.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 52.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  icon: FaIcon(
+                                                    FontAwesomeIcons
+                                                        .sortAlphaDown,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    if (animationsMap[
+                                                            'iconButtonOnActionTriggerAnimation2'] !=
+                                                        null) {
+                                                      safeSetState(() =>
+                                                          hasIconButtonTriggered2 =
+                                                              true);
+                                                      SchedulerBinding.instance
+                                                          .addPostFrameCallback((_) async =>
+                                                              await animationsMap[
+                                                                      'iconButtonOnActionTriggerAnimation2']!
+                                                                  .controller
+                                                                  .forward(
+                                                                      from:
+                                                                          0.0));
+                                                    }
+                                                    _model.sortAtoZ = false;
+                                                    safeSetState(() {});
+                                                  },
+                                                ).animateOnActionTrigger(
+                                                    animationsMap[
+                                                        'iconButtonOnActionTriggerAnimation1']!,
+                                                    hasBeenTriggered:
+                                                        hasIconButtonTriggered1),
+                                              ),
+                                            if (_model.sortAtoZ == false)
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderRadius: 15.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 52.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  icon: FaIcon(
+                                                    FontAwesomeIcons
+                                                        .sortAlphaDownAlt,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    if (animationsMap[
+                                                            'iconButtonOnActionTriggerAnimation1'] !=
+                                                        null) {
+                                                      safeSetState(() =>
+                                                          hasIconButtonTriggered1 =
+                                                              true);
+                                                      SchedulerBinding.instance
+                                                          .addPostFrameCallback((_) async =>
+                                                              await animationsMap[
+                                                                      'iconButtonOnActionTriggerAnimation1']!
+                                                                  .controller
+                                                                  .forward(
+                                                                      from:
+                                                                          0.0));
+                                                    }
+                                                    _model.sortAtoZ = true;
+                                                    safeSetState(() {});
+                                                  },
+                                                ).animateOnActionTrigger(
+                                                    animationsMap[
+                                                        'iconButtonOnActionTriggerAnimation2']!,
+                                                    hasBeenTriggered:
+                                                        hasIconButtonTriggered2),
+                                              ),
+                                          ],
+                                        ),
                                     ],
                                   ).animateOnPageLoad(
                                       animationsMap['rowOnPageLoadAnimation']!),
                                 ),
-                                Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 0.0, 0.0),
-                                    child: Text(
-                                      'This is a list of people you have added to your favorites to review later.',
-                                      style: FlutterFlowTheme.of(context)
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: 240.0,
+                                      height: 40.0,
+                                      decoration: const BoxDecoration(),
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(-1.0, 0.0),
+                                        child: Text(
+                                          'Work through tasks one at a time',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'textOnPageLoadAnimation1']!),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 80.0,
+                                      height: 40.0,
+                                      decoration: const BoxDecoration(),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 8.0,
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.grid_view_outlined,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                            },
+                                          ),
+                                          FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 8.0,
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons
+                                                  .format_list_bulleted_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              context.pushNamed('favorites2');
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 40.0,
+                                  decoration: const BoxDecoration(),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: FlutterFlowChoiceChips(
+                                    options: const [
+                                      ChipData('All'),
+                                      ChipData('Work'),
+                                      ChipData('Personal')
+                                    ],
+                                    onChanged: (val) => safeSetState(() =>
+                                        _model.choiceChipsValue =
+                                            val?.firstOrNull),
+                                    selectedChipStyle: ChipStyle(
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      iconColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      iconSize: 16.0,
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    unselectedChipStyle: ChipStyle(
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      textStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                            fontSize: 14.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.normal,
                                           ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'textOnPageLoadAnimation']!),
+                                      iconColor: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      iconSize: 16.0,
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    chipSpacing: 8.0,
+                                    rowSpacing: 8.0,
+                                    multiselect: false,
+                                    alignment: WrapAlignment.start,
+                                    controller:
+                                        _model.choiceChipsValueController ??=
+                                            FormFieldController<List<String>>(
+                                      [],
+                                    ),
+                                    wrapped: true,
                                   ),
                                 ),
+                                if (responsiveVisibility(
+                                  context: context,
+                                  phone: false,
+                                  tablet: false,
+                                  tabletLandscape: false,
+                                  desktop: false,
+                                ))
+                                  Align(
+                                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 12.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Work through task one at a time',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'textOnPageLoadAnimation2']!),
+                                    ),
+                                  ),
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 25.0, 0.0, 0.0),
+                                      0.0, 10.0, 0.0, 0.0),
                                   child: GridView(
                                     padding: EdgeInsets.zero,
                                     gridDelegate:
@@ -352,6 +527,302 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     children: [
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            useSafeArea: true,
+                                            context: context,
+                                            builder: (context) {
+                                              return GestureDetector(
+                                                onTap: () =>
+                                                    FocusScope.of(context)
+                                                        .unfocus(),
+                                                child: Padding(
+                                                  padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                  child: const MatchComponentWidget(),
+                                                ),
+                                              );
+                                            },
+                                          ).then(
+                                              (value) => safeSetState(() {}));
+                                        },
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          child: Stack(
+                                            children: [
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0),
+                                                  child: Image.asset(
+                                                    'assets/images/scott-graham-5fNmWej4tAA-unsplash.jpg',
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 1.0),
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: 83.0,
+                                                  decoration: const BoxDecoration(
+                                                    color: Color(0x81000000),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(15.0),
+                                                      bottomRight:
+                                                          Radius.circular(15.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(15.0),
+                                                      bottomRight:
+                                                          Radius.circular(15.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
+                                                    child: BackdropFilter(
+                                                      filter: ImageFilter.blur(
+                                                        sigmaX: 4.0,
+                                                        sigmaY: 4.0,
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    8.0,
+                                                                    0.0,
+                                                                    8.0,
+                                                                    0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          2.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Prioritise product features - sprint 4',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: FlutterFlowTheme.of(context).info,
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                              tablet: false,
+                                                              tabletLandscape:
+                                                                  false,
+                                                              desktop: false,
+                                                            ))
+                                                              Flexible(
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
+                                                                  children: [
+                                                                    Flexible(
+                                                                      child:
+                                                                          FlutterFlowIconButton(
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        borderWidth:
+                                                                            1.0,
+                                                                        buttonSize:
+                                                                            50.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .close_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).info,
+                                                                          size:
+                                                                              30.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          print(
+                                                                              'IconButton pressed ...');
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width:
+                                                                          1.0,
+                                                                      height:
+                                                                          40.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .info,
+                                                                      ),
+                                                                    ),
+                                                                    Flexible(
+                                                                      child:
+                                                                          FlutterFlowIconButton(
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        buttonSize:
+                                                                            50.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .favorite_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          size:
+                                                                              30.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          print(
+                                                                              'IconButton pressed ...');
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    -1.0, -1.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          8.0, 10.0, 0.0, 0.0),
+                                                  child: Container(
+                                                    width: 100.0,
+                                                    height: 34.0,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(0x77000000),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            Icons.date_range,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info,
+                                                            size: 24.0,
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                            'Today',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .info,
+                                                                  fontSize:
+                                                                      13.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                       SizedBox(
                                         width: double.infinity,
                                         height: double.infinity,
@@ -363,8 +834,8 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
-                                                child: Image.network(
-                                                  'https://images.unsplash.com/photo-1566492031773-4f4e44671857?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyfHxibGFjayUyMGd1eXxlbnwwfHx8fDE3MTAxNzQ4MTR8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                                                child: Image.asset(
+                                                  'assets/images/airfocus-v89zhr0iBFY-unsplash.jpg',
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   fit: BoxFit.cover,
@@ -446,7 +917,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                                             0.0,
                                                                             0.0),
                                                                     child: Text(
-                                                                      'Jessica, 25',
+                                                                      'Submit tax return',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -468,76 +939,91 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                               ],
                                                             ),
                                                           ),
-                                                          Flexible(
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    borderWidth:
-                                                                        1.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .close_rounded,
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                            tablet: false,
+                                                            tabletLandscape:
+                                                                false,
+                                                            desktop: false,
+                                                          ))
+                                                            Flexible(
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceAround,
+                                                                children: [
+                                                                  Flexible(
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      borderWidth:
+                                                                          1.0,
+                                                                      buttonSize:
+                                                                          50.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .close_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .info,
+                                                                        size:
+                                                                            30.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        print(
+                                                                            'IconButton pressed ...');
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    width: 1.0,
+                                                                    height:
+                                                                        40.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .info,
-                                                                      size:
-                                                                          30.0,
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
                                                                   ),
-                                                                ),
-                                                                Container(
-                                                                  width: 1.0,
-                                                                  height: 40.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .info,
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .favorite_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          30.0,
+                                                                  Flexible(
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      buttonSize:
+                                                                          50.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .favorite_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            30.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        print(
+                                                                            'IconButton pressed ...');
+                                                                      },
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -577,7 +1063,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                                     5.0,
                                                                     0.0),
                                                         child: Icon(
-                                                          Icons.location_on,
+                                                          Icons.date_range,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .info,
@@ -586,7 +1072,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                       ),
                                                       Flexible(
                                                         child: Text(
-                                                          '2.81 km',
+                                                          'Today',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: FlutterFlowTheme
@@ -626,8 +1112,8 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
-                                                child: Image.network(
-                                                  'https://images.unsplash.com/photo-1530785602389-07594beb8b73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNHx8JTIwYWZyaWNhbiUyMGdpcmx8ZW58MHx8fHwxNzEwMTc0ODU3fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                                child: Image.asset(
+                                                  'assets/images/2h-media-vjj-fsa3k-Y-unsplash.jpg',
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   fit: BoxFit.cover,
@@ -709,7 +1195,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                                             0.0,
                                                                             0.0),
                                                                     child: Text(
-                                                                      'Jessica, 25',
+                                                                      'Brief UI/UX team',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -731,82 +1217,91 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                               ],
                                                             ),
                                                           ),
-                                                          Flexible(
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    borderWidth:
-                                                                        1.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .close_rounded,
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                            tablet: false,
+                                                            tabletLandscape:
+                                                                false,
+                                                            desktop: false,
+                                                          ))
+                                                            Flexible(
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceAround,
+                                                                children: [
+                                                                  Flexible(
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      borderWidth:
+                                                                          1.0,
+                                                                      buttonSize:
+                                                                          50.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .close_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .info,
+                                                                        size:
+                                                                            30.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        print(
+                                                                            'IconButton pressed ...');
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    width: 1.0,
+                                                                    height:
+                                                                        40.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .info,
-                                                                      size:
-                                                                          30.0,
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
                                                                   ),
-                                                                ),
-                                                                Container(
-                                                                  width: 1.0,
-                                                                  height: 40.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .info,
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .favorite_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          30.0,
+                                                                  Flexible(
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      buttonSize:
+                                                                          50.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .favorite_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            30.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        print(
+                                                                            'IconButton pressed ...');
+                                                                      },
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -846,7 +1341,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                                     5.0,
                                                                     0.0),
                                                         child: Icon(
-                                                          Icons.location_on,
+                                                          Icons.date_range,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .info,
@@ -855,7 +1350,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                       ),
                                                       Flexible(
                                                         child: Text(
-                                                          '2.81 km',
+                                                          '1 Nov',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: FlutterFlowTheme
@@ -895,8 +1390,8 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
-                                                child: Image.network(
-                                                  'https://images.unsplash.com/photo-1602009786299-3a425d5a2bac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw1fHxBZnJpY2FuJTIwZ2lybHxlbnwwfHx8fDE3MTAxNzQ5Njd8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                                                child: Image.asset(
+                                                  'assets/images/solen-feyissa-TaOGbz_S-Qw-unsplash_(1).jpg',
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   fit: BoxFit.cover,
@@ -978,7 +1473,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                                             0.0,
                                                                             0.0),
                                                                     child: Text(
-                                                                      'Jessica, 25',
+                                                                      'Pay water bill',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -1000,82 +1495,91 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                               ],
                                                             ),
                                                           ),
-                                                          Flexible(
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    borderWidth:
-                                                                        1.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .close_rounded,
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                            tablet: false,
+                                                            tabletLandscape:
+                                                                false,
+                                                            desktop: false,
+                                                          ))
+                                                            Flexible(
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceAround,
+                                                                children: [
+                                                                  Flexible(
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      borderWidth:
+                                                                          1.0,
+                                                                      buttonSize:
+                                                                          50.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .close_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .info,
+                                                                        size:
+                                                                            30.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        print(
+                                                                            'IconButton pressed ...');
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    width: 1.0,
+                                                                    height:
+                                                                        40.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .info,
-                                                                      size:
-                                                                          30.0,
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
                                                                   ),
-                                                                ),
-                                                                Container(
-                                                                  width: 1.0,
-                                                                  height: 40.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .info,
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .favorite_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          30.0,
+                                                                  Flexible(
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      buttonSize:
+                                                                          50.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .favorite_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            30.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        print(
+                                                                            'IconButton pressed ...');
+                                                                      },
                                                                     ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -1115,7 +1619,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                                     5.0,
                                                                     0.0),
                                                         child: Icon(
-                                                          Icons.location_on,
+                                                          Icons.date_range,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .info,
@@ -1124,7 +1628,7 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                                       ),
                                                       Flexible(
                                                         child: Text(
-                                                          '2.81 km',
+                                                          '5 Nov',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: FlutterFlowTheme
@@ -1153,813 +1657,564 @@ class _FavoritesWidgetState extends State<FavoritesWidget>
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        child: Stack(
-                                          children: [
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                                child: Image.network(
-                                                  'https://images.unsplash.com/photo-1600442715817-4d9c8b6c729f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyM3x8YmxhY2slMjBtYW58ZW58MHx8fHwxNzEwMTc0OTA5fDA&ixlib=rb-4.0.3&q=80&w=1080',
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 1.0),
-                                              child: Container(
-                                                width: double.infinity,
-                                                height: 83.0,
-                                                decoration: const BoxDecoration(
-                                                  color: Color(0x81000000),
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15.0),
-                                                    bottomRight:
-                                                        Radius.circular(15.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                ),
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                        tablet: false,
+                                        tabletLandscape: false,
+                                        desktop: false,
+                                      ))
+                                        SizedBox(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          child: Stack(
+                                            children: [
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
                                                 child: ClipRRect(
                                                   borderRadius:
-                                                      const BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15.0),
-                                                    bottomRight:
-                                                        Radius.circular(15.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                  child: BackdropFilter(
-                                                    filter: ImageFilter.blur(
-                                                      sigmaX: 4.0,
-                                                      sigmaY: 4.0,
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  0.0,
-                                                                  8.0,
-                                                                  0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        2.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Expanded(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      'Jessica, 25',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).info,
-                                                                            fontSize:
-                                                                                16.0,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Flexible(
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    borderWidth:
-                                                                        1.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .close_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .info,
-                                                                      size:
-                                                                          30.0,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                                Container(
-                                                                  width: 1.0,
-                                                                  height: 40.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .info,
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .favorite_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          30.0,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
+                                                      BorderRadius.circular(
+                                                          15.0),
+                                                  child: Image.asset(
+                                                    'assets/images/stephen-phillips-hostreviews-co-uk-aE0iX-bLCJc-unsplash.jpg',
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  -1.0, -1.0),
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 10.0, 0.0, 0.0),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 1.0),
                                                 child: Container(
-                                                  width: 100.0,
-                                                  height: 34.0,
-                                                  decoration: BoxDecoration(
-                                                    color: const Color(0x77000000),
+                                                  width: double.infinity,
+                                                  height: 83.0,
+                                                  decoration: const BoxDecoration(
+                                                    color: Color(0x81000000),
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(15.0),
+                                                      bottomRight:
+                                                          Radius.circular(15.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
                                                   ),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Padding(
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(15.0),
+                                                      bottomRight:
+                                                          Radius.circular(15.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
+                                                    child: BackdropFilter(
+                                                      filter: ImageFilter.blur(
+                                                        sigmaX: 4.0,
+                                                        sigmaY: 4.0,
+                                                      ),
+                                                      child: Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
                                                                 .fromSTEB(
+                                                                    8.0,
                                                                     0.0,
-                                                                    0.0,
-                                                                    5.0,
+                                                                    8.0,
                                                                     0.0),
-                                                        child: Icon(
-                                                          Icons.location_on,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .info,
-                                                          size: 24.0,
-                                                        ),
-                                                      ),
-                                                      Flexible(
-                                                        child: Text(
-                                                          '2.81 km',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .info,
-                                                                fontSize: 13.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          2.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Daily standup - Geoff',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: FlutterFlowTheme.of(context).info,
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
+                                                            ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                              tablet: false,
+                                                              tabletLandscape:
+                                                                  false,
+                                                              desktop: false,
+                                                            ))
+                                                              Flexible(
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
+                                                                  children: [
+                                                                    Flexible(
+                                                                      child:
+                                                                          FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        borderWidth:
+                                                                            1.0,
+                                                                        buttonSize:
+                                                                            50.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .close_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).info,
+                                                                          size:
+                                                                              30.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          print(
+                                                                              'IconButton pressed ...');
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width:
+                                                                          1.0,
+                                                                      height:
+                                                                          40.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .info,
+                                                                      ),
+                                                                    ),
+                                                                    Flexible(
+                                                                      child:
+                                                                          FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        buttonSize:
+                                                                            50.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .favorite_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          size:
+                                                                              30.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          print(
+                                                                              'IconButton pressed ...');
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    -1.0, -1.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          8.0, 10.0, 0.0, 0.0),
+                                                  child: Container(
+                                                    width: 100.0,
+                                                    height: 34.0,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(0x77000000),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            Icons.date_range,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info,
+                                                            size: 24.0,
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                            '6 Nov',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .info,
+                                                                  fontSize:
+                                                                      13.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        child: Stack(
-                                          children: [
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                                child: Image.network(
-                                                  'https://images.unsplash.com/photo-1523297736436-356615162cc8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMnx8YWZyaWNhbiUyMGdpcmx8ZW58MHx8fHwxNzEwMTc1MzU4fDA&ixlib=rb-4.0.3&q=80&w=1080',
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 1.0),
-                                              child: Container(
-                                                width: double.infinity,
-                                                height: 83.0,
-                                                decoration: const BoxDecoration(
-                                                  color: Color(0x81000000),
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15.0),
-                                                    bottomRight:
-                                                        Radius.circular(15.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                ),
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                        tablet: false,
+                                        tabletLandscape: false,
+                                        desktop: false,
+                                      ))
+                                        SizedBox(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          child: Stack(
+                                            children: [
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
                                                 child: ClipRRect(
                                                   borderRadius:
-                                                      const BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15.0),
-                                                    bottomRight:
-                                                        Radius.circular(15.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                  child: BackdropFilter(
-                                                    filter: ImageFilter.blur(
-                                                      sigmaX: 4.0,
-                                                      sigmaY: 4.0,
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  0.0,
-                                                                  8.0,
-                                                                  0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        2.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Expanded(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      'Jessica, 25',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).info,
-                                                                            fontSize:
-                                                                                16.0,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Flexible(
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    borderWidth:
-                                                                        1.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .close_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .info,
-                                                                      size:
-                                                                          30.0,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                                Container(
-                                                                  width: 1.0,
-                                                                  height: 40.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .info,
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .favorite_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          30.0,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
+                                                      BorderRadius.circular(
+                                                          15.0),
+                                                  child: Image.asset(
+                                                    'assets/images/chris-montgomery-smgTvepind4-unsplash.jpg',
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  -1.0, -1.0),
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 10.0, 0.0, 0.0),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 1.0),
                                                 child: Container(
-                                                  width: 100.0,
-                                                  height: 34.0,
-                                                  decoration: BoxDecoration(
-                                                    color: const Color(0x77000000),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
-                                                  ),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                        child: Icon(
-                                                          Icons.location_on,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .info,
-                                                          size: 24.0,
-                                                        ),
-                                                      ),
-                                                      Flexible(
-                                                        child: Text(
-                                                          '2.81 km',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .info,
-                                                                fontSize: 13.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        child: Stack(
-                                          children: [
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                                child: Image.network(
-                                                  'https://images.unsplash.com/photo-1573497019418-b400bb3ab074?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw5fHxhZnJpY2FuJTIwZ2lybHN8ZW58MHx8fHwxNzEwMTc1MzgwfDA&ixlib=rb-4.0.3&q=80&w=1080',
                                                   width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 1.0),
-                                              child: Container(
-                                                width: double.infinity,
-                                                height: 83.0,
-                                                decoration: const BoxDecoration(
-                                                  color: Color(0x81000000),
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15.0),
-                                                    bottomRight:
-                                                        Radius.circular(15.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15.0),
-                                                    bottomRight:
-                                                        Radius.circular(15.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                  child: BackdropFilter(
-                                                    filter: ImageFilter.blur(
-                                                      sigmaX: 4.0,
-                                                      sigmaY: 4.0,
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  0.0,
-                                                                  8.0,
-                                                                  0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        2.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Expanded(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      'Jessica, 25',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).info,
-                                                                            fontSize:
-                                                                                16.0,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Flexible(
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                              children: [
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    borderWidth:
-                                                                        1.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .close_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .info,
-                                                                      size:
-                                                                          30.0,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                                Container(
-                                                                  width: 1.0,
-                                                                  height: 40.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .info,
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      FlutterFlowIconButton(
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderRadius:
-                                                                        20.0,
-                                                                    buttonSize:
-                                                                        50.0,
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .favorite_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          30.0,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      print(
-                                                                          'IconButton pressed ...');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  -1.0, -1.0),
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 10.0, 0.0, 0.0),
-                                                child: Container(
-                                                  width: 100.0,
-                                                  height: 34.0,
-                                                  decoration: BoxDecoration(
-                                                    color: const Color(0x77000000),
+                                                  height: 83.0,
+                                                  decoration: const BoxDecoration(
+                                                    color: Color(0x81000000),
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(15.0),
+                                                      bottomRight:
+                                                          Radius.circular(15.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
                                                   ),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Padding(
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(15.0),
+                                                      bottomRight:
+                                                          Radius.circular(15.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
+                                                    child: BackdropFilter(
+                                                      filter: ImageFilter.blur(
+                                                        sigmaX: 4.0,
+                                                        sigmaY: 4.0,
+                                                      ),
+                                                      child: Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
                                                                 .fromSTEB(
+                                                                    8.0,
                                                                     0.0,
-                                                                    0.0,
-                                                                    5.0,
+                                                                    8.0,
                                                                     0.0),
-                                                        child: Icon(
-                                                          Icons.location_on,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .info,
-                                                          size: 24.0,
-                                                        ),
-                                                      ),
-                                                      Flexible(
-                                                        child: Text(
-                                                          '2.81 km',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .info,
-                                                                fontSize: 13.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          2.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Go for 30 min walk',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: FlutterFlowTheme.of(context).info,
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
+                                                            ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                              tablet: false,
+                                                              tabletLandscape:
+                                                                  false,
+                                                              desktop: false,
+                                                            ))
+                                                              Flexible(
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
+                                                                  children: [
+                                                                    Flexible(
+                                                                      child:
+                                                                          FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        borderWidth:
+                                                                            1.0,
+                                                                        buttonSize:
+                                                                            50.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .close_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).info,
+                                                                          size:
+                                                                              30.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          print(
+                                                                              'IconButton pressed ...');
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width:
+                                                                          1.0,
+                                                                      height:
+                                                                          40.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .info,
+                                                                      ),
+                                                                    ),
+                                                                    Flexible(
+                                                                      child:
+                                                                          FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        buttonSize:
+                                                                            50.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .favorite_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          size:
+                                                                              30.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          print(
+                                                                              'IconButton pressed ...');
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    -1.0, -1.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          8.0, 10.0, 0.0, 0.0),
+                                                  child: Container(
+                                                    width: 100.0,
+                                                    height: 34.0,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(0x77000000),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            Icons.date_range,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .info,
+                                                            size: 24.0,
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                            '10 Nov',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .info,
+                                                                  fontSize:
+                                                                      13.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
                                     ],
                                   ).animateOnPageLoad(animationsMap[
                                       'gridViewOnPageLoadAnimation']!),

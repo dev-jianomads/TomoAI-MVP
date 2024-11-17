@@ -205,7 +205,7 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: Image.asset(
-                                              'assets/images/trademark.png',
+                                              'assets/images/Tomo_FileFormats-06_3_128x128.png',
                                               width: 109.0,
                                               height: 100.0,
                                               fit: BoxFit.contain,
