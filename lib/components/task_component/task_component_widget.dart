@@ -5,20 +5,19 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'match_component_model.dart';
-export 'match_component_model.dart';
+import 'task_component_model.dart';
+export 'task_component_model.dart';
 
-class MatchComponentWidget extends StatefulWidget {
-  const MatchComponentWidget({super.key});
+class TaskComponentWidget extends StatefulWidget {
+  const TaskComponentWidget({super.key});
 
   @override
-  State<MatchComponentWidget> createState() => _MatchComponentWidgetState();
+  State<TaskComponentWidget> createState() => _TaskComponentWidgetState();
 }
 
-class _MatchComponentWidgetState extends State<MatchComponentWidget>
+class _TaskComponentWidgetState extends State<TaskComponentWidget>
     with TickerProviderStateMixin {
-  late MatchComponentModel _model;
+  late TaskComponentModel _model;
 
   final animationsMap = <String, AnimationInfo>{};
 
@@ -31,7 +30,7 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MatchComponentModel());
+    _model = createModel(context, () => TaskComponentModel());
 
     animationsMap.addAll({
       'transformOnPageLoadAnimation1': AnimationInfo(
@@ -211,25 +210,6 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
           ),
         ],
       ),
-      'textOnPageLoadAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 200.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 200.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 23.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -258,13 +238,12 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
               child: SizedBox(
                 width: 295.0,
-                height: 260.0,
+                height: 403.0,
                 child: Stack(
                   children: [
                     Align(
@@ -274,10 +253,10 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15.0),
                           child: Image.asset(
-                            'assets/images/solen-feyissa-TaOGbz_S-Qw-unsplash_(1).jpg',
+                            'assets/images/nordwood-themes-kRNZiGKtz48-unsplash.jpg',
                             width: 295.0,
-                            height: 240.0,
-                            fit: BoxFit.cover,
+                            height: 403.0,
+                            fit: BoxFit.fitWidth,
                           ),
                         ),
                       ).animateOnPageLoad(
@@ -291,9 +270,9 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
                       desktop: false,
                     ))
                       Align(
-                        alignment: const AlignmentDirectional(-1.0, 0.7),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Transform.rotate(
-                          angle: -10.0 * (math.pi / 180),
+                          angle: 0.0 * (math.pi / 180),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
                             child: Image.network(
@@ -500,151 +479,59 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
                 ),
               ),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Prioritise product features - sprint 4',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
-                        color: FlutterFlowTheme.of(context).primary,
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation1']!),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                  child: Text(
-                    'Asana',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                  ).animateOnPageLoad(
-                      animationsMap['textOnPageLoadAnimation2']!),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: Text(
-                    'Suggested Actions',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          color: const Color(0xFFFF9786),
-                          fontSize: 16.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ).animateOnPageLoad(
-                      animationsMap['textOnPageLoadAnimation3']!),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 8.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('chatDetails');
-                    },
-                    text: 'Go directly to project',
-                    icon: const Icon(
-                      Icons.group_work,
-                      size: 20.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: 295.0,
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 21.0, 0.0, 0.0),
+              child: Text(
+                'Task 1',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Inter',
                       color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Inter',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(6.0),
+                      fontSize: 30.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('chatDetails');
-                    },
-                    text: 'Huddle with Geoff',
-                    icon: const FaIcon(
-                      FontAwesomeIcons.slackHash,
-                      size: 20.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: 295.0,
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Inter',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('chatDetails');
-                    },
-                    text: 'Schedule team meet',
-                    icon: const Icon(
-                      Icons.groups,
-                      size: 20.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: 295.0,
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Inter',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                  ),
-                ),
-              ],
+              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation1']!),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 24.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+              child: Text(
+                'Task Description',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Inter',
+                      letterSpacing: 0.0,
+                    ),
+              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation2']!),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 16.0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  context.pushNamed('chatDetails');
+                },
+                text: 'Suggested Action 1',
+                options: FFButtonOptions(
+                  width: 295.0,
+                  height: 56.0,
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  iconPadding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).primary,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Inter',
+                        color: Colors.white,
+                        letterSpacing: 0.0,
+                      ),
+                  elevation: 3.0,
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   Navigator.pop(context);
@@ -652,7 +539,7 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
                 text: 'Keep swiping',
                 options: FFButtonOptions(
                   width: 295.0,
-                  height: 40.0,
+                  height: 56.0,
                   padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
@@ -668,7 +555,7 @@ class _MatchComponentWidgetState extends State<MatchComponentWidget>
                     color: Colors.transparent,
                     width: 1.0,
                   ),
-                  borderRadius: BorderRadius.circular(6.0),
+                  borderRadius: BorderRadius.circular(32.0),
                 ),
               ),
             ),

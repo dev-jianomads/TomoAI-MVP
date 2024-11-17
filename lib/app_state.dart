@@ -35,6 +35,30 @@ class FFAppState extends ChangeNotifier {
     _walkthroughComplete = value;
     prefs.setBool('ff_walkthroughComplete', value);
   }
+
+  String _authCode = ' ';
+  String get authCode => _authCode;
+  set authCode(String value) {
+    _authCode = value;
+  }
+
+  String _score = ' ';
+  String get score => _score;
+  set score(String value) {
+    _score = value;
+  }
+
+  String _refreshToken = '';
+  String get refreshToken => _refreshToken;
+  set refreshToken(String value) {
+    _refreshToken = value;
+  }
+
+  String _accessToken = '';
+  String get accessToken => _accessToken;
+  set accessToken(String value) {
+    _accessToken = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

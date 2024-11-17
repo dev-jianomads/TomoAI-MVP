@@ -445,11 +445,11 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        context.goNamedAuth('OnboardingPage', context.mounted);
-
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();
+
+                        context.goNamedAuth('OnboardingPage', context.mounted);
                       },
                       text: 'Log Out',
                       options: FFButtonOptions(

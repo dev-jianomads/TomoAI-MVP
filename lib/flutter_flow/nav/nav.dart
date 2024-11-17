@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -170,6 +171,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ProfileDetails',
           path: '/profileDetails',
           builder: (context, params) => const ProfileDetailsWidget(),
+        ),
+        FFRoute(
+          name: 'favorites2',
+          path: '/favorites2',
+          builder: (context, params) => const Favorites2Widget(),
+        ),
+        FFRoute(
+          name: 'integrations',
+          path: '/integrations',
+          builder: (context, params) => const IntegrationsWidget(),
+        ),
+        FFRoute(
+          name: 'access',
+          path: '/access',
+          builder: (context, params) => const AccessWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -354,14 +370,14 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Container(
-                  color: Colors.transparent,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/onboarding_image.png',
-                      width: double.infinity,
-                      height: double.infinity,
-                      fit: BoxFit.cover,
+              ? Center(
+                  child: SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
                     ),
                   ),
                 )

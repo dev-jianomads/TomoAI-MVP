@@ -1,10 +1,10 @@
 import '/components/nav_bar/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'favorites_widget.dart' show FavoritesWidget;
+import 'favorites2_widget.dart' show Favorites2Widget;
 import 'package:flutter/material.dart';
 
-class FavoritesModel extends FlutterFlowModel<FavoritesWidget> {
+class Favorites2Model extends FlutterFlowModel<Favorites2Widget> {
   ///  Local state fields for this page.
 
   bool sortAtoZ = true;

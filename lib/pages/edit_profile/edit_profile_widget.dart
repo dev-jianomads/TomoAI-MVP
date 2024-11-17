@@ -31,11 +31,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
     super.initState();
     _model = createModel(context, () => EditProfileModel());
 
-    _model.firstnameTextController ??=
-        TextEditingController(text: 'Daddy Claude');
+    _model.firstnameTextController ??= TextEditingController(text: 'Ken');
     _model.firstnameFocusNode ??= FocusNode();
 
-    _model.lastNameTextController ??= TextEditingController(text: 'Bediako');
+    _model.lastNameTextController ??=
+        TextEditingController(text: '0411 123 456');
     _model.lastNameFocusNode ??= FocusNode();
 
     animationsMap.addAll({
@@ -253,7 +253,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(25.0),
                                   child: Image.asset(
-                                    'assets/images/1650791999808.jpg',
+                                    'assets/images/ben-sweet-2LowviVHZ-E-unsplash_(1).jpg',
                                     width: 99.0,
                                     height: 99.0,
                                     fit: BoxFit.cover,

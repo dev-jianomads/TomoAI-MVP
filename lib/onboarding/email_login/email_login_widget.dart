@@ -38,20 +38,20 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
     _model.firstNameTextController ??= TextEditingController();
     _model.firstNameFocusNode ??= FocusNode();
 
-    _model.emailAddressTextController1 ??= TextEditingController();
-    _model.emailAddressFocusNode1 ??= FocusNode();
+    _model.emailAddress1TextController ??= TextEditingController();
+    _model.emailAddress1FocusNode ??= FocusNode();
 
-    _model.passwordTextController1 ??= TextEditingController();
-    _model.passwordFocusNode1 ??= FocusNode();
+    _model.signuppasswordTextController ??= TextEditingController();
+    _model.signuppasswordFocusNode ??= FocusNode();
 
-    _model.confirmpasswordTextController ??= TextEditingController();
-    _model.confirmpasswordFocusNode ??= FocusNode();
+    _model.signupconfirmpasswordTextController ??= TextEditingController();
+    _model.signupconfirmpasswordFocusNode ??= FocusNode();
 
-    _model.emailAddressTextController2 ??= TextEditingController();
-    _model.emailAddressFocusNode2 ??= FocusNode();
+    _model.emailAddress2TextController ??= TextEditingController();
+    _model.emailAddress2FocusNode ??= FocusNode();
 
-    _model.passwordTextController2 ??= TextEditingController();
-    _model.passwordFocusNode2 ??= FocusNode();
+    _model.signinpasswordTextController ??= TextEditingController();
+    _model.signinpasswordFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'imageOnPageLoadAnimation': AnimationInfo(
@@ -246,7 +246,7 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                             .primary,
                                         unselectedLabelColor:
                                             FlutterFlowTheme.of(context)
-                                                .primary,
+                                                .secondaryText,
                                         labelPadding:
                                             const EdgeInsetsDirectional.fromSTEB(
                                                 32.0, 0.0, 32.0, 0.0),
@@ -447,9 +447,9 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                       width: double.infinity,
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .emailAddressTextController1,
+                                                            .emailAddress1TextController,
                                                         focusNode: _model
-                                                            .emailAddressFocusNode1,
+                                                            .emailAddress1FocusNode,
                                                         autofocus: false,
                                                         autofillHints: const [
                                                           AutofillHints.email
@@ -562,7 +562,7 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                             TextInputType
                                                                 .emailAddress,
                                                         validator: _model
-                                                            .emailAddressTextController1Validator
+                                                            .emailAddress1TextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -577,15 +577,15 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                       width: double.infinity,
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .passwordTextController1,
+                                                            .signuppasswordTextController,
                                                         focusNode: _model
-                                                            .passwordFocusNode1,
+                                                            .signuppasswordFocusNode,
                                                         autofocus: false,
                                                         autofillHints: const [
                                                           AutofillHints.password
                                                         ],
                                                         obscureText: !_model
-                                                            .passwordVisibility1,
+                                                            .signuppasswordVisibility,
                                                         decoration:
                                                             InputDecoration(
                                                           labelText: 'Password',
@@ -674,15 +674,15 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                             onTap: () =>
                                                                 safeSetState(
                                                               () => _model
-                                                                      .passwordVisibility1 =
+                                                                      .signuppasswordVisibility =
                                                                   !_model
-                                                                      .passwordVisibility1,
+                                                                      .signuppasswordVisibility,
                                                             ),
                                                             focusNode: FocusNode(
                                                                 skipTraversal:
                                                                     true),
                                                             child: Icon(
-                                                              _model.passwordVisibility1
+                                                              _model.signuppasswordVisibility
                                                                   ? Icons
                                                                       .visibility_outlined
                                                                   : Icons
@@ -713,7 +713,7 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                           .w500,
                                                                 ),
                                                         validator: _model
-                                                            .passwordTextController1Validator
+                                                            .signuppasswordTextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -728,15 +728,15 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                       width: double.infinity,
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .confirmpasswordTextController,
+                                                            .signupconfirmpasswordTextController,
                                                         focusNode: _model
-                                                            .confirmpasswordFocusNode,
+                                                            .signupconfirmpasswordFocusNode,
                                                         autofocus: false,
                                                         autofillHints: const [
                                                           AutofillHints.password
                                                         ],
                                                         obscureText: !_model
-                                                            .confirmpasswordVisibility,
+                                                            .signupconfirmpasswordVisibility,
                                                         decoration:
                                                             InputDecoration(
                                                           labelText:
@@ -826,15 +826,15 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                             onTap: () =>
                                                                 safeSetState(
                                                               () => _model
-                                                                      .confirmpasswordVisibility =
+                                                                      .signupconfirmpasswordVisibility =
                                                                   !_model
-                                                                      .confirmpasswordVisibility,
+                                                                      .signupconfirmpasswordVisibility,
                                                             ),
                                                             focusNode: FocusNode(
                                                                 skipTraversal:
                                                                     true),
                                                             child: Icon(
-                                                              _model.confirmpasswordVisibility
+                                                              _model.signupconfirmpasswordVisibility
                                                                   ? Icons
                                                                       .visibility_outlined
                                                                   : Icons
@@ -865,7 +865,7 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                           .w500,
                                                                 ),
                                                         validator: _model
-                                                            .confirmpasswordTextControllerValidator
+                                                            .signupconfirmpasswordTextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -886,12 +886,13 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
                                                           GoRouter.of(context)
-                                                              .prepareAuthEvent();
+                                                              .prepareAuthEvent(
+                                                                  true);
                                                           if (_model
-                                                                  .passwordTextController1
+                                                                  .signuppasswordTextController
                                                                   .text !=
                                                               _model
-                                                                  .confirmpasswordTextController
+                                                                  .signupconfirmpasswordTextController
                                                                   .text) {
                                                             ScaffoldMessenger
                                                                     .of(context)
@@ -910,17 +911,17 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                   .createAccountWithEmail(
                                                             context,
                                                             _model
-                                                                .emailAddressTextController1
+                                                                .emailAddress1TextController
                                                                 .text,
                                                             _model
-                                                                .passwordTextController1
+                                                                .signuppasswordTextController
                                                                 .text,
                                                           );
                                                           if (user == null) {
                                                             return;
                                                           }
 
-                                                          await ProfilesTable()
+                                                          await UsersTable()
                                                               .insert({
                                                             'id':
                                                                 currentUserUid,
@@ -928,17 +929,20 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                 supaSerialize<
                                                                         DateTime>(
                                                                     getCurrentTimestamp),
-                                                            'first_name': _model
+                                                            'email':
+                                                                currentUserEmail,
+                                                            'display_name': _model
                                                                 .firstNameTextController
                                                                 .text,
-                                                            'email': _model
-                                                                .emailAddressTextController1
-                                                                .text,
+                                                            'provider': 'email',
                                                           });
 
                                                           context.pushNamedAuth(
-                                                              'Homepage',
-                                                              context.mounted);
+                                                            'Homepage',
+                                                            context.mounted,
+                                                            ignoreRedirect:
+                                                                true,
+                                                          );
                                                         },
                                                         text: 'Sign Up',
                                                         options:
@@ -993,34 +997,42 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Align(
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                0.0, 0.0),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      16.0,
-                                                                      0.0,
-                                                                      16.0,
-                                                                      16.0),
-                                                          child: Text(
-                                                            'Or sign up with',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                      if (responsiveVisibility(
+                                                        context: context,
+                                                        phone: false,
+                                                        tablet: false,
+                                                        tabletLandscape: false,
+                                                        desktop: false,
+                                                      ))
+                                                        Align(
+                                                          alignment:
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        0.0,
+                                                                        16.0,
+                                                                        16.0),
+                                                            child: Text(
+                                                              'Or sign up with',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
                                                       Align(
                                                         alignment:
                                                             const AlignmentDirectional(
@@ -1155,17 +1167,16 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                           null) {
                                                                         return;
                                                                       }
-                                                                      await ProfilesTable()
+                                                                      await UsersTable()
                                                                           .insert({
                                                                         'id':
                                                                             currentUserUid,
                                                                         'created_at':
                                                                             supaSerialize<DateTime>(getCurrentTimestamp),
-                                                                        'first_name': _model
-                                                                            .firstNameTextController
-                                                                            .text,
+                                                                        'display_name':
+                                                                            '',
                                                                         'email': _model
-                                                                            .emailAddressTextController1
+                                                                            .emailAddress1TextController
                                                                             .text,
                                                                       });
 
@@ -1231,52 +1242,55 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  GoRouter.of(
-                                                                          context)
-                                                                      .prepareAuthEvent();
-                                                                  final user =
-                                                                      await authManager
-                                                                          .signInWithGoogle(
-                                                                              context);
-                                                                  if (user ==
-                                                                      null) {
-                                                                    return;
-                                                                  }
-                                                                  await ProfilesTable()
-                                                                      .insert({
-                                                                    'id':
-                                                                        currentUserUid,
-                                                                    'created_at':
-                                                                        supaSerialize<DateTime>(
-                                                                            getCurrentTimestamp),
-                                                                    'first_name':
-                                                                        _model
-                                                                            .firstNameTextController
-                                                                            .text,
-                                                                    'email': _model
-                                                                        .emailAddressTextController1
-                                                                        .text,
-                                                                  });
-
-                                                                  context.pushNamedAuth(
-                                                                      'Homepage',
-                                                                      context
-                                                                          .mounted);
-                                                                },
-                                                                child:
-                                                                    ClipRRect(
+                                                              if (responsiveVisibility(
+                                                                context:
+                                                                    context,
+                                                                phone: false,
+                                                                tablet: false,
+                                                                tabletLandscape:
+                                                                    false,
+                                                                desktop: false,
+                                                              ))
+                                                                Align(
+                                                                  alignment:
+                                                                      const AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            16.0,
+                                                                            0.0,
+                                                                            16.0,
+                                                                            16.0),
+                                                                    child: Text(
+                                                                      'Or sign up with',
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .labelMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Inter',
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              if (responsiveVisibility(
+                                                                context:
+                                                                    context,
+                                                                phone: false,
+                                                                tablet: false,
+                                                                tabletLandscape:
+                                                                    false,
+                                                                desktop: false,
+                                                              ))
+                                                                ClipRRect(
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -1296,7 +1310,6 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                             0.0),
                                                                   ),
                                                                 ),
-                                                              ),
                                                             ],
                                                           ),
                                                         ),
@@ -1343,9 +1356,9 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                       width: double.infinity,
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .emailAddressTextController2,
+                                                            .emailAddress2TextController,
                                                         focusNode: _model
-                                                            .emailAddressFocusNode2,
+                                                            .emailAddress2FocusNode,
                                                         autofocus: false,
                                                         autofillHints: const [
                                                           AutofillHints.email
@@ -1453,7 +1466,7 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                             TextInputType
                                                                 .emailAddress,
                                                         validator: _model
-                                                            .emailAddressTextController2Validator
+                                                            .emailAddress2TextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -1468,15 +1481,15 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                       width: double.infinity,
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .passwordTextController2,
+                                                            .signinpasswordTextController,
                                                         focusNode: _model
-                                                            .passwordFocusNode2,
+                                                            .signinpasswordFocusNode,
                                                         autofocus: false,
                                                         autofillHints: const [
                                                           AutofillHints.password
                                                         ],
                                                         obscureText: !_model
-                                                            .passwordVisibility2,
+                                                            .signinpasswordVisibility,
                                                         decoration:
                                                             InputDecoration(
                                                           labelText: 'Password',
@@ -1563,15 +1576,15 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                             onTap: () =>
                                                                 safeSetState(
                                                               () => _model
-                                                                      .passwordVisibility2 =
+                                                                      .signinpasswordVisibility =
                                                                   !_model
-                                                                      .passwordVisibility2,
+                                                                      .signinpasswordVisibility,
                                                             ),
                                                             focusNode: FocusNode(
                                                                 skipTraversal:
                                                                     true),
                                                             child: Icon(
-                                                              _model.passwordVisibility2
+                                                              _model.signinpasswordVisibility
                                                                   ? Icons
                                                                       .visibility_outlined
                                                                   : Icons
@@ -1599,7 +1612,7 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                       0.0,
                                                                 ),
                                                         validator: _model
-                                                            .passwordTextController2Validator
+                                                            .signinpasswordTextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -1627,10 +1640,10 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                   .signInWithEmail(
                                                             context,
                                                             _model
-                                                                .emailAddressTextController1
+                                                                .emailAddress2TextController
                                                                 .text,
                                                             _model
-                                                                .passwordTextController1
+                                                                .signinpasswordTextController
                                                                 .text,
                                                           );
                                                           if (user == null) {
@@ -1749,178 +1762,6 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget>
                                                                 .down,
                                                         clipBehavior: Clip.none,
                                                         children: [
-                                                          if (responsiveVisibility(
-                                                            context: context,
-                                                            phone: false,
-                                                            tablet: false,
-                                                            tabletLandscape:
-                                                                false,
-                                                            desktop: false,
-                                                          ))
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          16.0),
-                                                              child:
-                                                                  FFButtonWidget(
-                                                                onPressed:
-                                                                    () async {
-                                                                  GoRouter.of(
-                                                                          context)
-                                                                      .prepareAuthEvent();
-                                                                  final user =
-                                                                      await authManager
-                                                                          .signInWithGoogle(
-                                                                              context);
-                                                                  if (user ==
-                                                                      null) {
-                                                                    return;
-                                                                  }
-
-                                                                  context.pushNamedAuth(
-                                                                      'Homepage',
-                                                                      context
-                                                                          .mounted);
-                                                                },
-                                                                text:
-                                                                    'Continue with Google',
-                                                                icon: const FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .google,
-                                                                  size: 20.0,
-                                                                ),
-                                                                options:
-                                                                    FFButtonOptions(
-                                                                  width: 230.0,
-                                                                  height: 44.0,
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  iconPadding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground,
-                                                                  textStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                      ),
-                                                                  elevation:
-                                                                      0.0,
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                    width: 2.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                  hoverColor: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          if (responsiveVisibility(
-                                                            context: context,
-                                                            phone: false,
-                                                            tablet: false,
-                                                            tabletLandscape:
-                                                                false,
-                                                            desktop: false,
-                                                          ))
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          16.0),
-                                                              child:
-                                                                  FFButtonWidget(
-                                                                onPressed:
-                                                                    () async {
-                                                                  context.pushNamed(
-                                                                      'editProfile');
-                                                                },
-                                                                text:
-                                                                    'Continue with Apple',
-                                                                icon: const FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .apple,
-                                                                  size: 20.0,
-                                                                ),
-                                                                options:
-                                                                    FFButtonOptions(
-                                                                  width: 230.0,
-                                                                  height: 44.0,
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  iconPadding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground,
-                                                                  textStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                      ),
-                                                                  elevation:
-                                                                      0.0,
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                    width: 2.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                  hoverColor: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                ),
-                                                              ),
-                                                            ),
                                                           InkWell(
                                                             splashColor: Colors
                                                                 .transparent,
