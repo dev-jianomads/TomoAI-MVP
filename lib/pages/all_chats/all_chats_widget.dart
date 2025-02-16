@@ -53,8 +53,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -72,8 +72,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -91,8 +91,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -110,8 +110,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(41.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(41.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -129,8 +129,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -148,8 +148,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -181,7 +181,10 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
         title: 'allChats',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -213,7 +216,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                   child: FlutterFlowIconButton(
                     borderColor: FlutterFlowTheme.of(context).alternate,
                     borderRadius: 15.0,
@@ -234,7 +237,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
               centerTitle: true,
               elevation: 0.0,
             ),
-            body: SizedBox(
+            body: Container(
               width: double.infinity,
               height: double.infinity,
               child: Stack(
@@ -244,16 +247,16 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 18.0, 0.0, 18.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -261,7 +264,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       Expanded(
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(-1.0, 0.0),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Text(
                                             'Your recent chats with Tomo',
                                             style: FlutterFlowTheme.of(context)
@@ -283,7 +286,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Container(
                                     width: double.infinity,
@@ -302,7 +305,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 3.0, 0.0),
                                           child: FaIcon(
                                             FontAwesomeIcons.search,
@@ -314,7 +317,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                         Expanded(
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 8.0, 0.0),
                                             child: TextFormField(
                                               controller: _model
@@ -327,7 +330,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                 labelText: 'Search....',
                                                 enabledBorder:
                                                     UnderlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -337,7 +340,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                 ),
                                                 focusedBorder:
                                                     UnderlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -347,7 +350,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                 ),
                                                 errorBorder:
                                                     UnderlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -357,7 +360,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                 ),
                                                 focusedErrorBorder:
                                                     UnderlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -380,8 +383,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                           ),
                                         ),
                                       ]
-                                          .addToStart(const SizedBox(width: 20.0))
-                                          .addToEnd(const SizedBox(width: 20.0)),
+                                          .addToStart(SizedBox(width: 20.0))
+                                          .addToEnd(SizedBox(width: 20.0)),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
                                       'containerOnPageLoadAnimation']!),
@@ -394,7 +397,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                   desktop: false,
                                 ))
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 12.0, 0.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -433,7 +436,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               Container(
                                                 width: 66.0,
                                                 height: 95.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -455,23 +458,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                     context)
                                                                 .warning
                                                           ],
-                                                          stops: const [
+                                                          stops: [
                                                             0.0,
                                                             0.5,
                                                             1.0
                                                           ],
                                                           begin:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, -0.34),
                                                           end:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.34),
                                                         ),
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(3.0),
+                                                            EdgeInsets.all(3.0),
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
@@ -488,7 +491,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -530,7 +533,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               Container(
                                                 width: 66.0,
                                                 height: 95.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -552,23 +555,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                     context)
                                                                 .warning
                                                           ],
-                                                          stops: const [
+                                                          stops: [
                                                             0.0,
                                                             0.5,
                                                             1.0
                                                           ],
                                                           begin:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, -0.34),
                                                           end:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.34),
                                                         ),
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(3.0),
+                                                            EdgeInsets.all(3.0),
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
@@ -585,7 +588,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -627,7 +630,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               Container(
                                                 width: 66.0,
                                                 height: 95.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -649,23 +652,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                     context)
                                                                 .secondaryBackground
                                                           ],
-                                                          stops: const [
+                                                          stops: [
                                                             0.0,
                                                             0.5,
                                                             1.0
                                                           ],
                                                           begin:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, -0.34),
                                                           end:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.34),
                                                         ),
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(3.0),
+                                                            EdgeInsets.all(3.0),
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
@@ -682,7 +685,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -724,7 +727,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               Container(
                                                 width: 66.0,
                                                 height: 95.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -746,23 +749,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                     context)
                                                                 .secondaryBackground
                                                           ],
-                                                          stops: const [
+                                                          stops: [
                                                             0.0,
                                                             0.5,
                                                             1.0
                                                           ],
                                                           begin:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, -0.34),
                                                           end:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.34),
                                                         ),
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(3.0),
+                                                            EdgeInsets.all(3.0),
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
@@ -779,7 +782,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -820,7 +823,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               Container(
                                                 width: 66.0,
                                                 height: 95.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -842,23 +845,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                     context)
                                                                 .warning
                                                           ],
-                                                          stops: const [
+                                                          stops: [
                                                             0.0,
                                                             0.5,
                                                             1.0
                                                           ],
                                                           begin:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, -0.34),
                                                           end:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.34),
                                                         ),
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(3.0),
+                                                            EdgeInsets.all(3.0),
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
@@ -875,7 +878,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -916,7 +919,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               Container(
                                                 width: 66.0,
                                                 height: 95.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -938,23 +941,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                     context)
                                                                 .warning
                                                           ],
-                                                          stops: const [
+                                                          stops: [
                                                             0.0,
                                                             0.5,
                                                             1.0
                                                           ],
                                                           begin:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, -0.34),
                                                           end:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.34),
                                                         ),
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(3.0),
+                                                            EdgeInsets.all(3.0),
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
@@ -971,7 +974,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -1010,9 +1013,9 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                 ),
                                               ),
                                             ]
-                                                .divide(const SizedBox(width: 10.0))
+                                                .divide(SizedBox(width: 10.0))
                                                 .addToEnd(
-                                                    const SizedBox(width: 15.0)),
+                                                    SizedBox(width: 15.0)),
                                           ),
                                         ),
                                       ),
@@ -1027,7 +1030,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                   desktop: false,
                                 ))
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 20.0, 0.0, 20.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1048,7 +1051,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                         'rowOnPageLoadAnimation3']!),
                                   ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 120.0),
                                   child: ListView(
                                     padding: EdgeInsets.zero,
@@ -1057,7 +1060,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                     scrollDirection: Axis.vertical,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 18.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1068,7 +1071,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             context.pushNamed('chatDetails');
                                           },
                                           child: Container(
-                                            decoration: const BoxDecoration(),
+                                            decoration: BoxDecoration(),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -1089,7 +1092,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(3.0),
+                                                        EdgeInsets.all(3.0),
                                                     child: ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1106,12 +1109,12 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 10.0, 0.0),
                                                     child: Container(
                                                       decoration:
-                                                          const BoxDecoration(),
+                                                          BoxDecoration(),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -1165,7 +1168,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         12.0,
@@ -1183,7 +1186,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                               ),
                                                             ),
                                                           ),
-                                                        ].divide(const SizedBox(
+                                                        ].divide(SizedBox(
                                                             height: 3.0)),
                                                       ),
                                                     ),
@@ -1206,7 +1209,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1248,11 +1251,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '2',
@@ -1288,7 +1291,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 18.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1299,7 +1302,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             context.pushNamed('chatDetails');
                                           },
                                           child: Container(
-                                            decoration: const BoxDecoration(),
+                                            decoration: BoxDecoration(),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -1319,18 +1322,18 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                 context)
                                                             .warning
                                                       ],
-                                                      stops: const [0.0, 0.5, 1.0],
+                                                      stops: [0.0, 0.5, 1.0],
                                                       begin:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               -1.0, -0.34),
-                                                      end: const AlignmentDirectional(
+                                                      end: AlignmentDirectional(
                                                           1.0, 0.34),
                                                     ),
                                                     shape: BoxShape.circle,
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(3.0),
+                                                        EdgeInsets.all(3.0),
                                                     child: ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1347,12 +1350,12 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 10.0, 0.0),
                                                     child: Container(
                                                       decoration:
-                                                          const BoxDecoration(),
+                                                          BoxDecoration(),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -1406,7 +1409,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         12.0,
@@ -1424,7 +1427,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                               ),
                                                             ),
                                                           ),
-                                                        ].divide(const SizedBox(
+                                                        ].divide(SizedBox(
                                                             height: 3.0)),
                                                       ),
                                                     ),
@@ -1447,7 +1450,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1489,11 +1492,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '1',
@@ -1537,7 +1540,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       ))
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 18.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -1548,7 +1551,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               context.pushNamed('chatDetails');
                                             },
                                             child: Container(
-                                              decoration: const BoxDecoration(),
+                                              decoration: BoxDecoration(),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -1568,19 +1571,19 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   context)
                                                               .warning
                                                         ],
-                                                        stops: const [0.0, 0.5, 1.0],
+                                                        stops: [0.0, 0.5, 1.0],
                                                         begin:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 -1.0, -0.34),
                                                         end:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 1.0, 0.34),
                                                       ),
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(3.0),
+                                                          EdgeInsets.all(3.0),
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -1598,7 +1601,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -1606,7 +1609,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   0.0),
                                                       child: Container(
                                                         decoration:
-                                                            const BoxDecoration(),
+                                                            BoxDecoration(),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -1660,7 +1663,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           12.0,
@@ -1678,7 +1681,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ].divide(const SizedBox(
+                                                          ].divide(SizedBox(
                                                               height: 3.0)),
                                                         ),
                                                       ),
@@ -1694,7 +1697,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1736,11 +1739,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '8',
@@ -1784,7 +1787,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       ))
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 18.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -1795,7 +1798,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               context.pushNamed('chatDetails');
                                             },
                                             child: Container(
-                                              decoration: const BoxDecoration(),
+                                              decoration: BoxDecoration(),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -1815,19 +1818,19 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   context)
                                                               .warning
                                                         ],
-                                                        stops: const [0.0, 0.5, 1.0],
+                                                        stops: [0.0, 0.5, 1.0],
                                                         begin:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 -1.0, -0.34),
                                                         end:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 1.0, 0.34),
                                                       ),
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(3.0),
+                                                          EdgeInsets.all(3.0),
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -1845,7 +1848,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -1853,7 +1856,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   0.0),
                                                       child: Container(
                                                         decoration:
-                                                            const BoxDecoration(),
+                                                            BoxDecoration(),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -1907,7 +1910,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           12.0,
@@ -1925,7 +1928,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ].divide(const SizedBox(
+                                                          ].divide(SizedBox(
                                                               height: 3.0)),
                                                         ),
                                                       ),
@@ -1941,7 +1944,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1983,11 +1986,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '2',
@@ -2031,7 +2034,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       ))
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 18.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -2042,7 +2045,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               context.pushNamed('chatDetails');
                                             },
                                             child: Container(
-                                              decoration: const BoxDecoration(),
+                                              decoration: BoxDecoration(),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -2062,19 +2065,19 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   context)
                                                               .warning
                                                         ],
-                                                        stops: const [0.0, 0.5, 1.0],
+                                                        stops: [0.0, 0.5, 1.0],
                                                         begin:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 -1.0, -0.34),
                                                         end:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 1.0, 0.34),
                                                       ),
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(3.0),
+                                                          EdgeInsets.all(3.0),
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -2092,7 +2095,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -2100,7 +2103,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   0.0),
                                                       child: Container(
                                                         decoration:
-                                                            const BoxDecoration(),
+                                                            BoxDecoration(),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2154,7 +2157,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           12.0,
@@ -2172,7 +2175,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ].divide(const SizedBox(
+                                                          ].divide(SizedBox(
                                                               height: 3.0)),
                                                         ),
                                                       ),
@@ -2188,7 +2191,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -2230,11 +2233,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '2',
@@ -2278,7 +2281,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       ))
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 18.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -2289,7 +2292,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               context.pushNamed('chatDetails');
                                             },
                                             child: Container(
-                                              decoration: const BoxDecoration(),
+                                              decoration: BoxDecoration(),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -2309,19 +2312,19 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   context)
                                                               .warning
                                                         ],
-                                                        stops: const [0.0, 0.5, 1.0],
+                                                        stops: [0.0, 0.5, 1.0],
                                                         begin:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 -1.0, -0.34),
                                                         end:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 1.0, 0.34),
                                                       ),
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(3.0),
+                                                          EdgeInsets.all(3.0),
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -2339,7 +2342,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -2347,7 +2350,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   0.0),
                                                       child: Container(
                                                         decoration:
-                                                            const BoxDecoration(),
+                                                            BoxDecoration(),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2401,7 +2404,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           12.0,
@@ -2419,7 +2422,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ].divide(const SizedBox(
+                                                          ].divide(SizedBox(
                                                               height: 3.0)),
                                                         ),
                                                       ),
@@ -2435,7 +2438,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -2477,11 +2480,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '1',
@@ -2525,7 +2528,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       ))
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 18.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -2536,7 +2539,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               context.pushNamed('chatDetails');
                                             },
                                             child: Container(
-                                              decoration: const BoxDecoration(),
+                                              decoration: BoxDecoration(),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -2556,19 +2559,19 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   context)
                                                               .warning
                                                         ],
-                                                        stops: const [0.0, 0.5, 1.0],
+                                                        stops: [0.0, 0.5, 1.0],
                                                         begin:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 -1.0, -0.34),
                                                         end:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 1.0, 0.34),
                                                       ),
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(3.0),
+                                                          EdgeInsets.all(3.0),
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -2586,7 +2589,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -2594,7 +2597,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   0.0),
                                                       child: Container(
                                                         decoration:
-                                                            const BoxDecoration(),
+                                                            BoxDecoration(),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2648,7 +2651,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           12.0,
@@ -2666,7 +2669,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ].divide(const SizedBox(
+                                                          ].divide(SizedBox(
                                                               height: 3.0)),
                                                         ),
                                                       ),
@@ -2682,7 +2685,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -2724,11 +2727,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '2',
@@ -2772,7 +2775,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                       ))
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 18.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -2783,7 +2786,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                               context.pushNamed('chatDetails');
                                             },
                                             child: Container(
-                                              decoration: const BoxDecoration(),
+                                              decoration: BoxDecoration(),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -2803,19 +2806,19 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   context)
                                                               .warning
                                                         ],
-                                                        stops: const [0.0, 0.5, 1.0],
+                                                        stops: [0.0, 0.5, 1.0],
                                                         begin:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 -1.0, -0.34),
                                                         end:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 1.0, 0.34),
                                                       ),
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(3.0),
+                                                          EdgeInsets.all(3.0),
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -2833,7 +2836,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -2841,7 +2844,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                   0.0),
                                                       child: Container(
                                                         decoration:
-                                                            const BoxDecoration(),
+                                                            BoxDecoration(),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2895,7 +2898,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           12.0,
@@ -2913,7 +2916,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ].divide(const SizedBox(
+                                                          ].divide(SizedBox(
                                                               height: 3.0)),
                                                         ),
                                                       ),
@@ -2929,7 +2932,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -2971,11 +2974,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsets.all(
+                                                                EdgeInsets.all(
                                                                     2.0),
                                                             child: Text(
                                                               '2',
@@ -3045,7 +3048,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                           context.pushNamed('Homepage');
                         },
                         navigateToFavorites: () async {
-                          context.pushNamed('favorites');
+                          context.pushNamed('FocusView');
                         },
                         navigateToChats: () async {
                           context.pushNamed('allChats');

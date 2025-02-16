@@ -44,8 +44,8 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -56,8 +56,8 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -75,8 +75,8 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -94,8 +94,8 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
             curve: Curves.easeInOut,
             delay: 650.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -124,7 +124,10 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
         title: 'enableNotifications',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -145,7 +148,7 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
                   context.pop();
                 },
               ),
-              actions: const [],
+              actions: [],
               centerTitle: true,
               elevation: 0.0,
             ),
@@ -156,16 +159,16 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             30.0, 0.0, 20.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 64.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -179,7 +182,7 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
                                   animationsMap['imageOnPageLoadAnimation']!),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Text(
                                 'Enable notification’s',
@@ -195,7 +198,7 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
                                   animationsMap['textOnPageLoadAnimation1']!),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
                                 'Get push-notification when you get the match or receive a message.',
@@ -214,19 +217,19 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
                                   animationsMap['textOnPageLoadAnimation2']!),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 100.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('SearchFriends');
+                                  context.pushNamed('FocusView');
                                 },
                                 text: 'I want to be notified',
                                 options: FFButtonOptions(
                                   width: 295.0,
                                   height: 56.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -237,7 +240,7 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

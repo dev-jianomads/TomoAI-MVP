@@ -1,5 +1,4 @@
 import '/backend/supabase/supabase.dart';
-import '/components/nav_bar/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'homepage_widget.dart' show HomepageWidget;
@@ -9,31 +8,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 class HomepageModel extends FlutterFlowModel<HomepageWidget> {
+  ///  Local state fields for this page.
+
+  DateTime? yesterdayDate;
+
+  String taskId = 'taskId';
+
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? homepageWalkthroughController;
+  // Stores action output result for [Backend Call - Query Rows] action in Homepage widget.
+  List<UsersRow>? queryUserId;
+  // Stores action output result for [Custom Action - setYesterdayDate] action in Homepage widget.
+  DateTime? yesterday;
+  // Stores action output result for [Custom Action - setTomorrowDate] action in Homepage widget.
+  DateTime? tomorrow;
+  Completer<List<TasksRow>>? requestCompleter;
+  // Stores action output result for [Custom Action - getTimeZoneIdentifiers] action in Homepage widget.
+  List<String>? listTimeZones;
   // State field(s) for SwipeableStack widget.
   late CardSwiperController swipeableStackController;
-  // Model for NavBar component.
-  late NavBarModel navBarModel;
-  // State field(s) for NameField widget.
-  FocusNode? nameFieldFocusNode;
-  TextEditingController? nameFieldTextController;
-  String? Function(BuildContext, String?)? nameFieldTextControllerValidator;
-  Completer<List<UsersRow>>? requestCompleter;
+  bool firestoreRequestCompleted = false;
+  String? firestoreRequestLastUniqueKey;
 
   @override
   void initState(BuildContext context) {
     swipeableStackController = CardSwiperController();
-    navBarModel = createModel(context, () => NavBarModel());
   }
 
   @override
   void dispose() {
     homepageWalkthroughController?.finish();
-    navBarModel.dispose();
-    nameFieldFocusNode?.dispose();
-    nameFieldTextController?.dispose();
   }
 
   /// Additional helper methods.
@@ -43,9 +48,24 @@ class HomepageModel extends FlutterFlowModel<HomepageWidget> {
   }) async {
     final stopwatch = Stopwatch()..start();
     while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
+      await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
       final requestComplete = requestCompleter?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
+  }
+
+  Future waitForFirestoreRequestCompleted({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = firestoreRequestCompleted;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

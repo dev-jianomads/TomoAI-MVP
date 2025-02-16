@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '/backend/backend.dart';
-
+import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
 
 import '../../flutter_flow/place.dart';
@@ -89,6 +89,12 @@ String? serializeParam(
       case ParamType.Document:
         final reference = (param as FirestoreRecord).reference;
         data = _serializeDocumentReference(reference);
+
+      case ParamType.DataStruct:
+        data = param is BaseStruct ? param.serialize() : null;
+
+      case ParamType.Enum:
+        data = (param is Enum) ? param.serialize() : null;
 
       case ParamType.SupabaseRow:
         return json.encode((param as SupabaseDataRow).data);
@@ -183,6 +189,8 @@ enum ParamType {
 
   Document,
   DocumentReference,
+  DataStruct,
+  Enum,
   SupabaseRow,
 }
 
@@ -191,6 +199,7 @@ dynamic deserializeParam<T>(
   ParamType paramType,
   bool isList, {
   List<String>? collectionNamePath,
+  StructBuilder<T>? structBuilder,
 }) {
   try {
     if (param == null) {
@@ -202,10 +211,15 @@ dynamic deserializeParam<T>(
         return null;
       }
       return paramValues
-          .whereType<String>()
-          .map((p) => p)
-          .map((p) => deserializeParam<T>(p, paramType, false,
-              collectionNamePath: collectionNamePath))
+          .where((p) => p is String)
+          .map((p) => p as String)
+          .map((p) => deserializeParam<T>(
+                p,
+                paramType,
+                false,
+                collectionNamePath: collectionNamePath,
+                structBuilder: structBuilder,
+              ))
           .where((p) => p != null)
           .map((p) => p! as T)
           .toList();
@@ -244,11 +258,30 @@ dynamic deserializeParam<T>(
         switch (T) {
           case TasksRow:
             return TasksRow(data);
+          case DigestsRow:
+            return DigestsRow(data);
+          case ChatRow:
+            return ChatRow(data);
+          case PreferencesRow:
+            return PreferencesRow(data);
+          case EmailsRow:
+            return EmailsRow(data);
           case UsersRow:
             return UsersRow(data);
+          case ConversationRow:
+            return ConversationRow(data);
+          case EmailThreadsRow:
+            return EmailThreadsRow(data);
           default:
             return null;
         }
+
+      case ParamType.DataStruct:
+        final data = json.decode(param) as Map<String, dynamic>? ?? {};
+        return structBuilder != null ? structBuilder(data) : null;
+
+      case ParamType.Enum:
+        return deserializeEnum<T>(param);
 
       default:
         return null;
@@ -276,7 +309,7 @@ Future<List<T>> Function(String) getDocList<T>(
     List<String> docIds = [];
     try {
       final ids = json.decode(idsList) as Iterable;
-      docIds = ids.whereType<String>().map((d) => d).toList();
+      docIds = ids.where((d) => d is String).map((d) => d as String).toList();
     } catch (_) {}
     return Future.wait(
       docIds.map(

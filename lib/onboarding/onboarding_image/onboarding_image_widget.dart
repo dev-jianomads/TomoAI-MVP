@@ -35,8 +35,8 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(-29.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(-29.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -54,8 +54,8 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(29.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(29.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -84,7 +84,10 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
         title: 'OnboardingImage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -95,10 +98,10 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
                 color: FlutterFlowTheme.of(context).primary,
               ),
               child: Stack(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 children: [
                   Align(
-                    alignment: const AlignmentDirectional(1.0, 0.0),
+                    alignment: AlignmentDirectional(1.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -128,7 +131,7 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
                             ),
                       ).animateOnPageLoad(
                           animationsMap['textOnPageLoadAnimation']!),
-                    ].divide(const SizedBox(width: 12.0)),
+                    ].divide(SizedBox(width: 12.0)),
                   ),
                 ],
               ),

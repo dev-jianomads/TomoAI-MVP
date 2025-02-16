@@ -3,9 +3,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'edit_profile_model.dart';
@@ -46,8 +46,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -65,8 +65,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 340.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -84,8 +84,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -103,8 +103,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -122,8 +122,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -141,8 +141,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -160,8 +160,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 750.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -190,7 +190,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
         title: 'editProfile',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -211,7 +214,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                   context.pop();
                 },
               ),
-              actions: const [],
+              actions: [],
               centerTitle: true,
               elevation: 0.0,
             ),
@@ -222,16 +225,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             30.0, 0.0, 20.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 91.0),
                               child: Text(
                                 'Profile details',
@@ -263,16 +266,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                             ).animateOnPageLoad(
                                 animationsMap['rowOnPageLoadAnimation']!),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 8.0, 0.0),
-                              child: SizedBox(
+                              child: Container(
                                 width: 295.0,
                                 child: TextFormField(
                                   controller: _model.firstnameTextController,
                                   focusNode: _model.firstnameFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.firstnameTextController',
-                                    const Duration(milliseconds: 2000),
+                                    Duration(milliseconds: 2000),
                                     () => safeSetState(() {}),
                                   ),
                                   autofocus: false,
@@ -324,7 +327,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
-                                    contentPadding: const EdgeInsets.all(12.0),
+                                    contentPadding: EdgeInsets.all(12.0),
                                     suffixIcon: _model.firstnameTextController!
                                             .text.isNotEmpty
                                         ? InkWell(
@@ -360,16 +363,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   'textFieldOnPageLoadAnimation1']!),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 8.0, 0.0),
-                              child: SizedBox(
+                              child: Container(
                                 width: 295.0,
                                 child: TextFormField(
                                   controller: _model.lastNameTextController,
                                   focusNode: _model.lastNameFocusNode,
                                   onChanged: (_) => EasyDebounce.debounce(
                                     '_model.lastNameTextController',
-                                    const Duration(milliseconds: 2000),
+                                    Duration(milliseconds: 2000),
                                     () => safeSetState(() {}),
                                   ),
                                   autofocus: false,
@@ -421,7 +424,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
-                                    contentPadding: const EdgeInsets.all(12.0),
+                                    contentPadding: EdgeInsets.all(12.0),
                                     suffixIcon: _model.lastNameTextController!
                                             .text.isNotEmpty
                                         ? InkWell(
@@ -464,7 +467,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                               desktop: false,
                             ))
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -475,7 +478,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                     await showModalBottomSheet<bool>(
                                         context: context,
                                         builder: (context) {
-                                          final datePickedCupertinoTheme =
+                                          final _datePickedCupertinoTheme =
                                               CupertinoTheme.of(context);
                                           return ScrollConfiguration(
                                             behavior:
@@ -500,10 +503,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .info,
                                               child: CupertinoTheme(
-                                                data: datePickedCupertinoTheme
+                                                data: _datePickedCupertinoTheme
                                                     .copyWith(
                                                   textTheme:
-                                                      datePickedCupertinoTheme
+                                                      _datePickedCupertinoTheme
                                                           .textTheme
                                                           .copyWith(
                                                     dateTimePickerTextStyle:
@@ -574,7 +577,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     19.5, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Choose birthday date',
@@ -607,7 +610,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   desktop: false,
                                 ))
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: Text(
                                   'Date Selected : ${dateTimeFormat("yMMMd", _model.datePicked)}',
@@ -626,7 +629,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                     animationsMap['textOnPageLoadAnimation2']!),
                               ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 88.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -636,9 +639,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                 options: FFButtonOptions(
                                   width: 295.0,
                                   height: 56.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -649,7 +652,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

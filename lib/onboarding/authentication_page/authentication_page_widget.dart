@@ -43,8 +43,8 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
             curve: Curves.easeInOut,
             delay: 600.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -55,8 +55,8 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -74,8 +74,8 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -104,7 +104,10 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
         title: 'AuthenticationPage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -112,10 +115,10 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 128.0, 0.0, 78.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 128.0, 0.0, 78.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -129,7 +132,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                   child: Text(
                     'Sign up To Continue',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -141,19 +144,19 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('EmailLogin');
+                      context.pushNamed('Login');
                     },
                     text: 'Continue with email',
                     options: FFButtonOptions(
                       width: 295.0,
                       height: 56.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -162,7 +165,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                                 letterSpacing: 0.0,
                               ),
                       elevation: 3.0,
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),
@@ -172,7 +175,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                       animationsMap['buttonOnPageLoadAnimation1']!),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 64.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 64.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       context.pushNamed('EnterMobileNumber');
@@ -182,9 +185,9 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                       width: 295.0,
                       height: 56.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -203,7 +206,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                       animationsMap['buttonOnPageLoadAnimation2']!),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 246.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 246.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -224,7 +227,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                               letterSpacing: 0.0,
                             ),
                       ),
-                    ].divide(const SizedBox(width: 25.0)),
+                    ].divide(SizedBox(width: 25.0)),
                   ),
                 ),
               ],

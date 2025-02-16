@@ -3,6 +3,12 @@ import 'access_widget.dart' show AccessWidget;
 import 'package:flutter/material.dart';
 
 class AccessModel extends FlutterFlowModel<AccessWidget> {
+  ///  Local state fields for this page.
+
+  String? code;
+
+  String? scope;
+
   @override
   void initState(BuildContext context) {}
 

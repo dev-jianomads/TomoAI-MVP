@@ -9,7 +9,7 @@ class UsersTable extends SupabaseTable<UsersRow> {
 }
 
 class UsersRow extends SupabaseDataRow {
-  UsersRow(super.data);
+  UsersRow(Map<String, dynamic> data) : super(data);
 
   @override
   SupabaseTable get table => UsersTable();
@@ -17,14 +17,11 @@ class UsersRow extends SupabaseDataRow {
   String get id => getField<String>('id')!;
   set id(String value) => setField<String>('id', value);
 
-  DateTime? get createdAt => getField<DateTime>('created_at');
-  set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
+  DateTime get createdAt => getField<DateTime>('created_at')!;
+  set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
-  String? get firstName => getField<String>('first_name');
-  set firstName(String? value) => setField<String>('first_name', value);
-
-  String? get email => getField<String>('email');
-  set email(String? value) => setField<String>('email', value);
+  String get email => getField<String>('email')!;
+  set email(String value) => setField<String>('email', value);
 
   String? get displayName => getField<String>('display_name');
   set displayName(String? value) => setField<String>('display_name', value);
@@ -38,7 +35,21 @@ class UsersRow extends SupabaseDataRow {
   String? get refreshToken => getField<String>('refresh_token');
   set refreshToken(String? value) => setField<String>('refresh_token', value);
 
-  String? get authorizationCode => getField<String>('authorization_code');
-  set authorizationCode(String? value) =>
-      setField<String>('authorization_code', value);
+  int? get expiresIn => getField<int>('expires_in');
+  set expiresIn(int? value) => setField<int>('expires_in', value);
+
+  String? get clientId => getField<String>('client_id');
+  set clientId(String? value) => setField<String>('client_id', value);
+
+  String? get clientSecret => getField<String>('client_secret');
+  set clientSecret(String? value) => setField<String>('client_secret', value);
+
+  bool? get refreshExpired => getField<bool>('refresh_expired');
+  set refreshExpired(bool? value) => setField<bool>('refresh_expired', value);
+
+  String? get timeZone => getField<String>('time_zone');
+  set timeZone(String? value) => setField<String>('time_zone', value);
+
+  String? get authCode => getField<String>('auth_code');
+  set authCode(String? value) => setField<String>('auth_code', value);
 }

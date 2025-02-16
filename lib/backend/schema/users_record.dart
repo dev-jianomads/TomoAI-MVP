@@ -9,9 +9,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UsersRecord extends FirestoreRecord {
   UsersRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -45,6 +45,46 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
+  // "gmail_access_token" field.
+  String? _gmailAccessToken;
+  String get gmailAccessToken => _gmailAccessToken ?? '';
+  bool hasGmailAccessToken() => _gmailAccessToken != null;
+
+  // "gmail_refresh_token" field.
+  String? _gmailRefreshToken;
+  String get gmailRefreshToken => _gmailRefreshToken ?? '';
+  bool hasGmailRefreshToken() => _gmailRefreshToken != null;
+
+  // "client_id" field.
+  String? _clientId;
+  String get clientId => _clientId ?? '';
+  bool hasClientId() => _clientId != null;
+
+  // "client_secret" field.
+  String? _clientSecret;
+  String get clientSecret => _clientSecret ?? '';
+  bool hasClientSecret() => _clientSecret != null;
+
+  // "auth_provider" field.
+  String? _authProvider;
+  String get authProvider => _authProvider ?? '';
+  bool hasAuthProvider() => _authProvider != null;
+
+  // "refresh_expired" field.
+  bool? _refreshExpired;
+  bool get refreshExpired => _refreshExpired ?? false;
+  bool hasRefreshExpired() => _refreshExpired != null;
+
+  // "time_zone" field.
+  String? _timeZone;
+  String get timeZone => _timeZone ?? '';
+  bool hasTimeZone() => _timeZone != null;
+
+  // "auth_code" field.
+  String? _authCode;
+  String get authCode => _authCode ?? '';
+  bool hasAuthCode() => _authCode != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -52,6 +92,14 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
+    _gmailAccessToken = snapshotData['gmail_access_token'] as String?;
+    _gmailRefreshToken = snapshotData['gmail_refresh_token'] as String?;
+    _clientId = snapshotData['client_id'] as String?;
+    _clientSecret = snapshotData['client_secret'] as String?;
+    _authProvider = snapshotData['auth_provider'] as String?;
+    _refreshExpired = snapshotData['refresh_expired'] as bool?;
+    _timeZone = snapshotData['time_zone'] as String?;
+    _authCode = snapshotData['auth_code'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -94,6 +142,14 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
+  String? gmailAccessToken,
+  String? gmailRefreshToken,
+  String? clientId,
+  String? clientSecret,
+  String? authProvider,
+  bool? refreshExpired,
+  String? timeZone,
+  String? authCode,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,6 +159,14 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
+      'gmail_access_token': gmailAccessToken,
+      'gmail_refresh_token': gmailRefreshToken,
+      'client_id': clientId,
+      'client_secret': clientSecret,
+      'auth_provider': authProvider,
+      'refresh_expired': refreshExpired,
+      'time_zone': timeZone,
+      'auth_code': authCode,
     }.withoutNulls,
   );
 
@@ -119,7 +183,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
-        e1?.phoneNumber == e2?.phoneNumber;
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.gmailAccessToken == e2?.gmailAccessToken &&
+        e1?.gmailRefreshToken == e2?.gmailRefreshToken &&
+        e1?.clientId == e2?.clientId &&
+        e1?.clientSecret == e2?.clientSecret &&
+        e1?.authProvider == e2?.authProvider &&
+        e1?.refreshExpired == e2?.refreshExpired &&
+        e1?.timeZone == e2?.timeZone &&
+        e1?.authCode == e2?.authCode;
   }
 
   @override
@@ -129,7 +201,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.photoUrl,
         e?.uid,
         e?.createdTime,
-        e?.phoneNumber
+        e?.phoneNumber,
+        e?.gmailAccessToken,
+        e?.gmailRefreshToken,
+        e?.clientId,
+        e?.clientSecret,
+        e?.authProvider,
+        e?.refreshExpired,
+        e?.timeZone,
+        e?.authCode
       ]);
 
   @override

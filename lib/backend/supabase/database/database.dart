@@ -6,4 +6,10 @@ export 'row.dart';
 export 'table.dart';
 
 export 'tables/tasks.dart';
+export 'tables/digests.dart';
+export 'tables/chat.dart';
+export 'tables/preferences.dart';
+export 'tables/emails.dart';
 export 'tables/users.dart';
+export 'tables/conversation.dart';
+export 'tables/email_threads.dart';

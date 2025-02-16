@@ -10,9 +10,49 @@ import 'place.dart';
 import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
-import '/auth/supabase_auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 
 String? demoFunction() {
   return ("Hello World from Cursor AI");
+}
+
+List<dynamic> listMessagesToListJSON(List<MessagesRecord>? messages) {
+  messages ??= [];
+
+  // Reverse the list
+  final reversedMessages = messages.reversed.toList();
+
+  final List<Map<String, dynamic>> jsonList = reversedMessages.map((message) {
+    return {
+      'role': message.role?.toString().split('.').last,
+      'content': message.content,
+    };
+  }).toList();
+
+  return jsonList;
+}
+
+String? convertToJson(String? inputString) {
+  List<String> convertToList(String email) {
+    return [email];
+  }
+}
+
+String? convertToTitleCase(String? lowerCaseText) {
+  if (lowerCaseText == null || lowerCaseText.isEmpty) {
+    return '';
+  }
+
+  List<String> words = lowerCaseText.split(' ');
+  for (int i = 0; i < words.length; i++) {
+    String word = words[i];
+    if (word.isNotEmpty) {
+      words[i] = word[0].toUpperCase() + word.substring(1).toLowerCase();
+    }
+  }
+
+  return words.join(' ');
 }

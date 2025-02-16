@@ -45,8 +45,8 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -57,8 +57,8 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(41.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(41.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -87,12 +87,15 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
         title: 'chatDetails',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(70.0),
+              preferredSize: Size.fromHeight(70.0),
               child: AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
                 automaticallyImplyLeading: false,
@@ -119,12 +122,12 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                     context.pushNamed('ProfileDetails');
                   },
                   child: Container(
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 12.0, 0.0),
                           child: Container(
                             width: 48.0,
@@ -135,14 +138,14 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                   FlutterFlowTheme.of(context).primary,
                                   FlutterFlowTheme.of(context).secondary
                                 ],
-                                stops: const [0.0, 1.0],
-                                begin: const AlignmentDirectional(0.0, -1.0),
-                                end: const AlignmentDirectional(0, 1.0),
+                                stops: [0.0, 1.0],
+                                begin: AlignmentDirectional(0.0, -1.0),
+                                end: AlignmentDirectional(0, 1.0),
                               ),
                               shape: BoxShape.circle,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(3.0),
+                              padding: EdgeInsets.all(3.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100.0),
                                 child: Image.asset(
@@ -158,7 +161,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                         ),
                         Expanded(
                           child: Align(
-                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            alignment: AlignmentDirectional(-1.0, 0.0),
                             child: Text(
                               'Product prioritisation - sprint 4',
                               style: FlutterFlowTheme.of(context)
@@ -177,12 +180,12 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                     ),
                   ),
                 ),
-                actions: const [],
+                actions: [],
                 centerTitle: true,
                 elevation: 0.0,
               ),
             ),
-            body: SizedBox(
+            body: Container(
               width: double.infinity,
               height: double.infinity,
               child: Stack(
@@ -192,16 +195,16 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 16.0, 16.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 120.0),
                                   child: ListView(
                                     padding: EdgeInsets.zero,
@@ -218,7 +221,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ))
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(1.0, 0.0),
+                                              AlignmentDirectional(1.0, 0.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
@@ -231,7 +234,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                   BorderRadius.circular(20.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Text(
                                                 'My name is Claude Asabee and I enjoy meeting new people and finding ways to help them have an uplifting experience. I enjoy Mama Vee a lot..',
                                                 style:
@@ -250,7 +253,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                         ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
+                                            AlignmentDirectional(-1.0, 0.0),
                                         child: Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -262,9 +265,9 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                 BorderRadius.circular(20.0),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.all(12.0),
+                                            padding: EdgeInsets.all(12.0),
                                             child: Text(
-                                              'Geoff, what would you like to know about this task?',
+                                              'Geoff, here is the draft email response: ....',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -282,7 +285,81 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(1.0, 0.0),
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.7,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(0.0),
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Gmail_Icon.original.png',
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.all(2.0),
+                                                child: Text(
+                                                  '[citation 1]',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent3,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/vecteezy_slack-transparent-icon_48759332.png',
+                                                  width: 40.0,
+                                                  height: 40.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.all(2.0),
+                                                child: Text(
+                                                  '[citation 2]',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent3,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(1.0, 0.0),
                                         child: Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -294,9 +371,9 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                 BorderRadius.circular(20.0),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.all(12.0),
+                                            padding: EdgeInsets.all(12.0),
                                             child: Text(
-                                              'List the product features that require prioritisation',
+                                              'Amend email to include: ...',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -314,7 +391,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
+                                            AlignmentDirectional(-1.0, 0.0),
                                         child: Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -326,7 +403,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                 BorderRadius.circular(20.0),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.all(12.0),
+                                            padding: EdgeInsets.all(12.0),
                                             child: Text(
                                               'Ok, you got it....',
                                               style:
@@ -353,7 +430,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ))
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-1.0, 0.0),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
@@ -366,7 +443,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                   BorderRadius.circular(20.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Text(
                                                 'but a responsible one! Not just anyone',
                                                 style:
@@ -392,7 +469,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ))
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(1.0, 0.0),
+                                              AlignmentDirectional(1.0, 0.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
@@ -405,7 +482,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                   BorderRadius.circular(20.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Text(
                                                 'Well, I am a responsible one. However, If you want an irresponsible sugar daddy I have a friend called FRANK AMPONSAH.',
                                                 style:
@@ -431,7 +508,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ))
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(1.0, 0.0),
+                                              AlignmentDirectional(1.0, 0.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
@@ -444,7 +521,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                   BorderRadius.circular(20.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Text(
                                                 'He\'s very irresponsible, infact, he will destroy your destiny, totally and completely! Till you have no destinly left  hmm its sad.',
                                                 style:
@@ -470,7 +547,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ))
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-1.0, 0.0),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
@@ -483,7 +560,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                   BorderRadius.circular(20.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Text(
                                                 'Wow lmao then he needs help...',
                                                 style:
@@ -509,7 +586,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ))
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-1.0, 0.0),
+                                              AlignmentDirectional(-1.0, 0.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
@@ -522,7 +599,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                   BorderRadius.circular(20.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Text(
                                                 'Don\'t you think??',
                                                 style:
@@ -548,7 +625,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                       ))
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(1.0, 0.0),
+                                              AlignmentDirectional(1.0, 0.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
@@ -561,7 +638,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                   BorderRadius.circular(20.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
+                                              padding: EdgeInsets.all(12.0),
                                               child: Text(
                                                 'I\'ve prayed for him severally, but he doesnt want to change....I even wrote his name on my prayer list for Alpha Hour, the pastor saw it and said \"oooohh not this boy again! We are tired of praying for him\".\n\nIt was at that moment that I lost hope for my dear friend Frank Amponsah Mens. aka Destiny killer. ',
                                                 style:
@@ -578,7 +655,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                             ),
                                           ),
                                         ),
-                                    ].divide(const SizedBox(height: 16.0)),
+                                    ].divide(SizedBox(height: 16.0)),
                                   ),
                                 ),
                               ],
@@ -589,7 +666,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 1.0),
+                    alignment: AlignmentDirectional(0.0, 1.0),
                     child: Container(
                       width: double.infinity,
                       height: 100.0,
@@ -600,14 +677,14 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                         key: _model.formKey,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: EdgeInsets.all(12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 18.0),
                                 child: FlutterFlowIconButton(
                                   borderColor:
@@ -629,17 +706,17 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                               ),
                               Expanded(
                                 child: Align(
-                                  alignment: const AlignmentDirectional(0.0, 1.0),
-                                  child: SizedBox(
+                                  alignment: AlignmentDirectional(0.0, 1.0),
+                                  child: Container(
                                     height: 100.0,
                                     child: Stack(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 0.0, 0.0, 0.0),
-                                          child: SizedBox(
+                                          child: Container(
                                             width: double.infinity,
                                             child: TextFormField(
                                               controller: _model.textController,
@@ -727,7 +804,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                                           24.0),
                                                 ),
                                                 contentPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(16.0, 16.0,
                                                             56.0, 16.0),
                                               ),
@@ -751,10 +828,10 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(1.0, 0.0),
+                                              AlignmentDirectional(1.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 4.0, 6.0, 4.0),
                                             child: FlutterFlowIconButton(
                                               borderColor:
