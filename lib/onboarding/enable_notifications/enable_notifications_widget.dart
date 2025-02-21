@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'enable_notifications_model.dart';
@@ -10,6 +11,9 @@ export 'enable_notifications_model.dart';
 
 class EnableNotificationsWidget extends StatefulWidget {
   const EnableNotificationsWidget({super.key});
+
+  static String routeName = 'enableNotifications';
+  static String routePath = '/enableNotifications';
 
   @override
   State<EnableNotificationsWidget> createState() =>
@@ -221,7 +225,7 @@ class _EnableNotificationsWidgetState extends State<EnableNotificationsWidget>
                                   0.0, 100.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('FocusView');
+                                  context.pushNamed(FocusViewWidget.routeName);
                                 },
                                 text: 'I want to be notified',
                                 options: FFButtonOptions(

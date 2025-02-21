@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -17,6 +18,9 @@ export 'profile_details_model.dart';
 
 class ProfileDetailsWidget extends StatefulWidget {
   const ProfileDetailsWidget({super.key});
+
+  static String routeName = 'ProfileDetails';
+  static String routePath = '/profileDetails';
 
   @override
   State<ProfileDetailsWidget> createState() => _ProfileDetailsWidgetState();
@@ -734,7 +738,8 @@ class _ProfileDetailsWidgetState extends State<ProfileDetailsWidget>
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          'integrations');
+                                                          IntegrationsWidget
+                                                              .routeName);
                                                     },
                                                     child: Text(
                                                       'Integrations',
@@ -780,7 +785,8 @@ class _ProfileDetailsWidgetState extends State<ProfileDetailsWidget>
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          'BlacklistView');
+                                                          BlacklistViewWidget
+                                                              .routeName);
                                                     },
                                                     child: Text(
                                                       'Blacklist',
@@ -833,7 +839,8 @@ class _ProfileDetailsWidgetState extends State<ProfileDetailsWidget>
                                                           Colors.transparent,
                                                       onTap: () async {
                                                         context.pushNamed(
-                                                            'Preferences');
+                                                            PreferencesWidget
+                                                                .routeName);
                                                       },
                                                       child: Text(
                                                         'Preferences',
@@ -891,7 +898,8 @@ class _ProfileDetailsWidgetState extends State<ProfileDetailsWidget>
                                                           Colors.transparent,
                                                       onTap: () async {
                                                         context.pushNamed(
-                                                            'Preferences2');
+                                                            Preferences2Widget
+                                                                .routeName);
                                                       },
                                                       child: Text(
                                                         'Preferences2',

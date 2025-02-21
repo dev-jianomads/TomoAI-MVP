@@ -11,6 +11,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/walkthroughs/homepage_walkthrough.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'dart:async';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
@@ -24,6 +25,9 @@ export 'homepage_model.dart';
 
 class HomepageWidget extends StatefulWidget {
   const HomepageWidget({super.key});
+
+  static String routeName = 'Homepage';
+  static String routePath = '/homepage';
 
   @override
   State<HomepageWidget> createState() => _HomepageWidgetState();
@@ -58,7 +62,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
       ));
       if (_model.queryUserId?.firstOrNull?.accessToken == null ||
           _model.queryUserId?.firstOrNull?.accessToken == '') {
-        context.pushNamed('integrations');
+        context.pushNamed(IntegrationsWidget.routeName);
       }
       if (_model.queryUserId?.firstOrNull?.refreshExpired == true) {
         await showDialog(
@@ -77,7 +81,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
           },
         );
 
-        context.pushNamed('integrations');
+        context.pushNamed(IntegrationsWidget.routeName);
       }
       _model.yesterday = await actions.setYesterdayDate(
         getCurrentTimestamp,
@@ -307,7 +311,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
                           size: 28.0,
                         ),
                         onPressed: () async {
-                          context.pushNamed('ProfileDetails');
+                          context.pushNamed(ProfileDetailsWidget.routeName);
                         },
                       ),
                     ),
@@ -658,7 +662,8 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                           () async {
                                                                         context
                                                                             .pushNamed(
-                                                                          'EmailsPreview',
+                                                                          EmailsPreviewWidget
+                                                                              .routeName,
                                                                           queryParameters:
                                                                               {
                                                                             'threadId':
@@ -1188,7 +1193,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                           ),
                                           onPressed: () async {
                                             context.pushNamed(
-                                              'TaskView',
+                                              TaskViewWidget.routeName,
                                               queryParameters: {
                                                 'yesterdayDate': serializeParam(
                                                   _model.yesterdayDate,
@@ -1314,7 +1319,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                         ),
                                         onPressed: () async {
                                           context.pushNamed(
-                                            'DigestView',
+                                            DigestViewWidget.routeName,
                                             queryParameters: {
                                               'yesterdayDate': serializeParam(
                                                 _model.yesterdayDate,

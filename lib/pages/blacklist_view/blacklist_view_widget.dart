@@ -3,12 +3,16 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'blacklist_view_model.dart';
 export 'blacklist_view_model.dart';
 
 class BlacklistViewWidget extends StatefulWidget {
   const BlacklistViewWidget({super.key});
+
+  static String routeName = 'BlacklistView';
+  static String routePath = '/BlacklistView';
 
   @override
   State<BlacklistViewWidget> createState() => _BlacklistViewWidgetState();
@@ -95,7 +99,7 @@ class _BlacklistViewWidgetState extends State<BlacklistViewWidget> {
                       size: 30.0,
                     ),
                     onPressed: () async {
-                      context.pushNamed('Homepage');
+                      context.pushNamed(HomepageWidget.routeName);
                     },
                   ),
                   title: Text(

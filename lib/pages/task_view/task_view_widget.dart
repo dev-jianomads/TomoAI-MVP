@@ -11,6 +11,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -25,6 +26,9 @@ class TaskViewWidget extends StatefulWidget {
   });
 
   final DateTime? yesterdayDate;
+
+  static String routeName = 'TaskView';
+  static String routePath = '/TaskView';
 
   @override
   State<TaskViewWidget> createState() => _TaskViewWidgetState();
@@ -173,7 +177,7 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                       size: 30.0,
                     ),
                     onPressed: () async {
-                      context.pushNamed('Homepage');
+                      context.pushNamed(HomepageWidget.routeName);
                     },
                   ),
                   title: Text(
@@ -484,7 +488,8 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                       size: 24.0,
                                     ),
                                     onPressed: () async {
-                                      context.pushNamed('Homepage');
+                                      context
+                                          .pushNamed(HomepageWidget.routeName);
                                     },
                                   ),
                                 ),
@@ -742,7 +747,8 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                     () async {
                                                                   context
                                                                       .pushNamed(
-                                                                    'EmailsPreview',
+                                                                    EmailsPreviewWidget
+                                                                        .routeName,
                                                                     queryParameters:
                                                                         {
                                                                       'threadId':
@@ -840,7 +846,8 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                     () async {
                                                                   context
                                                                       .pushNamed(
-                                                                    'EmailsPreview',
+                                                                    EmailsPreviewWidget
+                                                                        .routeName,
                                                                     queryParameters:
                                                                         {
                                                                       'threadId':

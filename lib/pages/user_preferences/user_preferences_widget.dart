@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -19,6 +20,9 @@ class UserPreferencesWidget extends StatefulWidget {
   });
 
   final DateTime? yesterdayDate;
+
+  static String routeName = 'userPreferences';
+  static String routePath = '/Userpreferences';
 
   @override
   State<UserPreferencesWidget> createState() => _UserPreferencesWidgetState();
@@ -85,7 +89,7 @@ class _UserPreferencesWidgetState extends State<UserPreferencesWidget> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed('Homepage');
+                  context.pushNamed(HomepageWidget.routeName);
                 },
               ),
               title: Text(

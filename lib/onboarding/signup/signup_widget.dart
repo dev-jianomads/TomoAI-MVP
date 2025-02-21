@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'signup_model.dart';
@@ -13,6 +14,9 @@ export 'signup_model.dart';
 
 class SignupWidget extends StatefulWidget {
   const SignupWidget({super.key});
+
+  static String routeName = 'Signup';
+  static String routePath = '/Signup';
 
   @override
   State<SignupWidget> createState() => _SignupWidgetState();
@@ -541,7 +545,7 @@ class _SignupWidgetState extends State<SignupWidget>
                                 ));
 
                                 context.pushNamedAuth(
-                                  'integrations',
+                                  IntegrationsWidget.routeName,
                                   context.mounted,
                                   ignoreRedirect: true,
                                 );
@@ -631,7 +635,8 @@ class _SignupWidgetState extends State<SignupWidget>
                                 });
 
                                 context.pushNamedAuth(
-                                    'integrations', context.mounted);
+                                    IntegrationsWidget.routeName,
+                                    context.mounted);
 
                                 safeSetState(() {});
                               },
@@ -677,7 +682,7 @@ class _SignupWidgetState extends State<SignupWidget>
                                 0.0, 16.0, 0.0, 16.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                context.pushNamed('Login');
+                                context.pushNamed(LoginWidget.routeName);
                               },
                               text: 'Sign in',
                               options: FFButtonOptions(

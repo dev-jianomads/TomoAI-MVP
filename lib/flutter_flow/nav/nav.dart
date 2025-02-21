@@ -8,10 +8,11 @@ import '/backend/supabase/supabase.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -88,33 +89,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : OnboardingPageWidget(),
         ),
         FFRoute(
-          name: 'OnboardingImage',
-          path: '/OnboardingImage',
+          name: OnboardingImageWidget.routeName,
+          path: OnboardingImageWidget.routePath,
           builder: (context, params) => OnboardingImageWidget(),
         ),
         FFRoute(
-          name: 'OnboardingPage',
-          path: '/onboardingPage',
+          name: OnboardingPageWidget.routeName,
+          path: OnboardingPageWidget.routePath,
           builder: (context, params) => OnboardingPageWidget(),
         ),
         FFRoute(
-          name: 'AuthenticationPage',
-          path: '/authenticationPage',
+          name: AuthenticationPageWidget.routeName,
+          path: AuthenticationPageWidget.routePath,
           builder: (context, params) => AuthenticationPageWidget(),
         ),
         FFRoute(
-          name: 'Login',
-          path: '/Login',
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'EnterMobileNumber',
-          path: '/enterMobileNumber',
+          name: EnterMobileNumberWidget.routeName,
+          path: EnterMobileNumberWidget.routePath,
           builder: (context, params) => EnterMobileNumberWidget(),
         ),
         FFRoute(
-          name: 'VerifyMobileNumber',
-          path: '/verifyMobileNumber',
+          name: VerifyMobileNumberWidget.routeName,
+          path: VerifyMobileNumberWidget.routePath,
           builder: (context, params) => VerifyMobileNumberWidget(
             phoneNumber: params.getParam(
               'phoneNumber',
@@ -123,33 +124,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ForgotPassword',
-          path: '/forgotPassword',
+          name: ForgotPasswordWidget.routeName,
+          path: ForgotPasswordWidget.routePath,
           builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'editProfile',
-          path: '/editProfile',
+          name: EditProfileWidget.routeName,
+          path: EditProfileWidget.routePath,
           builder: (context, params) => EditProfileWidget(),
         ),
         FFRoute(
-          name: 'chooseGender',
-          path: '/chooseGender',
+          name: ChooseGenderWidget.routeName,
+          path: ChooseGenderWidget.routePath,
           builder: (context, params) => ChooseGenderWidget(),
         ),
         FFRoute(
-          name: 'Preferences',
-          path: '/preferences',
+          name: PreferencesWidget.routeName,
+          path: PreferencesWidget.routePath,
           builder: (context, params) => PreferencesWidget(),
         ),
         FFRoute(
-          name: 'enableNotifications',
-          path: '/enableNotifications',
+          name: EnableNotificationsWidget.routeName,
+          path: EnableNotificationsWidget.routePath,
           builder: (context, params) => EnableNotificationsWidget(),
         ),
         FFRoute(
-          name: 'Homepage',
-          path: '/homepage',
+          name: HomepageWidget.routeName,
+          path: HomepageWidget.routePath,
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Homepage')
               : NavBarPage(
@@ -158,23 +159,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
         ),
         FFRoute(
-          name: 'allChats',
-          path: '/allChats',
+          name: AllChatsWidget.routeName,
+          path: AllChatsWidget.routePath,
           builder: (context, params) => AllChatsWidget(),
         ),
         FFRoute(
-          name: 'chatDetails',
-          path: '/chatDetails',
+          name: ChatDetailsWidget.routeName,
+          path: ChatDetailsWidget.routePath,
           builder: (context, params) => ChatDetailsWidget(),
         ),
         FFRoute(
-          name: 'ProfileDetails',
-          path: '/profileDetails',
+          name: ProfileDetailsWidget.routeName,
+          path: ProfileDetailsWidget.routePath,
           builder: (context, params) => ProfileDetailsWidget(),
         ),
         FFRoute(
-          name: 'FocusView',
-          path: '/FocusView',
+          name: FocusViewWidget.routeName,
+          path: FocusViewWidget.routePath,
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'FocusView')
               : FocusViewWidget(
@@ -185,23 +186,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
         ),
         FFRoute(
-          name: 'integrations',
-          path: '/integrations',
+          name: IntegrationsWidget.routeName,
+          path: IntegrationsWidget.routePath,
           builder: (context, params) => IntegrationsWidget(),
         ),
         FFRoute(
-          name: 'access',
-          path: '/access',
+          name: AccessWidget.routeName,
+          path: AccessWidget.routePath,
           builder: (context, params) => AccessWidget(),
         ),
         FFRoute(
-          name: 'Preferences2',
-          path: '/preferences2',
+          name: Preferences2Widget.routeName,
+          path: Preferences2Widget.routePath,
           builder: (context, params) => Preferences2Widget(),
         ),
         FFRoute(
-          name: 'tomochat',
-          path: '/tomochat',
+          name: TomochatWidget.routeName,
+          path: TomochatWidget.routePath,
           builder: (context, params) => TomochatWidget(
             tasks: params.getParam<TasksRow>(
               'tasks',
@@ -218,8 +219,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'tomochatOriginal',
-          path: '/tomochatOriginal',
+          name: TomochatOriginalWidget.routeName,
+          path: TomochatOriginalWidget.routePath,
           builder: (context, params) => TomochatOriginalWidget(
             tasks: params.getParam<TasksRow>(
               'tasks',
@@ -232,8 +233,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'TaskView',
-          path: '/TaskView',
+          name: TaskViewWidget.routeName,
+          path: TaskViewWidget.routePath,
           builder: (context, params) => TaskViewWidget(
             yesterdayDate: params.getParam(
               'yesterdayDate',
@@ -242,8 +243,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'EmailsPreview',
-          path: '/EmailsPreview',
+          name: EmailsPreviewWidget.routeName,
+          path: EmailsPreviewWidget.routePath,
           builder: (context, params) => EmailsPreviewWidget(
             threadId: params.getParam(
               'threadId',
@@ -272,13 +273,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'Signup',
-          path: '/Signup',
+          name: SignupWidget.routeName,
+          path: SignupWidget.routePath,
           builder: (context, params) => SignupWidget(),
         ),
         FFRoute(
-          name: 'DigestView',
-          path: '/DigestView',
+          name: DigestViewWidget.routeName,
+          path: DigestViewWidget.routePath,
           builder: (context, params) => DigestViewWidget(
             yesterdayDate: params.getParam(
               'yesterdayDate',
@@ -287,8 +288,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'userPreferences',
-          path: '/Userpreferences',
+          name: UserPreferencesWidget.routeName,
+          path: UserPreferencesWidget.routePath,
           builder: (context, params) => UserPreferencesWidget(
             yesterdayDate: params.getParam(
               'yesterdayDate',
@@ -297,9 +298,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'BlacklistView',
-          path: '/BlacklistView',
+          name: BlacklistViewWidget.routeName,
+          path: BlacklistViewWidget.routePath,
           builder: (context, params) => BlacklistViewWidget(),
+        ),
+        FFRoute(
+          name: GoogleAuthErrorWidget.routeName,
+          path: GoogleAuthErrorWidget.routePath,
+          builder: (context, params) => GoogleAuthErrorWidget(
+            message: params.getParam(
+              'message',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

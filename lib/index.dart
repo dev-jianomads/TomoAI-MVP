@@ -40,3 +40,5 @@ export '/pages/user_preferences/user_preferences_widget.dart'
     show UserPreferencesWidget;
 export '/pages/blacklist_view/blacklist_view_widget.dart'
     show BlacklistViewWidget;
+export '/pages/google_auth_error/google_auth_error_widget.dart'
+    show GoogleAuthErrorWidget;

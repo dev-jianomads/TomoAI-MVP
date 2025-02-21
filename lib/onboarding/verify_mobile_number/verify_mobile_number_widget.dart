@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,9 @@ class VerifyMobileNumberWidget extends StatefulWidget {
   });
 
   final String? phoneNumber;
+
+  static String routeName = 'VerifyMobileNumber';
+  static String routePath = '/verifyMobileNumber';
 
   @override
   State<VerifyMobileNumberWidget> createState() =>
@@ -35,6 +39,8 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => VerifyMobileNumberModel());
+
+    _model.pinCodeFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -278,7 +284,8 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                                           TapGestureRecognizer()
                                                             ..onTap = () async {
                                                               context.pushNamed(
-                                                                  'EnterMobileNumber');
+                                                                  EnterMobileNumberWidget
+                                                                      .routeName);
                                                             },
                                                     )
                                                   ],
@@ -314,6 +321,7 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                                 MainAxisAlignment.spaceBetween,
                                             enableActiveFill: true,
                                             autoFocus: false,
+                                            focusNode: _model.pinCodeFocusNode,
                                             enablePinAutofill: true,
                                             errorTextSpace: 16.0,
                                             showCursor: true,
@@ -364,8 +372,9 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                                       0.0, 16.0, 0.0, 16.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  context
-                                                      .pushNamed('editProfile');
+                                                  context.pushNamed(
+                                                      EditProfileWidget
+                                                          .routeName);
                                                 },
                                                 text: 'Verify Code',
                                                 options: FFButtonOptions(

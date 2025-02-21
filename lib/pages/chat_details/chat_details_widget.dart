@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'chat_details_model.dart';
@@ -9,6 +10,9 @@ export 'chat_details_model.dart';
 
 class ChatDetailsWidget extends StatefulWidget {
   const ChatDetailsWidget({super.key});
+
+  static String routeName = 'chatDetails';
+  static String routePath = '/chatDetails';
 
   @override
   State<ChatDetailsWidget> createState() => _ChatDetailsWidgetState();
@@ -110,7 +114,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                     size: 30.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('allChats');
+                    context.pushNamed(AllChatsWidget.routeName);
                   },
                 ),
                 title: InkWell(
@@ -119,7 +123,7 @@ class _ChatDetailsWidgetState extends State<ChatDetailsWidget>
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('ProfileDetails');
+                    context.pushNamed(ProfileDetailsWidget.routeName);
                   },
                   child: Container(
                     decoration: BoxDecoration(),

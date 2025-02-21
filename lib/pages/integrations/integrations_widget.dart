@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/backend/supabase/supabase.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,12 +8,14 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
 import 'integrations_model.dart';
 export 'integrations_model.dart';
 
 class IntegrationsWidget extends StatefulWidget {
   const IntegrationsWidget({super.key});
+
+  static String routeName = 'integrations';
+  static String routePath = '/integrations';
 
   @override
   State<IntegrationsWidget> createState() => _IntegrationsWidgetState();
@@ -105,8 +106,6 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'integrations',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -232,89 +231,18 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
                                         8.0, 8.0, 0.0, 8.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        if (isWeb == true) {
-                                          await launchURL(
-                                              'https://accounts.google.com/o/oauth2/v2/auth?scope=https://mail.google.com/%20https://www.googleapis.com/auth/calendar&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=https://tomoaimvp-app-3sa6fr.flutterflow.app/access&client_id=593702549940-o05dp44paranv7l365esg6021lpgob4j.apps.googleusercontent.com&prompt=consent');
-                                        } else {
-                                          _model.authToken =
-                                              await actions.signinWithGoogle();
+                                        _model.oauthUrl =
+                                            await GetGoogleAuthUrlCall.call(
+                                          platform: isWeb ? 'web' : 'mobile',
+                                          uid: currentUserUid,
+                                        );
 
-                                          await currentUserReference!
-                                              .update(createUsersRecordData(
-                                            authCode: _model.authToken,
-                                          ));
-                                          await UsersTable().update(
-                                            data: {
-                                              'auth_code': _model.authToken,
-                                            },
-                                            matchingRows: (rows) =>
-                                                rows.eqOrNull(
-                                              'id',
-                                              currentUserUid,
-                                            ),
-                                          );
-                                          await actions.getGmailTokensIos(
-                                            valueOrDefault(
-                                                currentUserDocument?.authCode,
-                                                ''),
-                                          );
-                                          // update user record with tokens
-
-                                          await currentUserReference!
-                                              .update(createUsersRecordData(
-                                            gmailAccessToken:
-                                                FFAppState().accessToken,
-                                            gmailRefreshToken:
-                                                FFAppState().refreshToken,
-                                            clientId:
-                                                '593702549940-ad91egfrob6pokspm5l5nrkg8nng1huj.apps.googleusercontent.com',
-                                            refreshExpired: false,
-                                          ));
-                                          // update supabase user record with tokens
-                                          await UsersTable().update(
-                                            data: {
-                                              'access_token':
-                                                  FFAppState().accessToken,
-                                              'refresh_token':
-                                                  FFAppState().refreshToken,
-                                              'client_id': valueOrDefault(
-                                                  currentUserDocument?.clientId,
-                                                  ''),
-                                              'refresh_expired': false,
-                                            },
-                                            matchingRows: (rows) =>
-                                                rows.eqOrNull(
-                                              'id',
-                                              currentUserUid,
-                                            ),
-                                          );
-                                          // send to Make to pull first set of emails
-                                          await actions.sendUseridToMake(
-                                            currentUserUid,
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Connected to email / calendar (iOS) !  Your tasks will start showing up in a while.',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 6000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
-                                          await Future.delayed(const Duration(
-                                              milliseconds: 2000));
-                                        }
-
-                                        context.pushNamed('Homepage');
+                                        await actions.launchInExternalBrowser(
+                                          getJsonField(
+                                            (_model.oauthUrl?.jsonBody ?? ''),
+                                            r'''$.url''',
+                                          ).toString(),
+                                        );
 
                                         safeSetState(() {});
                                       },

@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'authentication_page_model.dart';
@@ -9,6 +10,9 @@ export 'authentication_page_model.dart';
 
 class AuthenticationPageWidget extends StatefulWidget {
   const AuthenticationPageWidget({super.key});
+
+  static String routeName = 'AuthenticationPage';
+  static String routePath = '/authenticationPage';
 
   @override
   State<AuthenticationPageWidget> createState() =>
@@ -147,7 +151,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('Login');
+                      context.pushNamed(LoginWidget.routeName);
                     },
                     text: 'Continue with email',
                     options: FFButtonOptions(
@@ -178,7 +182,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 64.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('EnterMobileNumber');
+                      context.pushNamed(EnterMobileNumberWidget.routeName);
                     },
                     text: 'Use phone number',
                     options: FFButtonOptions(

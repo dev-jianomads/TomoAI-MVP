@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'task_completion_g_i_f_model.dart';
 export 'task_completion_g_i_f_model.dart';
@@ -64,7 +65,7 @@ class _TaskCompletionGIFWidgetState extends State<TaskCompletionGIFWidget> {
                     size: 24.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('Homepage');
+                    context.pushNamed(HomepageWidget.routeName);
                   },
                 ),
               ),

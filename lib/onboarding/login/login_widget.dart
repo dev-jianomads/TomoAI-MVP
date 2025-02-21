@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'login_model.dart';
@@ -10,6 +11,9 @@ export 'login_model.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
+
+  static String routeName = 'Login';
+  static String routePath = '/Login';
 
   @override
   State<LoginWidget> createState() => _LoginWidgetState();
@@ -312,7 +316,7 @@ class _LoginWidgetState extends State<LoginWidget>
                           alignment: AlignmentDirectional(-1.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('ForgotPassword');
+                              context.pushNamed(ForgotPasswordWidget.routeName);
                             },
                             text: 'Forgot your password?',
                             options: FFButtonOptions(
@@ -368,14 +372,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                             '') ==
                                         '') {
                                   context.pushNamedAuth(
-                                      'integrations', context.mounted);
+                                      IntegrationsWidget.routeName,
+                                      context.mounted);
                                 }
                                 FFAppState().digestNextShow =
                                     getCurrentTimestamp;
                                 safeSetState(() {});
 
                                 context.pushNamedAuth(
-                                    'Homepage', context.mounted);
+                                    HomepageWidget.routeName, context.mounted);
                               },
                               text: 'Sign In',
                               options: FFButtonOptions(
@@ -445,14 +450,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                             '') ==
                                         '') {
                                   context.pushNamedAuth(
-                                      'integrations', context.mounted);
+                                      IntegrationsWidget.routeName,
+                                      context.mounted);
                                 }
                                 FFAppState().digestNextShow =
                                     getCurrentTimestamp;
                                 safeSetState(() {});
 
                                 context.pushNamedAuth(
-                                    'Homepage', context.mounted);
+                                    HomepageWidget.routeName, context.mounted);
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(0.0),
@@ -492,7 +498,7 @@ class _LoginWidgetState extends State<LoginWidget>
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('Signup');
+                              context.pushNamed(SignupWidget.routeName);
                             },
                             text: 'Create Account',
                             options: FFButtonOptions(

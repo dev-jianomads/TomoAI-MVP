@@ -10,6 +10,9 @@ export 'onboarding_image_model.dart';
 class OnboardingImageWidget extends StatefulWidget {
   const OnboardingImageWidget({super.key});
 
+  static String routeName = 'OnboardingImage';
+  static String routePath = '/OnboardingImage';
+
   @override
   State<OnboardingImageWidget> createState() => _OnboardingImageWidgetState();
 }

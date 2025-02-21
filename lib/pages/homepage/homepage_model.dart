@@ -1,5 +1,6 @@
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'dart:async';
 import 'homepage_widget.dart' show HomepageWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'

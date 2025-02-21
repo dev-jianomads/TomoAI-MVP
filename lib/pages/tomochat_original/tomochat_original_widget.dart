@@ -23,6 +23,9 @@ class TomochatOriginalWidget extends StatefulWidget {
   final TasksRow? tasks;
   final EmailsRow? email;
 
+  static String routeName = 'tomochatOriginal';
+  static String routePath = '/tomochatOriginal';
+
   @override
   State<TomochatOriginalWidget> createState() => _TomochatOriginalWidgetState();
 }

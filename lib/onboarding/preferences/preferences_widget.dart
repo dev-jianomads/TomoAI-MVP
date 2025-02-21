@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'preferences_model.dart';
@@ -10,6 +11,9 @@ export 'preferences_model.dart';
 
 class PreferencesWidget extends StatefulWidget {
   const PreferencesWidget({super.key});
+
+  static String routeName = 'Preferences';
+  static String routePath = '/preferences';
 
   @override
   State<PreferencesWidget> createState() => _PreferencesWidgetState();
@@ -206,7 +210,8 @@ class _PreferencesWidgetState extends State<PreferencesWidget>
                                   0.0, 40.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('integrations');
+                                  context
+                                      .pushNamed(IntegrationsWidget.routeName);
                                 },
                                 text: 'Continue',
                                 options: FFButtonOptions(

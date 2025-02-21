@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -21,6 +22,9 @@ class FocusViewWidget extends StatefulWidget {
   });
 
   final DateTime? yesterdayDate;
+
+  static String routeName = 'FocusView';
+  static String routePath = '/FocusView';
 
   @override
   State<FocusViewWidget> createState() => _FocusViewWidgetState();
@@ -87,7 +91,7 @@ class _FocusViewWidgetState extends State<FocusViewWidget> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed('Homepage');
+                  context.pushNamed(HomepageWidget.routeName);
                 },
               ),
               title: Text(

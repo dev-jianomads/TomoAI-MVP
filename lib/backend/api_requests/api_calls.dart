@@ -3617,6 +3617,34 @@ class MakeFetchFreeTimeslotsCall {
           .toList();
 }
 
+class GetGoogleAuthUrlCall {
+  static Future<ApiCallResponse> call({
+    String? platform = 'web',
+    String? uid = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Google Auth Url',
+      apiUrl:
+          'https://oauth2-425172227831.us-central1.run.app/get-google-auth-url?platform=${platform}&uid=${uid}',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? oauthUrl(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.url''',
+      ));
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'choose_gender_model.dart';
@@ -10,6 +11,9 @@ export 'choose_gender_model.dart';
 
 class ChooseGenderWidget extends StatefulWidget {
   const ChooseGenderWidget({super.key});
+
+  static String routeName = 'chooseGender';
+  static String routePath = '/chooseGender';
 
   @override
   State<ChooseGenderWidget> createState() => _ChooseGenderWidgetState();
@@ -408,7 +412,8 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                   0.0, 88.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('Preferences');
+                                  context
+                                      .pushNamed(PreferencesWidget.routeName);
                                 },
                                 text: 'Continue',
                                 options: FFButtonOptions(

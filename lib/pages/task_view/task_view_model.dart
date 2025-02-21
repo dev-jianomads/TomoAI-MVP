@@ -2,6 +2,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:async';
+import '/index.dart';
 import 'task_view_widget.dart' show TaskViewWidget;
 import 'package:flutter/material.dart';
 

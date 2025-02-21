@@ -2,6 +2,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'emails_preview_model.dart';
@@ -24,6 +25,9 @@ class EmailsPreviewWidget extends StatefulWidget {
   final String? emailURL;
   final String? senderName;
   final String? taskTitle;
+
+  static String routeName = 'EmailsPreview';
+  static String routePath = '/EmailsPreview';
 
   @override
   State<EmailsPreviewWidget> createState() => _EmailsPreviewWidgetState();
@@ -109,7 +113,7 @@ class _EmailsPreviewWidgetState extends State<EmailsPreviewWidget> {
                       size: 30.0,
                     ),
                     onPressed: () async {
-                      context.pushNamed('Homepage');
+                      context.pushNamed(HomepageWidget.routeName);
                     },
                   ),
                   title: Text(

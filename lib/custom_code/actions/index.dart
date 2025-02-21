@@ -9,3 +9,4 @@ export 'signin_with_google_web.dart' show signinWithGoogleWeb;
 export 'set_tomorrow_date.dart' show setTomorrowDate;
 export 'convert_to_local_display_time.dart' show convertToLocalDisplayTime;
 export 'parse_and_store_time_slots.dart' show parseAndStoreTimeSlots;
+export 'launch_in_external_browser.dart' show launchInExternalBrowser;

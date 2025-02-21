@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -13,6 +14,9 @@ export 'all_chats_model.dart';
 
 class AllChatsWidget extends StatefulWidget {
   const AllChatsWidget({super.key});
+
+  static String routeName = 'allChats';
+  static String routePath = '/allChats';
 
   @override
   State<AllChatsWidget> createState() => _AllChatsWidgetState();
@@ -1068,7 +1072,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            context.pushNamed('chatDetails');
+                                            context.pushNamed(
+                                                ChatDetailsWidget.routeName);
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(),
@@ -1299,7 +1304,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            context.pushNamed('chatDetails');
+                                            context.pushNamed(
+                                                ChatDetailsWidget.routeName);
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(),
@@ -1548,7 +1554,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed('chatDetails');
+                                              context.pushNamed(
+                                                  ChatDetailsWidget.routeName);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(),
@@ -1795,7 +1802,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed('chatDetails');
+                                              context.pushNamed(
+                                                  ChatDetailsWidget.routeName);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(),
@@ -2042,7 +2050,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed('chatDetails');
+                                              context.pushNamed(
+                                                  ChatDetailsWidget.routeName);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(),
@@ -2289,7 +2298,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed('chatDetails');
+                                              context.pushNamed(
+                                                  ChatDetailsWidget.routeName);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(),
@@ -2536,7 +2546,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed('chatDetails');
+                                              context.pushNamed(
+                                                  ChatDetailsWidget.routeName);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(),
@@ -2783,7 +2794,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed('chatDetails');
+                                              context.pushNamed(
+                                                  ChatDetailsWidget.routeName);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(),
@@ -3045,16 +3057,16 @@ class _AllChatsWidgetState extends State<AllChatsWidget>
                             FlutterFlowTheme.of(context).secondaryBackground,
                         profileIconColour: FlutterFlowTheme.of(context).accent1,
                         navigateHome: () async {
-                          context.pushNamed('Homepage');
+                          context.pushNamed(HomepageWidget.routeName);
                         },
                         navigateToFavorites: () async {
-                          context.pushNamed('FocusView');
+                          context.pushNamed(FocusViewWidget.routeName);
                         },
                         navigateToChats: () async {
-                          context.pushNamed('allChats');
+                          context.pushNamed(AllChatsWidget.routeName);
                         },
                         navigateToProfile: () async {
-                          context.pushNamed('ProfileDetails');
+                          context.pushNamed(ProfileDetailsWidget.routeName);
                         },
                       ),
                     ),

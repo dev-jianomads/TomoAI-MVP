@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -20,6 +21,9 @@ class DigestViewWidget extends StatefulWidget {
   });
 
   final DateTime? yesterdayDate;
+
+  static String routeName = 'DigestView';
+  static String routePath = '/DigestView';
 
   @override
   State<DigestViewWidget> createState() => _DigestViewWidgetState();
@@ -86,7 +90,7 @@ class _DigestViewWidgetState extends State<DigestViewWidget> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed('Homepage');
+                  context.pushNamed(HomepageWidget.routeName);
                 },
               ),
               title: Text(

@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'settings_model.dart';
@@ -253,12 +254,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           FFAppState().walkthroughComplete = false;
                           safeSetState(() {});
 
-                          context.pushNamed('Homepage');
+                          context.pushNamed(HomepageWidget.routeName);
                         } else {
                           FFAppState().walkthroughComplete = false;
                           safeSetState(() {});
 
-                          context.pushNamed('Homepage');
+                          context.pushNamed(HomepageWidget.routeName);
                         }
                       },
                       child: Container(
@@ -449,7 +450,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();
 
-                        context.goNamedAuth('OnboardingPage', context.mounted);
+                        context.goNamedAuth(
+                            OnboardingPageWidget.routeName, context.mounted);
                       },
                       text: 'Log Out',
                       options: FFButtonOptions(

@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'chat_details_widget.dart' show ChatDetailsWidget;
 import 'package:flutter/material.dart';
 

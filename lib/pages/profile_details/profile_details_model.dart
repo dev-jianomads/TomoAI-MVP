@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'profile_details_widget.dart' show ProfileDetailsWidget;
 import 'package:flutter/material.dart';
 

@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'onboarding_page_model.dart';
@@ -9,6 +10,9 @@ export 'onboarding_page_model.dart';
 
 class OnboardingPageWidget extends StatefulWidget {
   const OnboardingPageWidget({super.key});
+
+  static String routeName = 'OnboardingPage';
+  static String routePath = '/onboardingPage';
 
   @override
   State<OnboardingPageWidget> createState() => _OnboardingPageWidgetState();
@@ -560,7 +564,7 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('Login');
+                            context.pushNamed(LoginWidget.routeName);
                           },
                           text: 'Continue',
                           options: FFButtonOptions(
@@ -600,7 +604,8 @@ class _OnboardingPageWidgetState extends State<OnboardingPageWidget>
                               0.0, 0.0, 0.0, 16.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('AuthenticationPage');
+                              context.pushNamed(
+                                  AuthenticationPageWidget.routeName);
                             },
                             text: 'Sign In',
                             options: FFButtonOptions(
