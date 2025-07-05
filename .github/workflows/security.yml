@@ -2,8 +2,8 @@ name: Security Scans
 
 on:
   push:
-    branches: [develop]        # run on every commit to your dev branch
-  pull_request:                # and on every PR targeting develop
+    branches: [develop]          # run on every commit to your dev branch
+  pull_request:                  # and on every PR targeting develop
     branches: [develop]
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
   semgrep:
     runs-on: ubuntu-latest
     permissions:
-      security-events: write   # allow SARIF upload
+      security-events: write     # allow SARIF upload
       actions: read
       contents: read
     steps:
@@ -35,7 +35,7 @@ jobs:
 
   # ---------- Dynamic analysis (OWASP ZAP) ----------
   zap:
-    needs: semgrep              # only start if static scan succeeded
+    needs: semgrep                # only start if static scan succeeded
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,5 +43,10 @@ jobs:
       - name: Run ZAP Baseline scan
         uses: zaproxy/action-baseline@v0.11.0
         with:
-          target: ${{ secrets.STAGING_URL }}   # set in repo secrets
-          fail_action: false                   # don’t break the build
+          target: ${{ secrets.STAGING_URL }}      # e.g. https://staging.praxio-ai.com
+          fail_action: false                      # don’t fail the build on alerts
+          cmd_options: >                          # pass Basic-Auth creds
+            -config auth.method=basic
+            -config auth.username='${{ secrets.ZAP_USER }}'
+            -config auth.password='${{ secrets.ZAP_PASS }}'
+            -config spider.maxDuration=5
