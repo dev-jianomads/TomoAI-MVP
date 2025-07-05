@@ -19,8 +19,8 @@ Future sendUseridToMake(String? userId) async {
     throw Exception('UserId cannot be null or empty');
   }
 
-  // API endpoint URL
-  String url = 'https://hook.us1.make.com/ic1b38cfbtuhj6y192eblac6xu93vi2n';
+  // New API endpoint URL with user id in the path
+  String url = 'https://utils-server-22rm.onrender.com/extract_tasks/$userId';
 
   // JSON data to send (ensuring both key and value are within double quotes)
   String data = jsonEncode({

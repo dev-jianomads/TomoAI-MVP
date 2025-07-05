@@ -23,6 +23,6 @@ class PreferencesRow extends SupabaseDataRow {
   String? get userId => getField<String>('user_id');
   set userId(String? value) => setField<String>('user_id', value);
 
-  String get description => getField<String>('description')!;
-  set description(String value) => setField<String>('description', value);
+  String get name => getField<String>('name')!;
+  set name(String value) => setField<String>('name', value);
 }

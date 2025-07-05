@@ -30,6 +30,8 @@ class SignupModel extends FlutterFlowModel<SignupWidget> {
   String? usertimezone1;
   // Stores action output result for [Custom Action - getTimezone] action in FirebaseSignupWithGoogle widget.
   String? usertimezone2;
+  // Stores action output result for [Custom Action - getTimezone] action in FirebaseSignupWithApple widget.
+  String? usertimezone3;
 
   @override
   void initState(BuildContext context) {

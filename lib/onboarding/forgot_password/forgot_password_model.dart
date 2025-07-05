@@ -10,7 +10,7 @@ class ForgotPasswordModel extends FlutterFlowModel<ForgotPasswordWidget> {
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
-  final emailMask = MaskTextInputFormatter(mask: '(###) ###-####');
+  late MaskTextInputFormatter emailMask;
   String? Function(BuildContext, String?)? emailTextControllerValidator;
 
   @override

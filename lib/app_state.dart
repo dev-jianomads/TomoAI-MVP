@@ -157,6 +157,94 @@ class FFAppState extends ChangeNotifier {
     _darkModeSetting = value;
   }
 
+  List<String> _feedbackDetail2 = [];
+  List<String> get feedbackDetail2 => _feedbackDetail2;
+  set feedbackDetail2(List<String> value) {
+    _feedbackDetail2 = value;
+  }
+
+  void addToFeedbackDetail2(String value) {
+    feedbackDetail2.add(value);
+  }
+
+  void removeFromFeedbackDetail2(String value) {
+    feedbackDetail2.remove(value);
+  }
+
+  void removeAtIndexFromFeedbackDetail2(int index) {
+    feedbackDetail2.removeAt(index);
+  }
+
+  void updateFeedbackDetail2AtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    feedbackDetail2[index] = updateFn(_feedbackDetail2[index]);
+  }
+
+  void insertAtIndexInFeedbackDetail2(int index, String value) {
+    feedbackDetail2.insert(index, value);
+  }
+
+  String _senderEmail = '';
+  String get senderEmail => _senderEmail;
+  set senderEmail(String value) {
+    _senderEmail = value;
+  }
+
+  String _selectedTask = '';
+  String get selectedTask => _selectedTask;
+  set selectedTask(String value) {
+    _selectedTask = value;
+  }
+
+  bool _showEmail = false;
+  bool get showEmail => _showEmail;
+  set showEmail(bool value) {
+    _showEmail = value;
+  }
+
+  String _selectedEmail = '';
+  String get selectedEmail => _selectedEmail;
+  set selectedEmail(String value) {
+    _selectedEmail = value;
+  }
+
+  String _agentHTML = '';
+  String get agentHTML => _agentHTML;
+  set agentHTML(String value) {
+    _agentHTML = value;
+  }
+
+  List<String> _questionsList = [];
+  List<String> get questionsList => _questionsList;
+  set questionsList(List<String> value) {
+    _questionsList = value;
+  }
+
+  void addToQuestionsList(String value) {
+    questionsList.add(value);
+  }
+
+  void removeFromQuestionsList(String value) {
+    questionsList.remove(value);
+  }
+
+  void removeAtIndexFromQuestionsList(int index) {
+    questionsList.removeAt(index);
+  }
+
+  void updateQuestionsListAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    questionsList[index] = updateFn(_questionsList[index]);
+  }
+
+  void insertAtIndexInQuestionsList(int index, String value) {
+    questionsList.insert(index, value);
+  }
+
   final _categoryQuery2Manager = FutureRequestManager<List<CategoryRecord>>();
   Future<List<CategoryRecord>> categoryQuery2({
     String? uniqueQueryKey,

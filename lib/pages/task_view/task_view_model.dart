@@ -26,12 +26,12 @@ class TaskViewModel extends FlutterFlowModel<TaskViewWidget> {
   DateTime? datePicked;
   // Stores action output result for [Custom Action - setYesterdayDate] action in DatePickerIcon widget.
   DateTime? yesterday2;
-  // State field(s) for EmailChoiceChips widget.
-  FormFieldController<List<String>>? emailChoiceChipsValueController;
-  String? get emailChoiceChipsValue =>
-      emailChoiceChipsValueController?.value?.firstOrNull;
-  set emailChoiceChipsValue(String? val) =>
-      emailChoiceChipsValueController?.value = val != null ? [val] : [];
+  // State field(s) for CategoryChoiceChips widget.
+  FormFieldController<List<String>>? categoryChoiceChipsValueController;
+  String? get categoryChoiceChipsValue =>
+      categoryChoiceChipsValueController?.value?.firstOrNull;
+  set categoryChoiceChipsValue(String? val) =>
+      categoryChoiceChipsValueController?.value = val != null ? [val] : [];
   Completer<List<TasksRow>>? requestCompleter;
 
   @override

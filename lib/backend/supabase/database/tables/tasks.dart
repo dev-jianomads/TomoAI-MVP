@@ -58,4 +58,16 @@ class TasksRow extends SupabaseDataRow {
 
   String? get timeBlocked => getField<String>('time_blocked');
   set timeBlocked(String? value) => setField<String>('time_blocked', value);
+
+  List<String> get userFeedback => getListField<String>('user_feedback');
+  set userFeedback(List<String>? value) =>
+      setListField<String>('user_feedback', value);
+
+  String? get extractedFromId => getField<String>('extracted_from_id');
+  set extractedFromId(String? value) =>
+      setField<String>('extracted_from_id', value);
+
+  String? get descriptionExtended => getField<String>('description_extended');
+  set descriptionExtended(String? value) =>
+      setField<String>('description_extended', value);
 }

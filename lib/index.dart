@@ -42,3 +42,5 @@ export '/pages/blacklist_view/blacklist_view_widget.dart'
     show BlacklistViewWidget;
 export '/pages/google_auth_error/google_auth_error_widget.dart'
     show GoogleAuthErrorWidget;
+export '/pages/emails_debug/emails_debug_widget.dart' show EmailsDebugWidget;
+export '/pages/web_view/web_view_widget.dart' show WebViewWidget;

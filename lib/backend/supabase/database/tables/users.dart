@@ -52,4 +52,15 @@ class UsersRow extends SupabaseDataRow {
 
   String? get authCode => getField<String>('auth_code');
   set authCode(String? value) => setField<String>('auth_code', value);
+
+  DateTime? get tokenExpirationDate =>
+      getField<DateTime>('token_expiration_date');
+  set tokenExpirationDate(DateTime? value) =>
+      setField<DateTime>('token_expiration_date', value);
+
+  String? get position => getField<String>('position');
+  set position(String? value) => setField<String>('position', value);
+
+  String? get role => getField<String>('role');
+  set role(String? value) => setField<String>('role', value);
 }

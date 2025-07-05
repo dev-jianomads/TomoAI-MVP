@@ -56,3 +56,14 @@ String? convertToTitleCase(String? lowerCaseText) {
 
   return words.join(' ');
 }
+
+int? getListCount(List<String>? countList) {
+  int getListCount(List<String> tasks) {
+    return tasks.length;
+  }
+}
+
+String? asString(String? v) {
+  if (v == null) return '';
+  return v.toString();
+}

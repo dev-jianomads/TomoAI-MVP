@@ -9,17 +9,19 @@ import '/flutter_flow/flutter_flow_swipeable_stack.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/walkthroughs/homepage_walkthrough.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
-import 'dart:async';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'homepage_model.dart';
 export 'homepage_model.dart';
 
@@ -48,6 +50,9 @@ class _HomepageWidgetState extends State<HomepageWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      safeSetState(() => _model.requestCompleter = null);
+      await _model.waitForRequestCompleted();
       // Fetch user record from supabase
       _model.queryUserId = await UsersTable().queryRows(
         queryFn: (q) => q.eqOrNull(
@@ -57,8 +62,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
       );
 
       await currentUserReference!.update(createUsersRecordData(
-        refreshExpired:
-            _model.queryUserId?.take(1).toList().firstOrNull?.refreshExpired,
+        refreshExpired: _model.queryUserId?.firstOrNull?.refreshExpired,
       ));
       if (_model.queryUserId?.firstOrNull?.accessToken == null ||
           _model.queryUserId?.firstOrNull?.accessToken == '') {
@@ -68,15 +72,17 @@ class _HomepageWidgetState extends State<HomepageWidget>
         await showDialog(
           context: context,
           builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Google Token Expired'),
-              content: Text('Google Token Expired. Please Reauthorize'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
+            return WebViewAware(
+              child: AlertDialog(
+                title: Text('Google Token Expired'),
+                content: Text('Google Token Expired. Please Reauthorize'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              ),
             );
           },
         );
@@ -103,15 +109,17 @@ class _HomepageWidgetState extends State<HomepageWidget>
           enableDrag: false,
           context: context,
           builder: (context) {
-            return GestureDetector(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
-              child: Padding(
-                padding: MediaQuery.viewInsetsOf(context),
-                child: DailyDigestWidget(
-                  yesterdayDate: _model.yesterday!,
+            return WebViewAware(
+              child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
+                child: Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: DailyDigestWidget(
+                    yesterdayDate: _model.yesterday!,
+                  ),
                 ),
               ),
             );
@@ -124,13 +132,25 @@ class _HomepageWidgetState extends State<HomepageWidget>
         safeSetState(() {});
       }
       await Future.delayed(const Duration(milliseconds: 1000));
-      safeSetState(() => _model.requestCompleter = null);
-      await _model.waitForRequestCompleted();
       if (!(FFAppState().TimeZoneId.isNotEmpty)) {
         _model.listTimeZones = await actions.getTimeZoneIdentifiers();
         FFAppState().TimeZoneId = _model.listTimeZones!.toList().cast<String>();
         safeSetState(() {});
       }
+      _model.usertimezoneupdated = await actions.getTimezone();
+
+      await currentUserReference!.update(createUsersRecordData(
+        timeZone: _model.usertimezoneupdated,
+      ));
+      await UsersTable().update(
+        data: {
+          'time_zone': _model.usertimezoneupdated,
+        },
+        matchingRows: (rows) => rows.eqOrNull(
+          'id',
+          currentUserUid,
+        ),
+      );
     });
 
     animationsMap.addAll({
@@ -150,6 +170,19 @@ class _HomepageWidgetState extends State<HomepageWidget>
             duration: 1000.0.ms,
             begin: Offset(0.9, 0.9),
             end: Offset(1.0, 1.0),
+          ),
+        ],
+      ),
+      'iconOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          RotateEffect(
+            curve: Curves.linear,
+            delay: 0.0.ms,
+            duration: 2000.0.ms,
+            begin: 1.0,
+            end: 2.5,
           ),
         ],
       ),
@@ -173,6 +206,12 @@ class _HomepageWidgetState extends State<HomepageWidget>
         ],
       ),
     });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -273,26 +312,55 @@ class _HomepageWidgetState extends State<HomepageWidget>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Important',
+                            dateTimeFormat("yMMMd", getCurrentTimestamp),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   fontSize: 24.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ],
                       ),
-                      Text(
-                        dateTimeFormat("yMMMd", getCurrentTimestamp),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontSize: 13.0,
-                              letterSpacing: 0.0,
-                            ),
-                      ),
+                      if (responsiveVisibility(
+                        context: context,
+                        phone: false,
+                        tablet: false,
+                        tabletLandscape: false,
+                        desktop: false,
+                      ))
+                        Text(
+                          dateTimeFormat("yMMMd", getCurrentTimestamp),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 13.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
                     ],
                   ).animateOnPageLoad(
                       animationsMap['columnOnPageLoadAnimation']!),
@@ -345,13 +413,13 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                               950.0) {
                                             return 65.0;
                                           } else {
-                                            return 20.0;
+                                            return 40.0;
                                           }
                                         }(),
                                         24.0,
                                       ),
                                       16.0,
-                                      90.0),
+                                      50.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -362,12 +430,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                       FutureBuilder<List<CategoryRecord>>(
                                         future: FFAppState().categoryQuery2(
                                           requestFn: () =>
-                                              queryCategoryRecordOnce()
-                                                  .then((result) {
-                                            _model.firestoreRequestCompleted =
-                                                true;
-                                            return result;
-                                          }),
+                                              queryCategoryRecordOnce(),
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
@@ -393,16 +456,31 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                               snapshot.data!;
 
                                           return Container(
-                                            width: double.infinity,
-                                            height: 550.0,
+                                            width: () {
+                                              if (MediaQuery.sizeOf(context)
+                                                      .width <
+                                                  kBreakpointSmall) {
+                                                return double.infinity;
+                                              } else if (MediaQuery.sizeOf(
+                                                          context)
+                                                      .width <
+                                                  kBreakpointMedium) {
+                                                return double.infinity;
+                                              } else if (MediaQuery.sizeOf(
+                                                          context)
+                                                      .width <
+                                                  kBreakpointLarge) {
+                                                return double.infinity;
+                                              } else {
+                                                return 400.0;
+                                              }
+                                            }(),
+                                            height: 530.0,
                                             decoration: BoxDecoration(),
                                             child: Builder(
                                               builder: (context) {
                                                 final swipeableHighPriorityTask =
                                                     homepageTasksRowList
-                                                        .where((e) =>
-                                                            e.priority ==
-                                                            'high')
                                                         .toList();
                                                 if (swipeableHighPriorityTask
                                                     .isEmpty) {
@@ -426,43 +504,37 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                           Colors.transparent,
                                                       barrierColor:
                                                           Colors.black,
+                                                      isDismissible: false,
                                                       enableDrag: false,
                                                       context: context,
                                                       builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                TaskComponentWidget(
-                                                              tasks:
-                                                                  swipeableHighPriorityTaskItem,
+                                                        return WebViewAware(
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              FocusScope.of(
+                                                                      context)
+                                                                  .unfocus();
+                                                              FocusManager
+                                                                  .instance
+                                                                  .primaryFocus
+                                                                  ?.unfocus();
+                                                            },
+                                                            child: Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  TaskComponentWidget(
+                                                                tasks:
+                                                                    swipeableHighPriorityTaskItem,
+                                                              ),
                                                             ),
                                                           ),
                                                         );
                                                       },
                                                     ).then((value) =>
                                                         safeSetState(() {}));
-
-                                                    _model.taskId =
-                                                        swipeableHighPriorityTaskItem
-                                                            .id;
-                                                    safeSetState(() {});
-                                                    safeSetState(() => _model
-                                                            .requestCompleter =
-                                                        null);
-                                                    await _model
-                                                        .waitForRequestCompleted();
                                                   },
                                                   onRightSwipe: (index) async {
                                                     final swipeableHighPriorityTaskItem =
@@ -482,19 +554,13 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                         _model.taskId,
                                                       ),
                                                     );
+                                                    _model.taskId = 'taskId';
+                                                    safeSetState(() {});
                                                     safeSetState(() => _model
                                                             .requestCompleter =
                                                         null);
                                                     await _model
                                                         .waitForRequestCompleted();
-                                                    safeSetState(() {
-                                                      FFAppState()
-                                                          .clearCategoryQuery2Cache();
-                                                      _model.firestoreRequestCompleted =
-                                                          false;
-                                                    });
-                                                    await _model
-                                                        .waitForFirestoreRequestCompleted();
                                                   },
                                                   onUpSwipe: (index) {},
                                                   onDownSwipe: (index) {},
@@ -508,6 +574,30 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                       height: double.infinity,
                                                       child: Stack(
                                                         children: [
+                                                          if ((swipeableHighPriorityTaskItem
+                                                                      .category ==
+                                                                  'app') &&
+                                                              isiOS)
+                                                            Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      0.0, 0.4),
+                                                              child: Container(
+                                                                width: 300.0,
+                                                                height: 70.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: swipeablestackContainerCategoryRecordList
+                                                                      .where((e) =>
+                                                                          e.name ==
+                                                                          swipeableHighPriorityTaskItem
+                                                                              .category)
+                                                                      .toList()
+                                                                      .firstOrNull
+                                                                      ?.colorLight,
+                                                                ),
+                                                              ),
+                                                            ),
                                                           ClipRRect(
                                                             borderRadius:
                                                                 BorderRadius
@@ -543,7 +633,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                               context)
                                                                       .height *
                                                                   1.0,
-                                                              fit: BoxFit.fill,
+                                                              fit: BoxFit.cover,
                                                               alignment:
                                                                   Alignment(
                                                                       0.0, 0.0),
@@ -660,6 +750,11 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                               .transparent,
                                                                       onTap:
                                                                           () async {
+                                                                        FFAppState().senderEmail =
+                                                                            taskDetailsCardEmailsRow!.senderEmail!;
+                                                                        safeSetState(
+                                                                            () {});
+
                                                                         context
                                                                             .pushNamed(
                                                                           EmailsPreviewWidget
@@ -668,32 +763,47 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                               {
                                                                             'threadId':
                                                                                 serializeParam(
-                                                                              taskDetailsCardEmailsRow?.threadId,
+                                                                              taskDetailsCardEmailsRow.threadId,
                                                                               ParamType.String,
                                                                             ),
                                                                             'latestcontent':
                                                                                 serializeParam(
-                                                                              taskDetailsCardEmailsRow?.body,
+                                                                              taskDetailsCardEmailsRow.body,
                                                                               ParamType.String,
                                                                             ),
                                                                             'latestdate':
                                                                                 serializeParam(
-                                                                              taskDetailsCardEmailsRow?.dateReceived,
+                                                                              taskDetailsCardEmailsRow.dateReceived,
                                                                               ParamType.DateTime,
                                                                             ),
                                                                             'emailURL':
                                                                                 serializeParam(
-                                                                              taskDetailsCardEmailsRow?.originalLink,
+                                                                              taskDetailsCardEmailsRow.iosLink,
                                                                               ParamType.String,
                                                                             ),
                                                                             'senderName':
                                                                                 serializeParam(
-                                                                              taskDetailsCardEmailsRow?.senderName,
+                                                                              taskDetailsCardEmailsRow.senderName,
                                                                               ParamType.String,
                                                                             ),
                                                                             'taskTitle':
                                                                                 serializeParam(
                                                                               swipeableHighPriorityTaskItem.description,
+                                                                              ParamType.String,
+                                                                            ),
+                                                                            'taskAppName':
+                                                                                serializeParam(
+                                                                              swipeableHighPriorityTaskItem.appName,
+                                                                              ParamType.String,
+                                                                            ),
+                                                                            'taskId':
+                                                                                serializeParam(
+                                                                              swipeableHighPriorityTaskItem.id,
+                                                                              ParamType.String,
+                                                                            ),
+                                                                            'taskExpanded':
+                                                                                serializeParam(
+                                                                              swipeableHighPriorityTaskItem.descriptionExtended,
                                                                               ParamType.String,
                                                                             ),
                                                                           }.withoutNulls,
@@ -711,9 +821,9 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0.0,
-                                                                                2.0,
+                                                                                4.0,
                                                                                 0.0,
-                                                                                10.0),
+                                                                                6.0),
                                                                             child:
                                                                                 SingleChildScrollView(
                                                                               scrollDirection: Axis.horizontal,
@@ -732,11 +842,15 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                                       textAlign: TextAlign.center,
                                                                                       maxLines: 2,
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            fontFamily: 'Inter',
+                                                                                            font: GoogleFonts.inter(
+                                                                                              fontWeight: FontWeight.bold,
+                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                            ),
                                                                                             color: FlutterFlowTheme.of(context).info,
                                                                                             fontSize: 16.0,
                                                                                             letterSpacing: 0.0,
                                                                                             fontWeight: FontWeight.bold,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                           ),
                                                                                     ),
                                                                                   ),
@@ -748,9 +862,9 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                             mainAxisSize:
                                                                                 MainAxisSize.max,
                                                                             mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
+                                                                                MainAxisAlignment.spaceBetween,
                                                                             crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
+                                                                                CrossAxisAlignment.center,
                                                                             children: [
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
@@ -763,13 +877,139 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                                     replacement: '…',
                                                                                   ),
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Inter',
+                                                                                        font: GoogleFonts.inter(
+                                                                                          fontWeight: FontWeight.normal,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
                                                                                         color: FlutterFlowTheme.of(context).info,
                                                                                         fontSize: 14.0,
                                                                                         letterSpacing: 0.0,
                                                                                         fontWeight: FontWeight.normal,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                       ),
                                                                                 ),
+                                                                              ),
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  if (valueOrDefault(currentUserDocument?.role, '') == 'admin')
+                                                                                    AuthUserStreamWidget(
+                                                                                      builder: (context) => AlignedTooltip(
+                                                                                        content: Padding(
+                                                                                          padding: EdgeInsets.all(4.0),
+                                                                                          child: Text(
+                                                                                            'Mark task complete',
+                                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                                  font: GoogleFonts.inter(
+                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                                  ),
+                                                                                                  fontSize: 12.0,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                                ),
+                                                                                          ),
+                                                                                        ),
+                                                                                        offset: 4.0,
+                                                                                        preferredDirection: AxisDirection.up,
+                                                                                        borderRadius: BorderRadius.circular(8.0),
+                                                                                        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                        elevation: 4.0,
+                                                                                        tailBaseWidth: 24.0,
+                                                                                        tailLength: 12.0,
+                                                                                        waitDuration: Duration(milliseconds: 100),
+                                                                                        showDuration: Duration(milliseconds: 1500),
+                                                                                        triggerMode: TooltipTriggerMode.longPress,
+                                                                                        child: FlutterFlowIconButton(
+                                                                                          borderRadius: 8.0,
+                                                                                          buttonSize: 40.0,
+                                                                                          icon: Icon(
+                                                                                            Icons.bug_report,
+                                                                                            color: FlutterFlowTheme.of(context).info,
+                                                                                            size: 24.0,
+                                                                                          ),
+                                                                                          onPressed: () async {
+                                                                                            context.pushNamed(
+                                                                                              EmailsDebugWidget.routeName,
+                                                                                              queryParameters: {
+                                                                                                'latestcontent': serializeParam(
+                                                                                                  taskDetailsCardEmailsRow?.body,
+                                                                                                  ParamType.String,
+                                                                                                ),
+                                                                                                'senderName': serializeParam(
+                                                                                                  taskDetailsCardEmailsRow?.senderName,
+                                                                                                  ParamType.String,
+                                                                                                ),
+                                                                                                'taskId': serializeParam(
+                                                                                                  swipeableHighPriorityTaskItem.id,
+                                                                                                  ParamType.String,
+                                                                                                ),
+                                                                                                'emailDate': serializeParam(
+                                                                                                  taskDetailsCardEmailsRow?.createdAt,
+                                                                                                  ParamType.DateTime,
+                                                                                                ),
+                                                                                                'emailId': serializeParam(
+                                                                                                  taskDetailsCardEmailsRow?.emailId,
+                                                                                                  ParamType.String,
+                                                                                                ),
+                                                                                              }.withoutNulls,
+                                                                                            );
+                                                                                          },
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  AlignedTooltip(
+                                                                                    content: Padding(
+                                                                                      padding: EdgeInsets.all(4.0),
+                                                                                      child: Text(
+                                                                                        'Mark task complete',
+                                                                                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                              font: GoogleFonts.inter(
+                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                              ),
+                                                                                              fontSize: 12.0,
+                                                                                              letterSpacing: 0.0,
+                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                            ),
+                                                                                      ),
+                                                                                    ),
+                                                                                    offset: 4.0,
+                                                                                    preferredDirection: AxisDirection.up,
+                                                                                    borderRadius: BorderRadius.circular(8.0),
+                                                                                    backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                    elevation: 4.0,
+                                                                                    tailBaseWidth: 24.0,
+                                                                                    tailLength: 12.0,
+                                                                                    waitDuration: Duration(milliseconds: 100),
+                                                                                    showDuration: Duration(milliseconds: 1500),
+                                                                                    triggerMode: TooltipTriggerMode.longPress,
+                                                                                    child: FlutterFlowIconButton(
+                                                                                      borderRadius: 8.0,
+                                                                                      buttonSize: 40.0,
+                                                                                      icon: Icon(
+                                                                                        Icons.check_circle_outlined,
+                                                                                        color: FlutterFlowTheme.of(context).info,
+                                                                                        size: 24.0,
+                                                                                      ),
+                                                                                      onPressed: () async {
+                                                                                        await TasksTable().update(
+                                                                                          data: {
+                                                                                            'progress': 'done',
+                                                                                          },
+                                                                                          matchingRows: (rows) => rows.eqOrNull(
+                                                                                            'id',
+                                                                                            swipeableHighPriorityTaskItem.id,
+                                                                                          ),
+                                                                                        );
+                                                                                        safeSetState(() => _model.requestCompleter = null);
+                                                                                        await _model.waitForRequestCompleted();
+                                                                                      },
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
                                                                               ),
                                                                             ],
                                                                           ),
@@ -789,11 +1029,15 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                                   Text(
                                                                                     'Due: ',
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          fontFamily: 'Inter',
+                                                                                          font: GoogleFonts.inter(
+                                                                                            fontWeight: FontWeight.normal,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
                                                                                           color: FlutterFlowTheme.of(context).info,
                                                                                           fontSize: 14.0,
                                                                                           letterSpacing: 0.0,
                                                                                           fontWeight: FontWeight.normal,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                         ),
                                                                                   ),
                                                                                   Padding(
@@ -804,60 +1048,19 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                                         '[due date]',
                                                                                       ),
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            fontFamily: 'Inter',
+                                                                                            font: GoogleFonts.inter(
+                                                                                              fontWeight: FontWeight.normal,
+                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                            ),
                                                                                             color: FlutterFlowTheme.of(context).info,
                                                                                             fontSize: 14.0,
                                                                                             letterSpacing: 0.0,
                                                                                             fontWeight: FontWeight.normal,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                           ),
                                                                                     ),
                                                                                   ),
                                                                                 ],
-                                                                              ),
-                                                                              AlignedTooltip(
-                                                                                content: Padding(
-                                                                                  padding: EdgeInsets.all(4.0),
-                                                                                  child: Text(
-                                                                                    'Going forward no tasks will be generated from this app',
-                                                                                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                          fontFamily: 'Inter',
-                                                                                          fontSize: 12.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                                offset: 4.0,
-                                                                                preferredDirection: AxisDirection.up,
-                                                                                borderRadius: BorderRadius.circular(8.0),
-                                                                                backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                elevation: 4.0,
-                                                                                tailBaseWidth: 24.0,
-                                                                                tailLength: 12.0,
-                                                                                waitDuration: Duration(milliseconds: 100),
-                                                                                showDuration: Duration(milliseconds: 1500),
-                                                                                triggerMode: TooltipTriggerMode.longPress,
-                                                                                child: FlutterFlowIconButton(
-                                                                                  borderRadius: 8.0,
-                                                                                  buttonSize: 40.0,
-                                                                                  icon: Icon(
-                                                                                    Icons.delete,
-                                                                                    color: FlutterFlowTheme.of(context).info,
-                                                                                    size: 24.0,
-                                                                                  ),
-                                                                                  onPressed: () async {
-                                                                                    await TasksTable().update(
-                                                                                      data: {
-                                                                                        'progress': 'deleted',
-                                                                                      },
-                                                                                      matchingRows: (rows) => rows.eqOrNull(
-                                                                                        'app_name',
-                                                                                        swipeableHighPriorityTaskItem.appName,
-                                                                                      ),
-                                                                                    );
-                                                                                    safeSetState(() => _model.requestCompleter = null);
-                                                                                    await _model.waitForRequestCompleted();
-                                                                                  },
-                                                                                ),
                                                                               ),
                                                                             ],
                                                                           ),
@@ -926,15 +1129,22 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                               0.0),
                                                                           child:
                                                                               Text(
-                                                                            (homepageTasksRowList.length - swipeableHighPriorityTaskIndex).toString(),
+                                                                            valueOrDefault<String>(
+                                                                              homepageTasksRowList.length.toString(),
+                                                                              '4',
+                                                                            ),
                                                                             textAlign:
                                                                                 TextAlign.center,
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Inter',
+                                                                                  font: GoogleFonts.inter(
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
                                                                                   color: FlutterFlowTheme.of(context).info,
                                                                                   fontSize: 16.0,
                                                                                   letterSpacing: 0.0,
                                                                                   fontWeight: FontWeight.bold,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                 ),
                                                                           ),
                                                                         ),
@@ -991,11 +1201,15 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
-                                                                              fontFamily: 'Inter',
+                                                                              font: GoogleFonts.inter(
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
                                                                               color: FlutterFlowTheme.of(context).info,
                                                                               fontSize: 16.0,
                                                                               letterSpacing: 0.0,
                                                                               fontWeight: FontWeight.bold,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                             ),
                                                                       ),
                                                                     ],
@@ -1051,11 +1265,15 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyMedium
                                                                               .override(
-                                                                                fontFamily: 'Inter',
+                                                                                font: GoogleFonts.inter(
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
                                                                                 color: FlutterFlowTheme.of(context).info,
                                                                                 fontSize: 16.0,
                                                                                 letterSpacing: 0.0,
                                                                                 fontWeight: FontWeight.bold,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                               ),
                                                                         ),
                                                                       ),
@@ -1100,7 +1318,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, -0.95),
+                          alignment: AlignmentDirectional(0.0, -1.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1119,9 +1337,28 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                font: GoogleFonts.inter(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
                                                 fontSize: 12.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -1159,9 +1396,28 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                font: GoogleFonts.inter(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
                                                 fontSize: 12.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -1205,6 +1461,88 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                         ),
                                       ),
                                     ),
+                                    if (isWeb == true)
+                                      AlignedTooltip(
+                                        content: Padding(
+                                          padding: EdgeInsets.all(4.0),
+                                          child: Text(
+                                            'Tomo',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge
+                                                .override(
+                                                  font: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyLarge
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyLarge
+                                                            .fontStyle,
+                                                  ),
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ),
+                                        offset: 4.0,
+                                        preferredDirection: AxisDirection.up,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                        elevation: 4.0,
+                                        tailBaseWidth: 24.0,
+                                        tailLength: 12.0,
+                                        waitDuration:
+                                            Duration(milliseconds: 100),
+                                        showDuration:
+                                            Duration(milliseconds: 1500),
+                                        triggerMode:
+                                            TooltipTriggerMode.longPress,
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  6.0, 0.0, 0.0, 0.0),
+                                          child: FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 8.0,
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.auto_awesome,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              context.pushNamed(
+                                                WebViewWidget.routeName,
+                                                queryParameters: {
+                                                  'yesterdayDate':
+                                                      serializeParam(
+                                                    _model.yesterdayDate,
+                                                    ParamType.DateTime,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ),
@@ -1222,9 +1560,28 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                font: GoogleFonts.inter(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
                                                 fontSize: 12.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -1257,21 +1614,23 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                             enableDrag: false,
                                             context: context,
                                             builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: DailyDigestWidget(
-                                                    yesterdayDate:
-                                                        _model.yesterdayDate!,
+                                              return WebViewAware(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: DailyDigestWidget(
+                                                      yesterdayDate:
+                                                          _model.yesterdayDate!,
+                                                    ),
                                                   ),
                                                 ),
                                               );
@@ -1289,9 +1648,28 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                font: GoogleFonts.inter(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
                                                 fontSize: 12.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -1359,10 +1737,113 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
                                             color: FlutterFlowTheme.of(context)
                                                 .accent1,
                                             letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 0.0, 0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        // send to Make to pull first set of emails
+                                        unawaited(
+                                          () async {
+                                            await actions.sendUseridToMake(
+                                              currentUserUid,
+                                            );
+                                          }(),
+                                        );
+                                        if (animationsMap[
+                                                'iconOnActionTriggerAnimation'] !=
+                                            null) {
+                                          await animationsMap[
+                                                  'iconOnActionTriggerAnimation']!
+                                              .controller
+                                              .forward(from: 0.0);
+                                        }
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Reading latest emails (will take a moment ...)',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor: Color(0xFF484A4E),
+                                          ),
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.change_circle_outlined,
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        size: 24.0,
+                                      ),
+                                    ).animateOnActionTrigger(
+                                      animationsMap[
+                                          'iconOnActionTriggerAnimation']!,
+                                    ),
+                                    Text(
+                                      'Refresh',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent1,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                     ),
                                   ],
@@ -1385,10 +1866,27 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
                                             color: FlutterFlowTheme.of(context)
                                                 .accent1,
                                             letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                     ),
                                   ],

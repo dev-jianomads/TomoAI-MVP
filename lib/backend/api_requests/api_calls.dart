@@ -3334,6 +3334,123 @@ class InitialChatCompletionCall {
 
 /// End Langflow API Group Code
 
+/// Start nEightn Group Code
+
+class NEightnGroup {
+  static String getBaseUrl() => 'https://n8n.srv845833.hstgr.cloud/webhook';
+  static Map<String, String> headers = {};
+  static QuestionGeneratorCall questionGeneratorCall = QuestionGeneratorCall();
+  static ChatPromptCall chatPromptCall = ChatPromptCall();
+  static UserPromptCall userPromptCall = UserPromptCall();
+}
+
+class QuestionGeneratorCall {
+  Future<ApiCallResponse> call({
+    String? taskId = '',
+  }) async {
+    final baseUrl = NEightnGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "taskId": "${escapeStringForJson(taskId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Question Generator',
+      apiUrl: '${baseUrl}/task-questions-generator',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? questionsList(dynamic response) => (getJsonField(
+        response,
+        r'''$.questions''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class ChatPromptCall {
+  Future<ApiCallResponse> call({
+    String? taskId = '',
+    String? prompt = '',
+  }) async {
+    final baseUrl = NEightnGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "chatInput": "${escapeStringForJson(prompt)}",
+  "metadata": {
+    "taskId": "${escapeStringForJson(taskId)}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Chat Prompt',
+      apiUrl: '${baseUrl}/95720286-0bb4-4e95-acca-5d6a42b03ef8/chat',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UserPromptCall {
+  Future<ApiCallResponse> call({
+    String? taskId = '',
+    String? prompt = '',
+  }) async {
+    final baseUrl = NEightnGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "taskId": "${escapeStringForJson(taskId)}",
+  "message": "${escapeStringForJson(prompt)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'User Prompt',
+      apiUrl: '${baseUrl}/task-agent',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? output(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.output''',
+      ));
+}
+
+/// End nEightn Group Code
+
 class GetAccessAndRefreshTokensCall {
   static Future<ApiCallResponse> call({
     String? authCode = '',
@@ -3397,11 +3514,15 @@ class MakeSendEmailCall {
   static Future<ApiCallResponse> call({
     String? taskId = '',
     String? title = '',
+    List<String>? emailListList,
   }) async {
+    final emailList = _serializeList(emailListList);
+
     final ffApiRequestBody = '''
 {
   "task_id": "${escapeStringForJson(taskId)}",
-  "title": "${escapeStringForJson(title)}"
+  "title": "${escapeStringForJson(title)}",
+"emaillIst": ${emailList}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Make send email',
@@ -3527,13 +3648,16 @@ class MakeFetchFreeTimeslotsCall {
     String? taskId = '',
     int? limit,
     String? mode = '',
+    dynamic userPreferenceJson,
   }) async {
+    final userPreference = _serializeJson(userPreferenceJson);
     final ffApiRequestBody = '''
 {
   "user_id": "${escapeStringForJson(userId)}",
   "task_id": "${escapeStringForJson(taskId)}",
   "limit": ${limit},
-  "mode": "${escapeStringForJson(mode)}"
+  "mode": "${escapeStringForJson(mode)}",
+  "userPreference": ${userPreference}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Make fetch free timeslots',

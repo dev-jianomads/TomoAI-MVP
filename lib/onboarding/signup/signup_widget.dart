@@ -9,6 +9,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'signup_model.dart';
 export 'signup_model.dart';
 
@@ -116,34 +117,28 @@ class _SignupWidgetState extends State<SignupWidget>
               top: true,
               child: Stack(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(0.0),
-                          bottomRight: Radius.circular(0.0),
-                          topLeft: Radius.circular(0.0),
-                          topRight: Radius.circular(0.0),
-                        ),
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Align(
-                        alignment: AlignmentDirectional(0.0, -0.5),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/tomologoformats-02.png',
-                            width: 150.0,
-                            height: 100.0,
-                            fit: BoxFit.contain,
-                          ),
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation']!),
+                  Container(
+                    width: double.infinity,
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(0.0),
+                        bottomRight: Radius.circular(0.0),
+                        topLeft: Radius.circular(0.0),
+                        topRight: Radius.circular(0.0),
                       ),
                     ),
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/tomologoformats-02.png',
+                        width: 150.0,
+                        height: 100.0,
+                        fit: BoxFit.contain,
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation']!),
                   ),
                   Padding(
                     padding:
@@ -161,10 +156,18 @@ class _SignupWidgetState extends State<SignupWidget>
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -184,12 +187,20 @@ class _SignupWidgetState extends State<SignupWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -228,12 +239,20 @@ class _SignupWidgetState extends State<SignupWidget>
                               style: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
                                   ),
                               keyboardType: TextInputType.emailAddress,
                               validator: _model
@@ -258,12 +277,20 @@ class _SignupWidgetState extends State<SignupWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -302,12 +329,20 @@ class _SignupWidgetState extends State<SignupWidget>
                               style: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
                                   ),
                               keyboardType: TextInputType.emailAddress,
                               validator: _model
@@ -332,12 +367,20 @@ class _SignupWidgetState extends State<SignupWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -391,12 +434,20 @@ class _SignupWidgetState extends State<SignupWidget>
                               style: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
                                   ),
                               validator: _model
                                   .signuppasswordTextControllerValidator
@@ -422,12 +473,20 @@ class _SignupWidgetState extends State<SignupWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -482,12 +541,20 @@ class _SignupWidgetState extends State<SignupWidget>
                               style: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
                                   ),
                               validator: _model
                                   .signupconfirmpasswordTextControllerValidator
@@ -526,6 +593,14 @@ class _SignupWidgetState extends State<SignupWidget>
                                   return;
                                 }
 
+                                await UsersRecord.collection
+                                    .doc(user.uid)
+                                    .update(createUsersRecordData(
+                                      displayName:
+                                          _model.displayNameTextController.text,
+                                      role: 'regular',
+                                    ));
+
                                 _model.usertimezone1 =
                                     await actions.getTimezone();
                                 await UsersTable().insert({
@@ -533,15 +608,26 @@ class _SignupWidgetState extends State<SignupWidget>
                                   'created_at': supaSerialize<DateTime>(
                                       getCurrentTimestamp),
                                   'email': currentUserEmail,
-                                  'display_name': currentUserDisplayName,
+                                  'display_name':
+                                      _model.displayNameTextController.text,
                                   'provider': 'email',
                                   'time_zone': _model.usertimezone1,
                                   'refresh_expired': false,
+                                  'client_secret':
+                                      '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',
+                                  'client_id':
+                                      '425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com',
+                                  'role': valueOrDefault(
+                                      currentUserDocument?.role, ''),
                                 });
 
                                 await currentUserReference!
                                     .update(createUsersRecordData(
                                   timeZone: _model.usertimezone1,
+                                  clientId:
+                                      '425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com',
+                                  clientSecret:
+                                      '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',
                                 ));
 
                                 context.pushNamedAuth(
@@ -564,9 +650,22 @@ class _SignupWidgetState extends State<SignupWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 3.0,
                                 borderSide: BorderSide(
@@ -589,11 +688,24 @@ class _SignupWidgetState extends State<SignupWidget>
                               style: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -602,7 +714,7 @@ class _SignupWidgetState extends State<SignupWidget>
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 32.0),
+                                0.0, 0.0, 0.0, 12.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
@@ -623,6 +735,11 @@ class _SignupWidgetState extends State<SignupWidget>
                                   authProvider: 'google',
                                   timeZone: _model.usertimezone2,
                                   refreshExpired: false,
+                                  clientId:
+                                      '425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com',
+                                  clientSecret:
+                                      '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',
+                                  role: 'regular',
                                 ));
                                 await UsersTable().insert({
                                   'id': currentUserUid,
@@ -632,6 +749,14 @@ class _SignupWidgetState extends State<SignupWidget>
                                   'display_name': currentUserDisplayName,
                                   'provider': 'google',
                                   'time_zone': _model.usertimezone2,
+                                  'client_secret':
+                                      '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',
+                                  'client_id':
+                                      '425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com',
+                                  'access_token': '',
+                                  'refresh_token': '',
+                                  'role': valueOrDefault(
+                                      currentUserDocument?.role, ''),
                                 });
 
                                 context.pushNamedAuth(
@@ -641,12 +766,80 @@ class _SignupWidgetState extends State<SignupWidget>
                                 safeSetState(() {});
                               },
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(0.0),
+                                borderRadius: BorderRadius.circular(14.0),
                                 child: Image.asset(
                                   'assets/images/web_light_sq_ctn@1x.png',
-                                  width: 183.0,
+                                  width: 200.0,
                                   height: 40.0,
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment(0.0, 0.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 12.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                GoRouter.of(context).prepareAuthEvent();
+                                final user =
+                                    await authManager.signInWithApple(context);
+                                if (user == null) {
+                                  return;
+                                }
+                                _model.usertimezone3 =
+                                    await actions.getTimezone();
+
+                                await currentUserReference!
+                                    .update(createUsersRecordData(
+                                  authProvider: 'google',
+                                  timeZone: _model.usertimezone3,
+                                  refreshExpired: false,
+                                  clientId:
+                                      '425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com',
+                                  clientSecret:
+                                      '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',
+                                  role: 'regular',
+                                ));
+                                await UsersTable().insert({
+                                  'id': currentUserUid,
+                                  'created_at': supaSerialize<DateTime>(
+                                      getCurrentTimestamp),
+                                  'email': currentUserEmail,
+                                  'display_name': currentUserDisplayName,
+                                  'provider': 'google',
+                                  'time_zone': _model.usertimezone3,
+                                  'client_secret':
+                                      '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',
+                                  'client_id':
+                                      '425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com',
+                                  'access_token': '',
+                                  'refresh_token': '',
+                                  'role': valueOrDefault(
+                                      currentUserDocument?.role, ''),
+                                });
+
+                                context.pushNamedAuth(
+                                    IntegrationsWidget.routeName,
+                                    context.mounted);
+
+                                safeSetState(() {});
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(14.0),
+                                child: Image.asset(
+                                  'assets/images/Sign_up_with_Apple_-_White_with_Gray_Outlined.png',
+                                  width: 200.0,
+                                  height: 40.0,
+                                  fit: BoxFit.cover,
                                   alignment: Alignment(0.0, 0.0),
                                 ),
                               ),
@@ -667,10 +860,18 @@ class _SignupWidgetState extends State<SignupWidget>
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -697,10 +898,23 @@ class _SignupWidgetState extends State<SignupWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 borderSide: BorderSide(
                                   color:

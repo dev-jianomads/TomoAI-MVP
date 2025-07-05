@@ -264,6 +264,8 @@ dynamic deserializeParam<T>(
             return ChatRow(data);
           case PreferencesRow:
             return PreferencesRow(data);
+          case TaskAgentChatHistoriesRow:
+            return TaskAgentChatHistoriesRow(data);
           case EmailsRow:
             return EmailsRow(data);
           case UsersRow:

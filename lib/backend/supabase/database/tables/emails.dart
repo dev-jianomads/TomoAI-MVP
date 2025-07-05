@@ -56,4 +56,25 @@ class EmailsRow extends SupabaseDataRow {
 
   String? get iosLink => getField<String>('ios_link');
   set iosLink(String? value) => setField<String>('ios_link', value);
+
+  String? get htmlBody => getField<String>('html_body');
+  set htmlBody(String? value) => setField<String>('html_body', value);
+
+  dynamic get attachmentsMetadata => getField<dynamic>('attachments_metadata');
+  set attachmentsMetadata(dynamic value) =>
+      setField<dynamic>('attachments_metadata', value);
+
+  String get id => getField<String>('id')!;
+  set id(String value) => setField<String>('id', value);
+
+  String? get relevanceExplanation => getField<String>('relevance_explanation');
+  set relevanceExplanation(String? value) =>
+      setField<String>('relevance_explanation', value);
+
+  String? get ccEmails => getField<String>('cc_emails');
+  set ccEmails(String? value) => setField<String>('cc_emails', value);
+
+  String? get recipientEmails => getField<String>('recipient_emails');
+  set recipientEmails(String? value) =>
+      setField<String>('recipient_emails', value);
 }

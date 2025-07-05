@@ -13,14 +13,23 @@ import 'package:flutter/material.dart';
 
 Future<List<TimeSlotsStruct>> parseAndStoreTimeSlots(
     List<dynamic>? data) async {
-  // Null safety check
-  data ??= <dynamic>[];
+  // If data is null or empty, return a single TimeSlotsStruct indicating no slots.
+  if (data == null || data.isEmpty) {
+    return [
+      TimeSlotsStruct(
+        duration: 30,
+        displayTime: 'no available timeslots',
+        displayDate: 'no available timeslots',
+        displayDatetime: 'no available timeslots',
+        rawDatetime: 'no available timeslots',
+      ),
+    ];
+  }
 
-  // List to hold parsed TimeSlotsStruct objects
+  // Otherwise, parse the data the same as before
   List<TimeSlotsStruct> timeSlots = <TimeSlotsStruct>[];
 
   for (dynamic timeSlotData in data) {
-    // Extract data from the dynamic object, ensuring null safety
     final String? rawDatetime = timeSlotData['raw_datetime']?.toString();
     final int? duration = timeSlotData['duration'] != null
         ? int.tryParse(timeSlotData['duration'].toString())
@@ -39,10 +48,8 @@ Future<List<TimeSlotsStruct>> parseAndStoreTimeSlots(
       displayDatetime: displayDatetime,
     );
 
-    // Add the instance to the list
     timeSlots.add(timeSlot);
   }
 
-  // Return the list of time slots
   return timeSlots;
 }

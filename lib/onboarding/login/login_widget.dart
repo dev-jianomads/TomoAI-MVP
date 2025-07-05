@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -148,10 +149,18 @@ class _LoginWidgetState extends State<LoginWidget>
                           'Sign in',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         ),
                         Padding(
@@ -170,9 +179,22 @@ class _LoginWidgetState extends State<LoginWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .fontStyle,
+                                      ),
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .fontStyle,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -214,11 +236,24 @@ class _LoginWidgetState extends State<LoginWidget>
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .fontStyle,
                                   ),
                               keyboardType: TextInputType.emailAddress,
                               validator: _model
@@ -243,9 +278,22 @@ class _LoginWidgetState extends State<LoginWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .fontStyle,
+                                      ),
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .fontStyle,
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -300,11 +348,24 @@ class _LoginWidgetState extends State<LoginWidget>
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .fontStyle,
                                   ),
                               validator: _model
                                   .signinpasswordTextControllerValidator
@@ -330,10 +391,18 @@ class _LoginWidgetState extends State<LoginWidget>
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                     decoration: TextDecoration.underline,
                                   ),
                               elevation: 0.0,
@@ -366,6 +435,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                   return;
                                 }
 
+                                FFAppState().digestNextShow =
+                                    getCurrentTimestamp;
+                                safeSetState(() {});
                                 if (valueOrDefault(
                                             currentUserDocument
                                                 ?.gmailAccessToken,
@@ -374,13 +446,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                   context.pushNamedAuth(
                                       IntegrationsWidget.routeName,
                                       context.mounted);
+                                } else {
+                                  context.pushNamedAuth(
+                                      HomepageWidget.routeName,
+                                      context.mounted);
                                 }
-                                FFAppState().digestNextShow =
-                                    getCurrentTimestamp;
-                                safeSetState(() {});
-
-                                context.pushNamedAuth(
-                                    HomepageWidget.routeName, context.mounted);
                               },
                               text: 'Sign In',
                               options: FFButtonOptions(
@@ -394,9 +464,22 @@ class _LoginWidgetState extends State<LoginWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -418,11 +501,24 @@ class _LoginWidgetState extends State<LoginWidget>
                               style: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -431,7 +527,7 @@ class _LoginWidgetState extends State<LoginWidget>
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 32.0),
+                                0.0, 0.0, 0.0, 12.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
@@ -444,6 +540,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                 if (user == null) {
                                   return;
                                 }
+                                FFAppState().digestNextShow =
+                                    getCurrentTimestamp;
+                                safeSetState(() {});
                                 if (valueOrDefault(
                                             currentUserDocument
                                                 ?.gmailAccessToken,
@@ -452,21 +551,65 @@ class _LoginWidgetState extends State<LoginWidget>
                                   context.pushNamedAuth(
                                       IntegrationsWidget.routeName,
                                       context.mounted);
+                                } else {
+                                  context.pushNamedAuth(
+                                      HomepageWidget.routeName,
+                                      context.mounted);
+                                }
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(14.0),
+                                child: Image.asset(
+                                  'assets/images/web_light_sq_ctn@1x.png',
+                                  width: 200.0,
+                                  height: 40.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 12.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                GoRouter.of(context).prepareAuthEvent();
+                                final user =
+                                    await authManager.signInWithApple(context);
+                                if (user == null) {
+                                  return;
                                 }
                                 FFAppState().digestNextShow =
                                     getCurrentTimestamp;
                                 safeSetState(() {});
-
-                                context.pushNamedAuth(
-                                    HomepageWidget.routeName, context.mounted);
+                                if (valueOrDefault(
+                                            currentUserDocument
+                                                ?.gmailAccessToken,
+                                            '') ==
+                                        '') {
+                                  context.pushNamedAuth(
+                                      IntegrationsWidget.routeName,
+                                      context.mounted);
+                                } else {
+                                  context.pushNamedAuth(
+                                      HomepageWidget.routeName,
+                                      context.mounted);
+                                }
                               },
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(0.0),
+                                borderRadius: BorderRadius.circular(14.0),
                                 child: Image.asset(
-                                  'assets/images/web_light_sq_ctn@1x.png',
-                                  width: 183.0,
+                                  'assets/images/Sign_in_with_Apple_-_White_with_Gray_Outlined.png',
+                                  width: 200.0,
                                   height: 40.0,
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -486,10 +629,18 @@ class _LoginWidgetState extends State<LoginWidget>
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -513,11 +664,24 @@ class _LoginWidgetState extends State<LoginWidget>
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
                                   ),
                               borderSide: BorderSide(
                                 color: FlutterFlowTheme.of(context).primaryText,

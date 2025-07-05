@@ -16,6 +16,8 @@ import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'task_view_model.dart';
 export 'task_view_model.dart';
 
@@ -183,11 +185,19 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                   title: Text(
                     'Important',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
-                          fontFamily: 'Inter',
+                          font: GoogleFonts.inter(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .fontStyle,
+                          ),
                           color: FlutterFlowTheme.of(context).primaryText,
                           fontSize: 24.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontStyle,
                         ),
                   ),
                   actions: [],
@@ -231,10 +241,20 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.normal,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               fontSize: 14.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ),
@@ -275,11 +295,24 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .headlineLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .headlineLarge
+                                                                  .fontStyle,
+                                                        ),
                                                         fontSize: 32.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .headlineLarge
+                                                                .fontStyle,
                                                       ),
                                               pickerBackgroundColor:
                                                   FlutterFlowTheme.of(context)
@@ -371,20 +404,21 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: FlutterFlowChoiceChips(
                                     options: [
-                                      ChipData('review'),
+                                      ChipData('all'),
                                       ChipData('reply'),
                                       ChipData('app'),
-                                      ChipData('event')
+                                      ChipData('event'),
+                                      ChipData('review')
                                     ],
                                     onChanged: (val) => safeSetState(() =>
-                                        _model.emailChoiceChipsValue =
+                                        _model.categoryChoiceChipsValue =
                                             val?.firstOrNull),
                                     selectedChipStyle: ChipStyle(
                                       backgroundColor: valueOrDefault<Color>(
                                         emailChoiceContainerCategoryRecordList
                                             .where((e) =>
                                                 e.name ==
-                                                _model.emailChoiceChipsValue)
+                                                _model.categoryChoiceChipsValue)
                                             .toList()
                                             .firstOrNull
                                             ?.colorLight,
@@ -393,11 +427,21 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
                                             color: FlutterFlowTheme.of(context)
                                                 .info,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                       iconColor:
                                           FlutterFlowTheme.of(context).info,
@@ -412,10 +456,27 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                       iconColor: FlutterFlowTheme.of(context)
                                           .secondaryText,
@@ -427,12 +488,12 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                     rowSpacing: 8.0,
                                     multiselect: false,
                                     initialized:
-                                        _model.emailChoiceChipsValue != null,
+                                        _model.categoryChoiceChipsValue != null,
                                     alignment: WrapAlignment.start,
                                     controller: _model
-                                            .emailChoiceChipsValueController ??=
+                                            .categoryChoiceChipsValueController ??=
                                         FormFieldController<List<String>>(
-                                      ['review'],
+                                      ['all'],
                                     ),
                                     wrapped: true,
                                   ),
@@ -460,9 +521,26 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
-                                            fontFamily: 'Inter',
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .fontStyle,
+                                            ),
                                             fontSize: 12.0,
                                             letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
                                           ),
                                     ),
                                   ),
@@ -501,9 +579,26 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
-                                            fontFamily: 'Inter',
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .fontStyle,
+                                            ),
                                             fontSize: 12.0,
                                             letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
                                           ),
                                     ),
                                   ),
@@ -547,9 +642,22 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
                                       fontSize: 12.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontStyle,
                                     ),
                               ),
                             ),
@@ -588,18 +696,23 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                         enableDrag: false,
                                         context: context,
                                         builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              FocusScope.of(context).unfocus();
-                                              FocusManager.instance.primaryFocus
-                                                  ?.unfocus();
-                                            },
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: DailyDigestWidget(
-                                                yesterdayDate:
-                                                    widget.yesterdayDate!,
+                                          return WebViewAware(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: DailyDigestWidget(
+                                                  yesterdayDate:
+                                                      widget.yesterdayDate!,
+                                                ),
                                               ),
                                             ),
                                           );
@@ -664,10 +777,13 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                   emailsViewVar[
                                                       emailsViewVarIndex];
                                               return Visibility(
-                                                visible: emailsViewVarItem
-                                                        .category ==
-                                                    _model
-                                                        .emailChoiceChipsValue,
+                                                visible: (_model
+                                                            .categoryChoiceChipsValue ==
+                                                        'all') ||
+                                                    (emailsViewVarItem
+                                                            .category ==
+                                                        _model
+                                                            .categoryChoiceChipsValue),
                                                 child: FutureBuilder<
                                                     List<EmailsRow>>(
                                                   future: EmailsTable()
@@ -793,6 +909,27 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                         ParamType
                                                                             .String,
                                                                       ),
+                                                                      'taskAppName':
+                                                                          serializeParam(
+                                                                        emailsViewVarItem
+                                                                            .appName,
+                                                                        ParamType
+                                                                            .String,
+                                                                      ),
+                                                                      'taskId':
+                                                                          serializeParam(
+                                                                        emailsViewVarItem
+                                                                            .id,
+                                                                        ParamType
+                                                                            .String,
+                                                                      ),
+                                                                      'taskExpanded':
+                                                                          serializeParam(
+                                                                        emailsViewVarItem
+                                                                            .descriptionExtended,
+                                                                        ParamType
+                                                                            .String,
+                                                                      ),
                                                                     }.withoutNulls,
                                                                   );
                                                                 },
@@ -889,6 +1026,27 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                           serializeParam(
                                                                         emailsViewVarItem
                                                                             .description,
+                                                                        ParamType
+                                                                            .String,
+                                                                      ),
+                                                                      'taskAppName':
+                                                                          serializeParam(
+                                                                        emailsViewVarItem
+                                                                            .appName,
+                                                                        ParamType
+                                                                            .String,
+                                                                      ),
+                                                                      'taskId':
+                                                                          serializeParam(
+                                                                        emailsViewVarItem
+                                                                            .id,
+                                                                        ParamType
+                                                                            .String,
+                                                                      ),
+                                                                      'taskExpanded':
+                                                                          serializeParam(
+                                                                        emailsViewVarItem
+                                                                            .descriptionExtended,
                                                                         ParamType
                                                                             .String,
                                                                       ),
@@ -1007,24 +1165,22 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                         context,
                                                                     builder:
                                                                         (context) {
-                                                                      return GestureDetector(
-                                                                        onTap:
-                                                                            () {
-                                                                          FocusScope.of(context)
-                                                                              .unfocus();
-                                                                          FocusManager
-                                                                              .instance
-                                                                              .primaryFocus
-                                                                              ?.unfocus();
-                                                                        },
+                                                                      return WebViewAware(
                                                                         child:
-                                                                            Padding(
-                                                                          padding:
-                                                                              MediaQuery.viewInsetsOf(context),
+                                                                            GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            FocusScope.of(context).unfocus();
+                                                                            FocusManager.instance.primaryFocus?.unfocus();
+                                                                          },
                                                                           child:
-                                                                              TaskComponentWidget(
-                                                                            tasks:
-                                                                                emailsViewVarItem,
+                                                                              Padding(
+                                                                            padding:
+                                                                                MediaQuery.viewInsetsOf(context),
+                                                                            child:
+                                                                                TaskComponentWidget(
+                                                                              tasks: emailsViewVarItem,
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       );
@@ -1091,24 +1247,22 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                         context,
                                                                     builder:
                                                                         (context) {
-                                                                      return GestureDetector(
-                                                                        onTap:
-                                                                            () {
-                                                                          FocusScope.of(context)
-                                                                              .unfocus();
-                                                                          FocusManager
-                                                                              .instance
-                                                                              .primaryFocus
-                                                                              ?.unfocus();
-                                                                        },
+                                                                      return WebViewAware(
                                                                         child:
-                                                                            Padding(
-                                                                          padding:
-                                                                              MediaQuery.viewInsetsOf(context),
+                                                                            GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            FocusScope.of(context).unfocus();
+                                                                            FocusManager.instance.primaryFocus?.unfocus();
+                                                                          },
                                                                           child:
-                                                                              TaskComponentWidget(
-                                                                            tasks:
-                                                                                emailsViewVarItem,
+                                                                              Padding(
+                                                                            padding:
+                                                                                MediaQuery.viewInsetsOf(context),
+                                                                            child:
+                                                                                TaskComponentWidget(
+                                                                              tasks: emailsViewVarItem,
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       );
@@ -1166,10 +1320,14 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                                 ),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                      fontFamily: 'Inter',
+                                                                                      font: GoogleFonts.inter(
+                                                                                        fontWeight: FontWeight.w600,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                      ),
                                                                                       fontSize: 14.0,
                                                                                       letterSpacing: 0.0,
                                                                                       fontWeight: FontWeight.w600,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                     ),
                                                                               ),
                                                                             ),
@@ -1179,21 +1337,58 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                           mainAxisSize:
                                                                               MainAxisSize.max,
                                                                           mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
+                                                                              MainAxisAlignment.start,
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.end,
                                                                           children: [
                                                                             Padding(
                                                                               padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                                                                               child: Text(
+                                                                                dateTimeFormat("MMMd", emailsViewVarItem.createdAt),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      font: GoogleFonts.inter(
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                      ),
+                                                                                      fontSize: 12.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                                                              child: Text(
+                                                                                ':',
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      font: GoogleFonts.inter(
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                      ),
+                                                                                      fontSize: 12.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 0.0, 0.0),
+                                                                              child: Text(
                                                                                 valueOrDefault<String>(
                                                                                   taskCardEmailsRow?.senderName,
                                                                                   'sender',
                                                                                 ),
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                      fontFamily: 'Inter',
+                                                                                      font: GoogleFonts.inter(
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                      ),
                                                                                       fontSize: 12.0,
                                                                                       letterSpacing: 0.0,
+                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                     ),
                                                                               ),
                                                                             ),
@@ -1204,87 +1399,6 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ),
-                                                          AlignedTooltip(
-                                                            content: Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(4.0),
-                                                              child: Text(
-                                                                'Going forward no tasks will be generated from this app',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            offset: 4.0,
-                                                            preferredDirection:
-                                                                AxisDirection
-                                                                    .up,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            backgroundColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
-                                                            elevation: 4.0,
-                                                            tailBaseWidth: 24.0,
-                                                            tailLength: 12.0,
-                                                            waitDuration:
-                                                                Duration(
-                                                                    milliseconds:
-                                                                        100),
-                                                            showDuration:
-                                                                Duration(
-                                                                    milliseconds:
-                                                                        1500),
-                                                            triggerMode:
-                                                                TooltipTriggerMode
-                                                                    .longPress,
-                                                            child:
-                                                                FlutterFlowIconButton(
-                                                              borderRadius: 8.0,
-                                                              buttonSize: 40.0,
-                                                              icon: Icon(
-                                                                Icons.delete,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                size: 24.0,
-                                                              ),
-                                                              onPressed:
-                                                                  () async {
-                                                                await TasksTable()
-                                                                    .update(
-                                                                  data: {
-                                                                    'progress':
-                                                                        'deleted',
-                                                                  },
-                                                                  matchingRows:
-                                                                      (rows) =>
-                                                                          rows.eqOrNull(
-                                                                    'app_name',
-                                                                    emailsViewVarItem
-                                                                        .appName,
-                                                                  ),
-                                                                );
-                                                                safeSetState(() =>
-                                                                    _model.requestCompleter =
-                                                                        null);
-                                                                await _model
-                                                                    .waitForRequestCompleted();
-                                                              },
                                                             ),
                                                           ),
                                                           FlutterFlowIconButton(
@@ -1324,6 +1438,103 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                                               await _model
                                                                   .waitForRequestCompleted();
                                                             },
+                                                          ),
+                                                          AlignedTooltip(
+                                                            content: Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(4.0),
+                                                              child: Text(
+                                                                'Make task complete',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .override(
+                                                                      font: GoogleFonts
+                                                                          .inter(
+                                                                        fontWeight: FlutterFlowTheme.of(context)
+                                                                            .bodyLarge
+                                                                            .fontWeight,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .bodyLarge
+                                                                            .fontStyle,
+                                                                      ),
+                                                                      fontSize:
+                                                                          12.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyLarge
+                                                                          .fontWeight,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyLarge
+                                                                          .fontStyle,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            offset: 4.0,
+                                                            preferredDirection:
+                                                                AxisDirection
+                                                                    .up,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                            elevation: 4.0,
+                                                            tailBaseWidth: 24.0,
+                                                            tailLength: 12.0,
+                                                            waitDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        100),
+                                                            showDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        1500),
+                                                            triggerMode:
+                                                                TooltipTriggerMode
+                                                                    .longPress,
+                                                            child:
+                                                                FlutterFlowIconButton(
+                                                              borderRadius: 8.0,
+                                                              buttonSize: 40.0,
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .check_circle_outline,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                size: 24.0,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                await TasksTable()
+                                                                    .update(
+                                                                  data: {
+                                                                    'progress':
+                                                                        'done',
+                                                                  },
+                                                                  matchingRows:
+                                                                      (rows) =>
+                                                                          rows.eqOrNull(
+                                                                    'id',
+                                                                    emailsViewVarItem
+                                                                        .id,
+                                                                  ),
+                                                                );
+                                                                safeSetState(() =>
+                                                                    _model.requestCompleter =
+                                                                        null);
+                                                                await _model
+                                                                    .waitForRequestCompleted();
+                                                              },
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -1388,9 +1599,7 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                         ),
                                       ),
                                       duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
+                                      backgroundColor: Color(0xFF484A4E),
                                     ),
                                   );
                                 },
@@ -1407,10 +1616,23 @@ class _TaskViewWidgetState extends State<TaskViewWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).accent1,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),

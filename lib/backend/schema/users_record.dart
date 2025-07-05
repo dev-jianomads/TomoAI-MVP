@@ -85,6 +85,16 @@ class UsersRecord extends FirestoreRecord {
   String get authCode => _authCode ?? '';
   bool hasAuthCode() => _authCode != null;
 
+  // "position" field.
+  String? _position;
+  String get position => _position ?? '';
+  bool hasPosition() => _position != null;
+
+  // "role" field.
+  String? _role;
+  String get role => _role ?? '';
+  bool hasRole() => _role != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -100,6 +110,8 @@ class UsersRecord extends FirestoreRecord {
     _refreshExpired = snapshotData['refresh_expired'] as bool?;
     _timeZone = snapshotData['time_zone'] as String?;
     _authCode = snapshotData['auth_code'] as String?;
+    _position = snapshotData['position'] as String?;
+    _role = snapshotData['role'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -150,6 +162,8 @@ Map<String, dynamic> createUsersRecordData({
   bool? refreshExpired,
   String? timeZone,
   String? authCode,
+  String? position,
+  String? role,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -167,6 +181,8 @@ Map<String, dynamic> createUsersRecordData({
       'refresh_expired': refreshExpired,
       'time_zone': timeZone,
       'auth_code': authCode,
+      'position': position,
+      'role': role,
     }.withoutNulls,
   );
 
@@ -191,7 +207,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.authProvider == e2?.authProvider &&
         e1?.refreshExpired == e2?.refreshExpired &&
         e1?.timeZone == e2?.timeZone &&
-        e1?.authCode == e2?.authCode;
+        e1?.authCode == e2?.authCode &&
+        e1?.position == e2?.position &&
+        e1?.role == e2?.role;
   }
 
   @override
@@ -209,7 +227,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.authProvider,
         e?.refreshExpired,
         e?.timeZone,
-        e?.authCode
+        e?.authCode,
+        e?.position,
+        e?.role
       ]);
 
   @override

@@ -1,7 +1,7 @@
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
 import 'dart:async';
+import '/index.dart';
 import 'homepage_widget.dart' show HomepageWidget;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
@@ -18,19 +18,19 @@ class HomepageModel extends FlutterFlowModel<HomepageWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? homepageWalkthroughController;
+  Completer<List<TasksRow>>? requestCompleter;
   // Stores action output result for [Backend Call - Query Rows] action in Homepage widget.
   List<UsersRow>? queryUserId;
   // Stores action output result for [Custom Action - setYesterdayDate] action in Homepage widget.
   DateTime? yesterday;
   // Stores action output result for [Custom Action - setTomorrowDate] action in Homepage widget.
   DateTime? tomorrow;
-  Completer<List<TasksRow>>? requestCompleter;
   // Stores action output result for [Custom Action - getTimeZoneIdentifiers] action in Homepage widget.
   List<String>? listTimeZones;
+  // Stores action output result for [Custom Action - getTimezone] action in Homepage widget.
+  String? usertimezoneupdated;
   // State field(s) for SwipeableStack widget.
   late CardSwiperController swipeableStackController;
-  bool firestoreRequestCompleted = false;
-  String? firestoreRequestLastUniqueKey;
 
   @override
   void initState(BuildContext context) {
@@ -52,21 +52,6 @@ class HomepageModel extends FlutterFlowModel<HomepageWidget> {
       await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
       final requestComplete = requestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-
-  Future waitForFirestoreRequestCompleted({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = firestoreRequestCompleted;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

@@ -45,21 +45,31 @@ class TaskComponentModel extends FlutterFlowModel<TaskComponentWidget> {
 
   bool negativeFeedbackState = false;
 
-  List<String> attendeesList = [];
-  void addToAttendeesList(String item) => attendeesList.add(item);
-  void removeFromAttendeesList(String item) => attendeesList.remove(item);
-  void removeAtIndexFromAttendeesList(int index) =>
-      attendeesList.removeAt(index);
-  void insertAtIndexInAttendeesList(int index, String item) =>
-      attendeesList.insert(index, item);
-  void updateAttendeesListAtIndex(int index, Function(String) updateFn) =>
-      attendeesList[index] = updateFn(attendeesList[index]);
-
   bool showFeedback = false;
 
   String? selectedTimeSlotSimple;
 
   bool alert = true;
+
+  List<String> emailList = [];
+  void addToEmailList(String item) => emailList.add(item);
+  void removeFromEmailList(String item) => emailList.remove(item);
+  void removeAtIndexFromEmailList(int index) => emailList.removeAt(index);
+  void insertAtIndexInEmailList(int index, String item) =>
+      emailList.insert(index, item);
+  void updateEmailListAtIndex(int index, Function(String) updateFn) =>
+      emailList[index] = updateFn(emailList[index]);
+
+  bool addEmailState = false;
+
+  List<ChatStruct> chat = [];
+  void addToChat(ChatStruct item) => chat.add(item);
+  void removeFromChat(ChatStruct item) => chat.remove(item);
+  void removeAtIndexFromChat(int index) => chat.removeAt(index);
+  void insertAtIndexInChat(int index, ChatStruct item) =>
+      chat.insert(index, item);
+  void updateChatAtIndex(int index, Function(ChatStruct) updateFn) =>
+      chat[index] = updateFn(chat[index]);
 
   ///  State fields for stateful widgets in this component.
 
@@ -67,20 +77,10 @@ class TaskComponentModel extends FlutterFlowModel<TaskComponentWidget> {
   ApiCallResponse? apiResulttimeslots;
   // Stores action output result for [Custom Action - parseAndStoreTimeSlots] action in TaskComponent widget.
   List<TimeSlotsStruct>? timeslotsoutput;
-  // State field(s) for CheckboxGroup widget.
-  FormFieldController<List<String>>? checkboxGroupValueController;
-  List<String>? get checkboxGroupValues => checkboxGroupValueController?.value;
-  set checkboxGroupValues(List<String>? v) =>
-      checkboxGroupValueController?.value = v;
-
   // State field(s) for EditTextField widget.
   FocusNode? editTextFieldFocusNode;
   TextEditingController? editTextFieldTextController;
   String? Function(BuildContext, String?)? editTextFieldTextControllerValidator;
-  // Stores action output result for [Backend Call - API (Make send email)] action in IconButton widget.
-  ApiCallResponse? apiResulth2e;
-  // Stores action output result for [Backend Call - API (Make send email)] action in IconButton widget.
-  ApiCallResponse? apiResulth3e;
   // State field(s) for TimeSlotChoice widget.
   FormFieldController<List<String>>? timeSlotChoiceValueController;
   String? get timeSlotChoiceValue =>
@@ -91,6 +91,38 @@ class TaskComponentModel extends FlutterFlowModel<TaskComponentWidget> {
   ApiCallResponse? blocktimeApiResult;
   // Stores action output result for [Backend Call - API (Make block time)] action in Button widget.
   ApiCallResponse? scheduletimeApiResult;
+  // State field(s) for UserPromptField widget.
+  FocusNode? userPromptFieldFocusNode;
+  TextEditingController? userPromptFieldTextController;
+  String? Function(BuildContext, String?)?
+      userPromptFieldTextControllerValidator;
+  // Stores action output result for [AI Agent - Send Message to Scheduler] action in UserPromptField widget.
+  Map<String, dynamic>? agentResponse2;
+  // Stores action output result for [AI Agent - Send Message to Scheduler] action in IconButton widget.
+  Map<String, dynamic>? agentResponse;
+  // State field(s) for SendToField widget.
+  FocusNode? sendToFieldFocusNode;
+  TextEditingController? sendToFieldTextController;
+  String? Function(BuildContext, String?)? sendToFieldTextControllerValidator;
+  // Stores action output result for [Backend Call - API (Make send email)] action in IconButton widget.
+  ApiCallResponse? apiResulth2e;
+  // Stores action output result for [Backend Call - API (Make send email)] action in IconButton widget.
+  ApiCallResponse? apiResulth3e;
+  // State field(s) for AddToField widget.
+  FocusNode? addToFieldFocusNode;
+  TextEditingController? addToFieldTextController;
+  String? Function(BuildContext, String?)? addToFieldTextControllerValidator;
+  // State field(s) for ChoiceChips widget.
+  FormFieldController<List<String>>? choiceChipsValueController;
+  String? get choiceChipsValue =>
+      choiceChipsValueController?.value?.firstOrNull;
+  set choiceChipsValue(String? val) =>
+      choiceChipsValueController?.value = val != null ? [val] : [];
+  // State field(s) for CheckboxGroup widget.
+  FormFieldController<List<String>>? checkboxGroupValueController;
+  List<String>? get checkboxGroupValues => checkboxGroupValueController?.value;
+  set checkboxGroupValues(List<String>? v) =>
+      checkboxGroupValueController?.value = v;
 
   @override
   void initState(BuildContext context) {}
@@ -99,5 +131,14 @@ class TaskComponentModel extends FlutterFlowModel<TaskComponentWidget> {
   void dispose() {
     editTextFieldFocusNode?.dispose();
     editTextFieldTextController?.dispose();
+
+    userPromptFieldFocusNode?.dispose();
+    userPromptFieldTextController?.dispose();
+
+    sendToFieldFocusNode?.dispose();
+    sendToFieldTextController?.dispose();
+
+    addToFieldFocusNode?.dispose();
+    addToFieldTextController?.dispose();
   }
 }

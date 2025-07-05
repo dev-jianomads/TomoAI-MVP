@@ -149,15 +149,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EnableNotificationsWidget(),
         ),
         FFRoute(
-          name: HomepageWidget.routeName,
-          path: HomepageWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Homepage')
-              : NavBarPage(
-                  initialPage: 'Homepage',
-                  page: HomepageWidget(),
-                ),
-        ),
+            name: HomepageWidget.routeName,
+            path: HomepageWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'Homepage')
+                : NavBarPage(
+                    initialPage: 'Homepage',
+                    page: HomepageWidget(),
+                  )),
         FFRoute(
           name: AllChatsWidget.routeName,
           path: AllChatsWidget.routePath,
@@ -270,6 +269,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'taskTitle',
               ParamType.String,
             ),
+            taskAppName: params.getParam(
+              'taskAppName',
+              ParamType.String,
+            ),
+            taskId: params.getParam(
+              'taskId',
+              ParamType.String,
+            ),
+            taskExpanded: params.getParam(
+              'taskExpanded',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -309,6 +320,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             message: params.getParam(
               'message',
               ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EmailsDebugWidget.routeName,
+          path: EmailsDebugWidget.routePath,
+          builder: (context, params) => EmailsDebugWidget(
+            latestcontent: params.getParam(
+              'latestcontent',
+              ParamType.String,
+            ),
+            senderName: params.getParam(
+              'senderName',
+              ParamType.String,
+            ),
+            taskId: params.getParam(
+              'taskId',
+              ParamType.String,
+            ),
+            emailDate: params.getParam(
+              'emailDate',
+              ParamType.DateTime,
+            ),
+            emailId: params.getParam(
+              'emailId',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: WebViewWidget.routeName,
+          path: WebViewWidget.routePath,
+          builder: (context, params) => WebViewWidget(
+            yesterdayDate: params.getParam(
+              'yesterdayDate',
+              ParamType.DateTime,
             ),
           ),
         )
