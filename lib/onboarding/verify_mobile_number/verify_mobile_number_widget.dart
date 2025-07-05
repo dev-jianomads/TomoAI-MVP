@@ -3,10 +3,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'verify_mobile_number_model.dart';
 export 'verify_mobile_number_model.dart';
 
@@ -17,6 +19,9 @@ class VerifyMobileNumberWidget extends StatefulWidget {
   });
 
   final String? phoneNumber;
+
+  static String routeName = 'VerifyMobileNumber';
+  static String routePath = '/verifyMobileNumber';
 
   @override
   State<VerifyMobileNumberWidget> createState() =>
@@ -36,6 +41,8 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
     super.initState();
     _model = createModel(context, () => VerifyMobileNumberModel());
 
+    _model.pinCodeFocusNode ??= FocusNode();
+
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -52,15 +59,15 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 400.0.ms,
-            begin: const Offset(0, 0.524),
-            end: const Offset(0, 0),
+            begin: Offset(0, 0.524),
+            end: Offset(0, 0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 400.0.ms,
-            begin: const Offset(70.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(70.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -78,8 +85,8 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
             curve: Curves.easeInOut,
             delay: 500.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -101,7 +108,10 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
         title: 'VerifyMobileNumber',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -122,7 +132,7 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                   context.pop();
                 },
               ),
-              actions: const [],
+              actions: [],
               centerTitle: true,
               elevation: 0.0,
             ),
@@ -139,7 +149,7 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                     Expanded(
                       flex: 5,
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
+                        alignment: AlignmentDirectional(0.0, -1.0),
                         child: Container(
                           width: double.infinity,
                           height: double.infinity,
@@ -149,9 +159,9 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                 FlutterFlowTheme.of(context).primaryBackground,
                                 FlutterFlowTheme.of(context).accent1
                               ],
-                              stops: const [0.0, 1.0],
-                              begin: const AlignmentDirectional(1.0, 0.0),
-                              end: const AlignmentDirectional(-1.0, 0),
+                              stops: [0.0, 1.0],
+                              begin: AlignmentDirectional(1.0, 0.0),
+                              end: AlignmentDirectional(-1.0, 0),
                             ),
                             borderRadius: BorderRadius.circular(0.0),
                           ),
@@ -161,21 +171,21 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                   Expanded(
                     flex: 5,
                     child: Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(16.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16.0),
                           child: Container(
                             width: double.infinity,
                             height: double.infinity,
-                            constraints: const BoxConstraints(
+                            constraints: BoxConstraints(
                               maxWidth: 570.0,
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16.0),
                             ),
-                            alignment: const AlignmentDirectional(0.0, -1.0),
+                            alignment: AlignmentDirectional(0.0, -1.0),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -184,7 +194,7 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                   Container(
                                     width: double.infinity,
                                     height: 140.0,
-                                    decoration: const BoxDecoration(
+                                    decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(16.0),
                                         bottomRight: Radius.circular(16.0),
@@ -192,9 +202,9 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                         topRight: Radius.circular(0.0),
                                       ),
                                     ),
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -217,9 +227,9 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 20.0, 16.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -231,14 +241,35 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .displaySmall
                                                 .override(
-                                                  fontFamily: 'Inter',
+                                                  font: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .displaySmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .displaySmall
+                                                            .fontStyle,
+                                                  ),
                                                   fontSize: 30.0,
                                                   letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .displaySmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .displaySmall
+                                                          .fontStyle,
                                                 ),
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 4.0, 0.0, 24.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
@@ -255,7 +286,7 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                                         .textScaler,
                                                 text: TextSpan(
                                                   children: [
-                                                    const TextSpan(
+                                                    TextSpan(
                                                       text:
                                                           'Enter the 6 digit code that you received. ',
                                                       style: TextStyle(),
@@ -275,7 +306,8 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                                           TapGestureRecognizer()
                                                             ..onTap = () async {
                                                               context.pushNamed(
-                                                                  'EnterMobileNumber');
+                                                                  EnterMobileNumberWidget
+                                                                      .routeName);
                                                             },
                                                     )
                                                   ],
@@ -283,9 +315,30 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                                           context)
                                                       .labelLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelLarge
+                                                                  .fontStyle,
+                                                        ),
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelLarge
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelLarge
+                                                                .fontStyle,
                                                         lineHeight: 1.5,
                                                       ),
                                                 ),
@@ -300,17 +353,39 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .bodyLarge
                                                     .override(
-                                                      fontFamily: 'Inter',
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyLarge
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyLarge
+                                                                .fontStyle,
+                                                      ),
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .info,
                                                       letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLarge
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLarge
+                                                              .fontStyle,
                                                     ),
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             enableActiveFill: true,
                                             autoFocus: false,
+                                            focusNode: _model.pinCodeFocusNode,
                                             enablePinAutofill: true,
                                             errorTextSpace: 16.0,
                                             showCursor: true,
@@ -324,7 +399,7 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                               fieldHeight: 48.0,
                                               fieldWidth: 48.0,
                                               borderWidth: 2.0,
-                                              borderRadius: const BorderRadius.only(
+                                              borderRadius: BorderRadius.only(
                                                 bottomLeft:
                                                     Radius.circular(12.0),
                                                 bottomRight:
@@ -354,41 +429,62 @@ class _VerifyMobileNumberWidgetState extends State<VerifyMobileNumberWidget>
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(1.0, -1.0),
+                                                AlignmentDirectional(1.0, -1.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 16.0, 0.0, 16.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  context
-                                                      .pushNamed('editProfile');
+                                                  context.pushNamed(
+                                                      EditProfileWidget
+                                                          .routeName);
                                                 },
                                                 text: 'Verify Code',
                                                 options: FFButtonOptions(
                                                   width: 200.0,
                                                   height: 44.0,
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 0.0),
                                                   iconPadding:
-                                                      const EdgeInsetsDirectional
+                                                      EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primary,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                          ),
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
                                                   elevation: 3.0,
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),

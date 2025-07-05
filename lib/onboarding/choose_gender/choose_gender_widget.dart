@@ -1,18 +1,20 @@
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'choose_gender_model.dart';
 export 'choose_gender_model.dart';
 
 class ChooseGenderWidget extends StatefulWidget {
   const ChooseGenderWidget({super.key});
+
+  static String routeName = 'chooseGender';
+  static String routePath = '/chooseGender';
 
   @override
   State<ChooseGenderWidget> createState() => _ChooseGenderWidgetState();
@@ -32,15 +34,15 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
     _model = createModel(context, () => ChooseGenderModel());
 
     animationsMap.addAll({
-      'textOnPageLoadAnimation1': AnimationInfo(
+      'textOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -58,8 +60,8 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -77,50 +79,12 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
             delay: 400.0.ms,
-            duration: 1000.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 600.0.ms,
-            duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
-          ),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 600.0.ms,
-            duration: 1000.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-        ],
-      ),
-      'choiceChipsOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 800.0.ms,
-            duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
-          ),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 800.0.ms,
             duration: 1000.0.ms,
             begin: 0.0,
             end: 1.0,
@@ -134,8 +98,8 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
             curve: Curves.easeInOut,
             delay: 1000.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -164,7 +128,10 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
         title: 'chooseGender',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -185,7 +152,7 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                   context.pop();
                 },
               ),
-              actions: const [],
+              actions: [],
               centerTitle: true,
               elevation: 0.0,
             ),
@@ -196,35 +163,44 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             30.0, 0.0, 20.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 40.0),
                                 child: Text(
                                   'Choose Gender',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         fontSize: 25.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ).animateOnPageLoad(
-                                    animationsMap['textOnPageLoadAnimation1']!),
+                                    animationsMap['textOnPageLoadAnimation']!),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -263,14 +239,21 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             20.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           'Man',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color: valueOrDefault<Color>(
                                                   _model.maleCheckboxValue ==
                                                           true
@@ -283,15 +266,19 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                                 fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.normal,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 20.0, 0.0),
                                         child: Theme(
                                           data: ThemeData(
-                                            checkboxTheme: const CheckboxThemeData(
+                                            checkboxTheme: CheckboxThemeData(
                                               visualDensity:
                                                   VisualDensity.compact,
                                               materialTapTargetSize:
@@ -311,12 +298,16 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                                   _model.maleCheckboxValue =
                                                       newValue!);
                                             },
-                                            side: BorderSide(
-                                              width: 2,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                            ),
+                                            side: (FlutterFlowTheme.of(context)
+                                                        .secondaryText !=
+                                                    null)
+                                                ? BorderSide(
+                                                    width: 2,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                  )
+                                                : null,
                                             activeColor:
                                                 FlutterFlowTheme.of(context)
                                                     .info,
@@ -333,7 +324,7 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                   'containerOnPageLoadAnimation1']!),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -372,14 +363,21 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             20.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           'Woman',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color: valueOrDefault<Color>(
                                                   _model.femaleCheckboxValue ==
                                                           true
@@ -392,15 +390,19 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                                 fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.normal,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 20.0, 0.0),
                                         child: Theme(
                                           data: ThemeData(
-                                            checkboxTheme: const CheckboxThemeData(
+                                            checkboxTheme: CheckboxThemeData(
                                               visualDensity:
                                                   VisualDensity.compact,
                                               materialTapTargetSize:
@@ -420,12 +422,16 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                                                   _model.femaleCheckboxValue =
                                                       newValue!);
                                             },
-                                            side: BorderSide(
-                                              width: 2,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                            ),
+                                            side: (FlutterFlowTheme.of(context)
+                                                        .secondaryText !=
+                                                    null)
+                                                ? BorderSide(
+                                                    width: 2,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                  )
+                                                : null,
                                             activeColor:
                                                 FlutterFlowTheme.of(context)
                                                     .info,
@@ -441,114 +447,47 @@ class _ChooseGenderWidgetState extends State<ChooseGenderWidget>
                               ).animateOnPageLoad(animationsMap[
                                   'containerOnPageLoadAnimation2']!),
                             ),
-                            Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 40.0, 0.0, 40.0),
-                                child: Text(
-                                  'I\'m interested in:',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        fontSize: 25.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ).animateOnPageLoad(
-                                    animationsMap['textOnPageLoadAnimation2']!),
-                              ),
-                            ),
-                            Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
-                              child: FlutterFlowChoiceChips(
-                                options: const [
-                                  ChipData('Men', Icons.man),
-                                  ChipData('Women', Icons.woman),
-                                  ChipData('Other', FontAwesomeIcons.marsDouble)
-                                ],
-                                onChanged: (val) => safeSetState(() =>
-                                    _model.genderOptionsChoiceChipsValue =
-                                        val?.firstOrNull),
-                                selectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primary,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color:
-                                            FlutterFlowTheme.of(context).info,
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  iconColor: FlutterFlowTheme.of(context).info,
-                                  iconSize: 20.0,
-                                  labelPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 3.0, 8.0, 3.0),
-                                  elevation: 4.0,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                unselectedChipStyle: ChipStyle(
-                                  backgroundColor: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: Colors.black,
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  iconColor:
-                                      FlutterFlowTheme.of(context).primary,
-                                  iconSize: 20.0,
-                                  labelPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 3.0, 8.0, 3.0),
-                                  elevation: 3.0,
-                                  borderColor:
-                                      FlutterFlowTheme.of(context).primary,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                chipSpacing: 18.0,
-                                rowSpacing: 12.0,
-                                multiselect: false,
-                                alignment: WrapAlignment.start,
-                                controller: _model
-                                        .genderOptionsChoiceChipsValueController ??=
-                                    FormFieldController<List<String>>(
-                                  [],
-                                ),
-                                wrapped: true,
-                              ).animateOnPageLoad(animationsMap[
-                                  'choiceChipsOnPageLoadAnimation']!),
-                            ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 88.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('Interests');
+                                  context
+                                      .pushNamed(PreferencesWidget.routeName);
                                 },
                                 text: 'Continue',
                                 options: FFButtonOptions(
                                   width: 295.0,
                                   height: 56.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Inter',
+                                        font: GoogleFonts.inter(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
                                         color: Colors.white,
                                         letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

@@ -2,18 +2,24 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/backend/supabase/supabase.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
+
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -72,44 +78,44 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomepageWidget() : const OnboardingPageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : OnboardingPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? const HomepageWidget()
-              : const OnboardingPageWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? NavBarPage() : OnboardingPageWidget(),
         ),
         FFRoute(
-          name: 'OnboardingImage',
-          path: '/OnboardingImage',
-          builder: (context, params) => const OnboardingImageWidget(),
+          name: OnboardingImageWidget.routeName,
+          path: OnboardingImageWidget.routePath,
+          builder: (context, params) => OnboardingImageWidget(),
         ),
         FFRoute(
-          name: 'OnboardingPage',
-          path: '/onboardingPage',
-          builder: (context, params) => const OnboardingPageWidget(),
+          name: OnboardingPageWidget.routeName,
+          path: OnboardingPageWidget.routePath,
+          builder: (context, params) => OnboardingPageWidget(),
         ),
         FFRoute(
-          name: 'AuthenticationPage',
-          path: '/authenticationPage',
-          builder: (context, params) => const AuthenticationPageWidget(),
+          name: AuthenticationPageWidget.routeName,
+          path: AuthenticationPageWidget.routePath,
+          builder: (context, params) => AuthenticationPageWidget(),
         ),
         FFRoute(
-          name: 'EmailLogin',
-          path: '/emailLogin',
-          builder: (context, params) => const EmailLoginWidget(),
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'EnterMobileNumber',
-          path: '/enterMobileNumber',
-          builder: (context, params) => const EnterMobileNumberWidget(),
+          name: EnterMobileNumberWidget.routeName,
+          path: EnterMobileNumberWidget.routePath,
+          builder: (context, params) => EnterMobileNumberWidget(),
         ),
         FFRoute(
-          name: 'VerifyMobileNumber',
-          path: '/verifyMobileNumber',
+          name: VerifyMobileNumberWidget.routeName,
+          path: VerifyMobileNumberWidget.routePath,
           builder: (context, params) => VerifyMobileNumberWidget(
             phoneNumber: params.getParam(
               'phoneNumber',
@@ -118,74 +124,240 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ForgotPassword',
-          path: '/forgotPassword',
-          builder: (context, params) => const ForgotPasswordWidget(),
+          name: ForgotPasswordWidget.routeName,
+          path: ForgotPasswordWidget.routePath,
+          builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'editProfile',
-          path: '/editProfile',
-          builder: (context, params) => const EditProfileWidget(),
+          name: EditProfileWidget.routeName,
+          path: EditProfileWidget.routePath,
+          builder: (context, params) => EditProfileWidget(),
         ),
         FFRoute(
-          name: 'chooseGender',
-          path: '/chooseGender',
-          builder: (context, params) => const ChooseGenderWidget(),
+          name: ChooseGenderWidget.routeName,
+          path: ChooseGenderWidget.routePath,
+          builder: (context, params) => ChooseGenderWidget(),
         ),
         FFRoute(
-          name: 'Interests',
-          path: '/interests',
-          builder: (context, params) => const InterestsWidget(),
+          name: PreferencesWidget.routeName,
+          path: PreferencesWidget.routePath,
+          builder: (context, params) => PreferencesWidget(),
         ),
         FFRoute(
-          name: 'SearchFriends',
-          path: '/searchFriends',
-          builder: (context, params) => const SearchFriendsWidget(),
+          name: EnableNotificationsWidget.routeName,
+          path: EnableNotificationsWidget.routePath,
+          builder: (context, params) => EnableNotificationsWidget(),
         ),
         FFRoute(
-          name: 'enableNotifications',
-          path: '/enableNotifications',
-          builder: (context, params) => const EnableNotificationsWidget(),
+            name: HomepageWidget.routeName,
+            path: HomepageWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'Homepage')
+                : NavBarPage(
+                    initialPage: 'Homepage',
+                    page: HomepageWidget(),
+                  )),
+        FFRoute(
+          name: AllChatsWidget.routeName,
+          path: AllChatsWidget.routePath,
+          builder: (context, params) => AllChatsWidget(),
         ),
         FFRoute(
-          name: 'Homepage',
-          path: '/homepage',
-          builder: (context, params) => const HomepageWidget(),
+          name: ChatDetailsWidget.routeName,
+          path: ChatDetailsWidget.routePath,
+          builder: (context, params) => ChatDetailsWidget(),
         ),
         FFRoute(
-          name: 'favorites',
-          path: '/favorites',
-          builder: (context, params) => const FavoritesWidget(),
+          name: ProfileDetailsWidget.routeName,
+          path: ProfileDetailsWidget.routePath,
+          builder: (context, params) => ProfileDetailsWidget(),
         ),
         FFRoute(
-          name: 'allChats',
-          path: '/allChats',
-          builder: (context, params) => const AllChatsWidget(),
+          name: FocusViewWidget.routeName,
+          path: FocusViewWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'FocusView')
+              : FocusViewWidget(
+                  yesterdayDate: params.getParam(
+                    'yesterdayDate',
+                    ParamType.DateTime,
+                  ),
+                ),
         ),
         FFRoute(
-          name: 'chatDetails',
-          path: '/chatDetails',
-          builder: (context, params) => const ChatDetailsWidget(),
+          name: IntegrationsWidget.routeName,
+          path: IntegrationsWidget.routePath,
+          builder: (context, params) => IntegrationsWidget(),
         ),
         FFRoute(
-          name: 'ProfileDetails',
-          path: '/profileDetails',
-          builder: (context, params) => const ProfileDetailsWidget(),
+          name: AccessWidget.routeName,
+          path: AccessWidget.routePath,
+          builder: (context, params) => AccessWidget(),
         ),
         FFRoute(
-          name: 'favorites2',
-          path: '/favorites2',
-          builder: (context, params) => const Favorites2Widget(),
+          name: Preferences2Widget.routeName,
+          path: Preferences2Widget.routePath,
+          builder: (context, params) => Preferences2Widget(),
         ),
         FFRoute(
-          name: 'integrations',
-          path: '/integrations',
-          builder: (context, params) => const IntegrationsWidget(),
+          name: TomochatWidget.routeName,
+          path: TomochatWidget.routePath,
+          builder: (context, params) => TomochatWidget(
+            tasks: params.getParam<TasksRow>(
+              'tasks',
+              ParamType.SupabaseRow,
+            ),
+            email: params.getParam<EmailsRow>(
+              'email',
+              ParamType.SupabaseRow,
+            ),
+            chatId: params.getParam(
+              'chatId',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'access',
-          path: '/access',
-          builder: (context, params) => const AccessWidget(),
+          name: TomochatOriginalWidget.routeName,
+          path: TomochatOriginalWidget.routePath,
+          builder: (context, params) => TomochatOriginalWidget(
+            tasks: params.getParam<TasksRow>(
+              'tasks',
+              ParamType.SupabaseRow,
+            ),
+            email: params.getParam<EmailsRow>(
+              'email',
+              ParamType.SupabaseRow,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: TaskViewWidget.routeName,
+          path: TaskViewWidget.routePath,
+          builder: (context, params) => TaskViewWidget(
+            yesterdayDate: params.getParam(
+              'yesterdayDate',
+              ParamType.DateTime,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EmailsPreviewWidget.routeName,
+          path: EmailsPreviewWidget.routePath,
+          builder: (context, params) => EmailsPreviewWidget(
+            threadId: params.getParam(
+              'threadId',
+              ParamType.String,
+            ),
+            latestcontent: params.getParam(
+              'latestcontent',
+              ParamType.String,
+            ),
+            latestdate: params.getParam(
+              'latestdate',
+              ParamType.DateTime,
+            ),
+            emailURL: params.getParam(
+              'emailURL',
+              ParamType.String,
+            ),
+            senderName: params.getParam(
+              'senderName',
+              ParamType.String,
+            ),
+            taskTitle: params.getParam(
+              'taskTitle',
+              ParamType.String,
+            ),
+            taskAppName: params.getParam(
+              'taskAppName',
+              ParamType.String,
+            ),
+            taskId: params.getParam(
+              'taskId',
+              ParamType.String,
+            ),
+            taskExpanded: params.getParam(
+              'taskExpanded',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: SignupWidget.routeName,
+          path: SignupWidget.routePath,
+          builder: (context, params) => SignupWidget(),
+        ),
+        FFRoute(
+          name: DigestViewWidget.routeName,
+          path: DigestViewWidget.routePath,
+          builder: (context, params) => DigestViewWidget(
+            yesterdayDate: params.getParam(
+              'yesterdayDate',
+              ParamType.DateTime,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: UserPreferencesWidget.routeName,
+          path: UserPreferencesWidget.routePath,
+          builder: (context, params) => UserPreferencesWidget(
+            yesterdayDate: params.getParam(
+              'yesterdayDate',
+              ParamType.DateTime,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: BlacklistViewWidget.routeName,
+          path: BlacklistViewWidget.routePath,
+          builder: (context, params) => BlacklistViewWidget(),
+        ),
+        FFRoute(
+          name: GoogleAuthErrorWidget.routeName,
+          path: GoogleAuthErrorWidget.routePath,
+          builder: (context, params) => GoogleAuthErrorWidget(
+            message: params.getParam(
+              'message',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EmailsDebugWidget.routeName,
+          path: EmailsDebugWidget.routePath,
+          builder: (context, params) => EmailsDebugWidget(
+            latestcontent: params.getParam(
+              'latestcontent',
+              ParamType.String,
+            ),
+            senderName: params.getParam(
+              'senderName',
+              ParamType.String,
+            ),
+            taskId: params.getParam(
+              'taskId',
+              ParamType.String,
+            ),
+            emailDate: params.getParam(
+              'emailDate',
+              ParamType.DateTime,
+            ),
+            emailId: params.getParam(
+              'emailId',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: WebViewWidget.routeName,
+          path: WebViewWidget.routePath,
+          builder: (context, params) => WebViewWidget(
+            yesterdayDate: params.getParam(
+              'yesterdayDate',
+              ParamType.DateTime,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -305,6 +477,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -323,6 +496,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -423,7 +597,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

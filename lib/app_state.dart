@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'flutter_flow/request_manager.dart';
+import '/backend/backend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -19,6 +21,15 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _walkthroughComplete =
           prefs.getBool('ff_walkthroughComplete') ?? _walkthroughComplete;
+    });
+    _safeInit(() {
+      _digest = prefs.getBool('ff_digest') ?? _digest;
+    });
+    _safeInit(() {
+      _digestNextShow = prefs.containsKey('ff_digestNextShow')
+          ? DateTime.fromMillisecondsSinceEpoch(
+              prefs.getInt('ff_digestNextShow')!)
+          : _digestNextShow;
     });
   }
 
@@ -59,6 +70,210 @@ class FFAppState extends ChangeNotifier {
   set accessToken(String value) {
     _accessToken = value;
   }
+
+  int _expiresIn = 0;
+  int get expiresIn => _expiresIn;
+  set expiresIn(int value) {
+    _expiresIn = value;
+  }
+
+  bool _digest = false;
+  bool get digest => _digest;
+  set digest(bool value) {
+    _digest = value;
+    prefs.setBool('ff_digest', value);
+  }
+
+  List<String> _TimeZoneId = [];
+  List<String> get TimeZoneId => _TimeZoneId;
+  set TimeZoneId(List<String> value) {
+    _TimeZoneId = value;
+  }
+
+  void addToTimeZoneId(String value) {
+    TimeZoneId.add(value);
+  }
+
+  void removeFromTimeZoneId(String value) {
+    TimeZoneId.remove(value);
+  }
+
+  void removeAtIndexFromTimeZoneId(int index) {
+    TimeZoneId.removeAt(index);
+  }
+
+  void updateTimeZoneIdAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    TimeZoneId[index] = updateFn(_TimeZoneId[index]);
+  }
+
+  void insertAtIndexInTimeZoneId(int index, String value) {
+    TimeZoneId.insert(index, value);
+  }
+
+  DateTime? _digestNextShow;
+  DateTime? get digestNextShow => _digestNextShow;
+  set digestNextShow(DateTime? value) {
+    _digestNextShow = value;
+    value != null
+        ? prefs.setInt('ff_digestNextShow', value.millisecondsSinceEpoch)
+        : prefs.remove('ff_digestNextShow');
+  }
+
+  List<String> _feedbackDetail = [];
+  List<String> get feedbackDetail => _feedbackDetail;
+  set feedbackDetail(List<String> value) {
+    _feedbackDetail = value;
+  }
+
+  void addToFeedbackDetail(String value) {
+    feedbackDetail.add(value);
+  }
+
+  void removeFromFeedbackDetail(String value) {
+    feedbackDetail.remove(value);
+  }
+
+  void removeAtIndexFromFeedbackDetail(int index) {
+    feedbackDetail.removeAt(index);
+  }
+
+  void updateFeedbackDetailAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    feedbackDetail[index] = updateFn(_feedbackDetail[index]);
+  }
+
+  void insertAtIndexInFeedbackDetail(int index, String value) {
+    feedbackDetail.insert(index, value);
+  }
+
+  bool _darkModeSetting = false;
+  bool get darkModeSetting => _darkModeSetting;
+  set darkModeSetting(bool value) {
+    _darkModeSetting = value;
+  }
+
+  List<String> _feedbackDetail2 = [];
+  List<String> get feedbackDetail2 => _feedbackDetail2;
+  set feedbackDetail2(List<String> value) {
+    _feedbackDetail2 = value;
+  }
+
+  void addToFeedbackDetail2(String value) {
+    feedbackDetail2.add(value);
+  }
+
+  void removeFromFeedbackDetail2(String value) {
+    feedbackDetail2.remove(value);
+  }
+
+  void removeAtIndexFromFeedbackDetail2(int index) {
+    feedbackDetail2.removeAt(index);
+  }
+
+  void updateFeedbackDetail2AtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    feedbackDetail2[index] = updateFn(_feedbackDetail2[index]);
+  }
+
+  void insertAtIndexInFeedbackDetail2(int index, String value) {
+    feedbackDetail2.insert(index, value);
+  }
+
+  String _senderEmail = '';
+  String get senderEmail => _senderEmail;
+  set senderEmail(String value) {
+    _senderEmail = value;
+  }
+
+  String _selectedTask = '';
+  String get selectedTask => _selectedTask;
+  set selectedTask(String value) {
+    _selectedTask = value;
+  }
+
+  bool _showEmail = false;
+  bool get showEmail => _showEmail;
+  set showEmail(bool value) {
+    _showEmail = value;
+  }
+
+  String _selectedEmail = '';
+  String get selectedEmail => _selectedEmail;
+  set selectedEmail(String value) {
+    _selectedEmail = value;
+  }
+
+  String _agentHTML = '';
+  String get agentHTML => _agentHTML;
+  set agentHTML(String value) {
+    _agentHTML = value;
+  }
+
+  List<String> _questionsList = [];
+  List<String> get questionsList => _questionsList;
+  set questionsList(List<String> value) {
+    _questionsList = value;
+  }
+
+  void addToQuestionsList(String value) {
+    questionsList.add(value);
+  }
+
+  void removeFromQuestionsList(String value) {
+    questionsList.remove(value);
+  }
+
+  void removeAtIndexFromQuestionsList(int index) {
+    questionsList.removeAt(index);
+  }
+
+  void updateQuestionsListAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    questionsList[index] = updateFn(_questionsList[index]);
+  }
+
+  void insertAtIndexInQuestionsList(int index, String value) {
+    questionsList.insert(index, value);
+  }
+
+  final _categoryQuery2Manager = FutureRequestManager<List<CategoryRecord>>();
+  Future<List<CategoryRecord>> categoryQuery2({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<CategoryRecord>> Function() requestFn,
+  }) =>
+      _categoryQuery2Manager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearCategoryQuery2Cache() => _categoryQuery2Manager.clear();
+  void clearCategoryQuery2CacheKey(String? uniqueKey) =>
+      _categoryQuery2Manager.clearRequest(uniqueKey);
+
+  final _categoryQuery3Manager = FutureRequestManager<List<CategoryRecord>>();
+  Future<List<CategoryRecord>> categoryQuery3({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<CategoryRecord>> Function() requestFn,
+  }) =>
+      _categoryQuery3Manager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearCategoryQuery3Cache() => _categoryQuery3Manager.clear();
+  void clearCategoryQuery3CacheKey(String? uniqueKey) =>
+      _categoryQuery3Manager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

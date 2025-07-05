@@ -4,11 +4,15 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'onboarding_image_model.dart';
 export 'onboarding_image_model.dart';
 
 class OnboardingImageWidget extends StatefulWidget {
   const OnboardingImageWidget({super.key});
+
+  static String routeName = 'OnboardingImage';
+  static String routePath = '/OnboardingImage';
 
   @override
   State<OnboardingImageWidget> createState() => _OnboardingImageWidgetState();
@@ -35,8 +39,8 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(-29.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(-29.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -54,8 +58,8 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(29.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(29.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -84,7 +88,10 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
         title: 'OnboardingImage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -95,10 +102,10 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
                 color: FlutterFlowTheme.of(context).primary,
               ),
               child: Stack(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 children: [
                   Align(
-                    alignment: const AlignmentDirectional(1.0, 0.0),
+                    alignment: AlignmentDirectional(1.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -120,15 +127,23 @@ class _OnboardingImageWidgetState extends State<OnboardingImageWidget>
                       Text(
                         'Take the work \nout of work!',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
+                              font: GoogleFonts.inter(
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
                               color: FlutterFlowTheme.of(context).info,
                               fontSize: 40.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.bold,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ).animateOnPageLoad(
                           animationsMap['textOnPageLoadAnimation']!),
-                    ].divide(const SizedBox(width: 12.0)),
+                    ].divide(SizedBox(width: 12.0)),
                   ),
                 ],
               ),

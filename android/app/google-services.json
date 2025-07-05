@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com",
+          "client_id": "425172227831-m5vc44cmcb9lkjk9hck98tjg0mberejp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.tomoaimvpapp",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "425172227831-ag09rmujgue3iptq27tflqdp291qkuhd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "425172227831-ncbf4cl805a8r49n13g0ogqml8s5eln0.apps.googleusercontent.com",
+              "client_id": "425172227831-ag09rmujgue3iptq27tflqdp291qkuhd.apps.googleusercontent.com",
               "client_type": 3
             },
             {

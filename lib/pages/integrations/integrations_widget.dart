@@ -1,18 +1,22 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'integrations_model.dart';
 export 'integrations_model.dart';
 
 class IntegrationsWidget extends StatefulWidget {
   const IntegrationsWidget({super.key});
+
+  static String routeName = 'integrations';
+  static String routePath = '/integrations';
 
   @override
   State<IntegrationsWidget> createState() => _IntegrationsWidgetState();
@@ -31,34 +35,6 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
     super.initState();
     _model = createModel(context, () => IntegrationsModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().accessToken != '') {
-        _model.emailIds = await GoogleGmailGroup.getEmailIDsCall.call(
-          accessToken: FFAppState().accessToken,
-          datetime: getCurrentTimestamp.secondsSinceEpoch.toString(),
-        );
-
-        if ((_model.emailIds?.succeeded ?? true)) {
-          context.pushNamed('Homepage');
-        } else {
-          _model.accessToken = await GetAccessFromRefreshTokenCall.call(
-            refreshToken: FFAppState().refreshToken,
-          );
-
-          if ((_model.accessToken?.succeeded ?? true)) {
-            FFAppState().accessToken = getJsonField(
-              (_model.accessToken?.jsonBody ?? ''),
-              r'''$.access_token''',
-            ).toString().toString();
-            safeSetState(() {});
-
-            context.pushNamed('Homepage');
-          }
-        }
-      }
-    });
-
     animationsMap.addAll({
       'textOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -67,8 +43,8 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -86,8 +62,8 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -105,8 +81,8 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
             curve: Curves.easeInOut,
             delay: 650.0.ms,
             duration: 1000.0.ms,
-            begin: const Offset(0.0, 41.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 41.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -131,13 +107,14 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'integrations',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -158,7 +135,7 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
                   context.pop();
                 },
               ),
-              actions: const [],
+              actions: [],
               centerTitle: true,
               elevation: 0.0,
             ),
@@ -169,64 +146,76 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             30.0, 0.0, 20.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 64.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/Tomo_FileFormats-02.png',
-                                  width: 240.0,
-                                  height: 240.0,
-                                  fit: BoxFit.cover,
-                                ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/Tomo_FileFormats-02.png',
+                                width: 150.0,
+                                height: 150.0,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Text(
                                 'Integrations',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       fontSize: 24.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation1']!),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
-                                'Connect to your favorate apps',
+                                'Connect to your favorite apps',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation2']!),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -241,33 +230,71 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
                                       fit: BoxFit.cover,
                                     ),
                                   ),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      'assets/images/Google_Calendar_Icon.original.png',
+                                      width: 50.0,
+                                      height: 50.0,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 0.0, 8.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        await launchURL(
-                                            'https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/gmail.readonly&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=https://tomoaimvp-app-3sa6fr.flutterflow.app/access&client_id=593702549940-o05dp44paranv7l365esg6021lpgob4j.apps.googleusercontent.com&prompt=consent');
+                                        _model.oauthUrl =
+                                            await GetGoogleAuthUrlCall.call(
+                                          platform: isWeb ? 'web' : 'mobile',
+                                          uid: currentUserUid,
+                                        );
+
+                                        await actions.launchInExternalBrowser(
+                                          getJsonField(
+                                            (_model.oauthUrl?.jsonBody ?? ''),
+                                            r'''$.url''',
+                                          ).toString(),
+                                        );
+
+                                        safeSetState(() {});
                                       },
                                       text: 'Connect',
                                       options: FFButtonOptions(
                                         width: 150.0,
                                         height: 40.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Inter',
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
                                               letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
                                             ),
                                         elevation: 1.0,
                                         borderSide: BorderSide(
@@ -282,6 +309,41 @@ class _IntegrationsWidgetState extends State<IntegrationsWidget>
                                         'buttonOnPageLoadAnimation']!),
                                   ),
                                 ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 20.0, 0.0, 0.0),
+                              child: Container(
+                                width: 300.0,
+                                height: 300.0,
+                                decoration: BoxDecoration(),
+                                child: Text(
+                                  'How Tomo AI handles your Google data:\n\n1. We only pull your Google emails and calendar entries so we can surface your tasks back to you.\n\n2. Your data never leaves our secure servers except when we send it right back to you inside the app.\n\n3.  No one at Tomo AI can read your data unless it’s absolutely necessary to fix a bug, keep the service secure, or meet a legal requirement.\n\n4. We don’t use your messages or photos to train big AI models, and we never mix your data with anyone else’s.\n\nTomo AI’s use of Google APIs follows Google’s API Services User Data Policy—including all Limited-Use rules.',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        font: GoogleFonts.inter(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        fontSize: 10.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                ),
                               ),
                             ),
                           ],

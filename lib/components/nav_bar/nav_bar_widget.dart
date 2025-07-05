@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'nav_bar_model.dart';
 export 'nav_bar_model.dart';
 
@@ -66,7 +67,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: const AlignmentDirectional(0.0, 1.0),
+      alignment: AlignmentDirectional(0.0, 1.0),
       child: Container(
         width: double.infinity,
         height: 80.0,
@@ -90,7 +91,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 height: double.infinity,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(0.0),
                     bottomRight: Radius.circular(0.0),
                     topLeft: Radius.circular(0.0),
@@ -109,9 +110,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     ),
                     Expanded(
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 11.0, 0.0, 11.0),
                           child: Icon(
                             Icons.home,
@@ -148,12 +149,54 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       decoration: BoxDecoration(
                         color: widget.favoriteActiveBarColour,
                       ),
+                      child: Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 2.0, 0.0, 0.0),
+                          child: badges.Badge(
+                            badgeContent: Text(
+                              '3',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
+                                    color: Colors.white,
+                                    fontSize: 12.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
+                            ),
+                            showBadge: true,
+                            shape: badges.BadgeShape.circle,
+                            badgeColor: FlutterFlowTheme.of(context).primary,
+                            elevation: 4.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.0, 20.0, 8.0, 20.0),
+                            position: badges.BadgePosition.topEnd(),
+                            animationType: badges.BadgeAnimationType.scale,
+                            toAnimate: true,
+                          ),
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 11.0, 0.0, 11.0),
                           child: Icon(
                             Icons.list_alt,
@@ -193,30 +236,43 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     ),
                     Expanded(
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: badges.Badge(
                           badgeContent: Text(
                             '3',
                             style: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Inter',
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
                                   color: Colors.white,
                                   fontSize: 12.0,
                                   letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
                                 ),
                           ),
-                          showBadge: true,
+                          showBadge: false,
                           shape: badges.BadgeShape.circle,
                           badgeColor: FlutterFlowTheme.of(context).primary,
                           elevation: 4.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               8.0, 20.0, 8.0, 20.0),
                           position: badges.BadgePosition.topEnd(),
                           animationType: badges.BadgeAnimationType.scale,
                           toAnimate: true,
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Icon(
                               Icons.auto_awesome,
                               color: widget.chatsIconColour,
@@ -263,9 +319,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       ),
                       Expanded(
                         child: Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 11.0, 0.0, 11.0),
                             child: Icon(
                               Icons.person,
@@ -280,9 +336,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 ),
               ),
           ]
-              .divide(const SizedBox(width: 29.0))
-              .addToStart(const SizedBox(width: 24.0))
-              .addToEnd(const SizedBox(width: 24.0)),
+              .divide(SizedBox(width: 29.0))
+              .addToStart(SizedBox(width: 24.0))
+              .addToEnd(SizedBox(width: 24.0)),
         ),
       ),
     );

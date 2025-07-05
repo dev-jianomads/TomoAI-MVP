@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'forgot_password_widget.dart' show ForgotPasswordWidget;
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -9,7 +10,7 @@ class ForgotPasswordModel extends FlutterFlowModel<ForgotPasswordWidget> {
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
-  final emailMask = MaskTextInputFormatter(mask: '(###) ###-####');
+  late MaskTextInputFormatter emailMask;
   String? Function(BuildContext, String?)? emailTextControllerValidator;
 
   @override
