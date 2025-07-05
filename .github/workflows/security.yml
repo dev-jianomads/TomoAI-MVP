@@ -1,0 +1,47 @@
+name: Security Scans
+
+on:
+  push:
+    branches: [develop]        # run on every commit to your dev branch
+  pull_request:                # and on every PR targeting develop
+    branches: [develop]
+
+jobs:
+  # ---------- Static analysis (Semgrep) ----------
+  semgrep:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write   # allow SARIF upload
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Semgrep CLI
+        run: pip install semgrep
+
+      - name: Run Semgrep and output SARIF
+        run: semgrep --config=auto --sarif --output=semgrep.sarif
+
+      - name: Upload SARIF to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
+
+  # ---------- Dynamic analysis (OWASP ZAP) ----------
+  zap:
+    needs: semgrep              # only start if static scan succeeded
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ZAP Baseline scan
+        uses: zaproxy/action-baseline@v0.11.0
+        with:
+          target: ${{ secrets.STAGING_URL }}   # set in repo secrets
+          fail_action: false                   # don’t break the build
